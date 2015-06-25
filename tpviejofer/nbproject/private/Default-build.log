@@ -1,0 +1,40 @@
+g++ -I../../../../../Modulos-CPP -g -Wall test.cpp -c -o test.o
+g++ -I../../../../../Modulos-CPP -g -Wall ArbolSintactico.cpp -c -o ArbolSintactico.o
+g++ -I../../../../../Modulos-CPP -g -Wall Driver.cpp -c -o Driver.o
+Driver.cpp: In member function 'const aed2::Conj<std::basic_string<char> >& aed2::Driver::CaracteristicasIesimoRobotActivo(aed2::Nat) const':
+Driver.cpp:73:33: warning: returning reference to temporary [-Wreturn-local-addr]
+     return Conj<Caracteristica>();
+                                 ^
+g++ -I../../../../../Modulos-CPP -g -Wall ColaPrioritaria.cpp -c -o ColaPrioritaria.o
+g++ -I../../../../../Modulos-CPP -g -Wall Mapa.cpp -c -o Mapa.o
+g++ -I../../../../../Modulos-CPP -g -Wall Rest.cpp -c -o Rest.o
+g++ -I../../../../../Modulos-CPP -g -Wall CiudadFuturista.cpp -c -o CiudadFuturista.o
+CiudadFuturista.cpp: In member function 'aed2::RUR CiudadFuturista::ProximoRUR()':
+CiudadFuturista.cpp:26:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+CiudadFuturista.cpp: In member function 'Mapa CiudadFuturista::GetMapa()':
+CiudadFuturista.cpp:30:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+CiudadFuturista.cpp: In member function 'CiudadFuturista::Iterador CiudadFuturista::Robots()':
+CiudadFuturista.cpp:34:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+CiudadFuturista.cpp: In member function 'aed2::Estacion CiudadFuturista::GetEstacion(aed2::RUR)':
+CiudadFuturista.cpp:38:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+CiudadFuturista.cpp: In member function 'aed2::Conj<std::basic_string<char> > CiudadFuturista::Tags(aed2::RUR)':
+CiudadFuturista.cpp:42:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+CiudadFuturista.cpp: In member function 'aed2::Nat CiudadFuturista::CantInfracciones(aed2::RUR)':
+CiudadFuturista.cpp:46:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+CiudadFuturista.cpp: In member function 'CiudadFuturista CiudadFuturista::Crear(Mapa)':
+CiudadFuturista.cpp:50:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+g++  test.o ArbolSintactico.o Driver.o ColaPrioritaria.o Mapa.o Rest.o CiudadFuturista.o -o test
