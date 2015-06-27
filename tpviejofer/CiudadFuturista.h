@@ -57,7 +57,7 @@ public:
         public:
             Iterador(Vector<Robot>& robots);
             
-//            ~Iterador();
+            ~Iterador();
 
             Iterador& operator = (Iterador& otro);
 

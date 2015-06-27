@@ -99,9 +99,9 @@ CiudadFuturista::Iterador::Iterador(Vector<Robot>& robots) : actual(0), robots(&
 
 }
 
-//CiudadFuturista::Iterador::~Iterador() {
-//    
-//}
+CiudadFuturista::Iterador::~Iterador() {
+    if(robots != NULL) { delete robots; }
+}
 
 CiudadFuturista::Iterador CiudadFuturista::CrearIt() {
     Vector<Robot>* robots = new Vector<Robot>();
