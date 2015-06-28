@@ -63,21 +63,21 @@ private:
 		e_estr();
 	};
 
-	ConjLineal(nodo) DameNodos(const nodo* p, Nat actual, const Nat destino) const;
+	Conj DameNodos(const nodo* p, Nat actual, const Nat destino) const;
 
-	nodo* Rotar(nodo*);
+	void Rotar(nodo* p);
 
-	nodo* RotarSimpleIzq(nodo*);
+	void RotarSimpleIzq(nodo* p);
 
-	nodo* RotarSimpleDer(nodo*);
+	void RotarSimpleDer(nodo* p);
 
-	nodo* RotarDobleIzq(nodo*);
+	void RotarDobleIzq(nodo* p);
 
-	nodo* RotarDobleDer(nodo*);
+	void RotarDobleDer(nodo* p);
 
-	Nat Altura(const nodo*) const;
+	Nat Altura(const nodo* p) const;
 
-	Nat FactorDesbalance(const nodo*) const; 
+	Nat FactorDesbalance(const nodo* p) const; 
 
 };
 
@@ -125,7 +125,7 @@ private:
 	struct e_estr {
 
 		Nat nivelActual;
-		Nat #nodosRecorridos;
+		Nat nodosRecorridos;
 		Nat tam;
 		nodo* nodoActual;
 		nodo* raiz;

@@ -183,11 +183,272 @@ void DiccRapido::Borrar(const Nat c) {
 				}
 				*(pNodo).clave = *(nuevoPNodo).clave;
 				*(pNodo).significado = *(nuevoPNodo).significado;
-				
+				if (*(nuevoPNodo).der != NULL) {
+					if (*(*(nuevoPNodo).padre).izq == nuevoPNodo) {
+						*(*(nuevoPNodo).padre.izq) = *(nuevoPNodo).der; 
+					} else {
+						*(*(nuevoPNodo).padre).der = *(nuevoPNodo).der;
+					}
+					*(*(nuevoPNodo).der).padre = *(nuevoPNodo).padre;
+				} else {
+					if (*(*(nuevoPNodo).padre).izq == nuevoPNodo) {
+						*(*(nuevoPNodo).padre).izq = NULL;
+					} else {
+						*(*(nuevoPNodo).padre).der = NULL;
+					}
+				}
+			}
+		}
+	}
+	dicc.tam = dicc.tam - 1;
+	pNodo = *(nuevoPNodo).padre;
+	while (pNodo != NULL) {
+		nodo* padrePNodo = *(pNodo).padre;
+		if (abs(FactorDesbalance(pNodo)) > 1) {
+			Rotar(pNodo);
+		} else {
+			*(pNodo).alt = Altura(pNodo);
+		}
+		pNodo = padrePNodo;
+	}
+}
+
+const bool DiccRapido::Vacio() const {
+	if (dicc.raiz == NULL) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+Nat c DiccRapido::ClaveMax() const {
+	nodo* pNodo = dicc.raiz;
+	while (*(pNodo).der != NULL) {
+		pNodo = *(pNodo).der;
+	}
+	return *(pNodo).clave;
+}
+
+ITClave DiccRapido::Claves() const {
+	return CrearIT();
+}
+
+//metodos privados de DiccRapido
+
+Conj DiccRapido::DameNodos(const nodo* p, Nat actual, const Nat destino) const {
+	Conj res = Conj();
+	if (p != NULL) {
+		if (actual == destino) {
+			res.Agregar(p);
+		} else {
+			Union(DameNodos(*(p).izq, actual + 1, destino), DameNodos(*(p).der, actual + 1, destino));
+		}
+	}
+	return res;
+}
+
+void DiccRapido::Rotar(nodo* p) {
+	if (FactorDesbalance(p) < -1) {
+		if (FactorDesbalance(*(p).der) > 0) {
+			return RotarDobleIzq(p);
+		} else {
+			return RotarSimpleIzq(p);
+		} 
+	} else {
+		if (FactorDesbalance(*(p).izq) < 0) {
+			return RotarDobleDer(p);
+		} else {
+			return RotarSimpleDer(p);
+		}
+	}
+}
+
+void DiccRapido::RotarSimpleIzq(nodo* p) {
+	nodo* r = p;
+	nodo* r2 = *(r).der;
+	nodo* i = *(r).izq;
+	nodo* i2 = *(r2).izq;
+	nodo* d2 = *(r2).der;
+	nodo* padre = *(r).padre;
+	if (padre != NULL) {
+		if (r == *(padre).izq) {
+			*(padre).izq = r2;
+		} else {
+			*(padre).der = r2;
+		}
+	}
+	*(r2).padre = padre;
+	*(r2).izq = r;
+	*(r).padre = r2;
+	*(r).der = i2;
+	if (i2 != NULL) {
+		*(i2).padre = r;
+	}
+	*(r).alt = Altura(r);
+	*(r2).alt = Altura(r2);
+}
+
+void DiccRapido::RotarSimpleDer(nodo* p) {
+	nodo* r = p;
+	nodo* r2 = *(r).izq;
+	nodo* d = *(r).der;
+	nodo* i2 = *(r2).izq;
+	nodo* d2 = *(r2).der;
+	nodo* padre = *(r).padre;
+	if (padre != NULL) {
+		if (r == *(padre).izq) {
+			*(padre).izq = r2;
+		} else {
+			*(padre).der = r2;
+		}
+	}
+	*(r2).padre = padre;
+	*(r2).der = r;
+	*(r).padre = r2;
+	*(r).izq = d2;
+	if (d2 != NULL) {
+		*(d2).padre = r;
+	}
+	*(r).alt = Altura(r);
+	*(r2).alt = Altura(r2);
+}
+
+
+void DiccRapido::RotarDobleIzq(nodo* p) {
+	RotarSimpleDer(*(p).der);
+	RotarSimpleIzq(p);
+}
+
+void DiccRapido::RotarDobleDer(nodo* p) {
+	RotarSimpleIzq(*(p).izq);
+	RotarSimpleDer(p);
+}
+
+Nat DiccRapido::Altura(const nodo* p) const {
+	if (*(p).izq == NULL && *(p).der == NULL) {
+		return 1;
+	} else {
+		if (*(p).izq != NULL *(p).der == NULL) {
+			return *(*(p).izq).alt + 1;
+		} else {
+			if (*(p).izq == NULL && *(p).der != NULL) {
+				return *(*(p).der).alt + 1;
+			} else {
+				return max(*(*(p).izq).alt, *(*(p).der).alt) + 1;
 			}
 		}
 	}
 }
+
+Nat DiccRapido::FactorDesbalance(const nodo* p) const {
+	if (*(p).izq == NULL && *(p).der == NULL) {
+		return 0;
+	} else {
+		if (*(p).izq != NULL && *(p).der == NULL) {
+			return *(*(p).izq).alt;
+		} else {
+			if (*(p).izq == NULL && *(p).der !== NULL) {
+				return -*(*(p).der).alt;
+			} else {
+				return *(*(p).izq).alt - *(*(p).der).alt;
+			}
+		}
+	}
+}
+
+//metodos e_estr (ITClave)
+
+ITClave::e_estr::e_estr() {
+	nivelActual = 1;
+	nodosRecorridos = 0;
+	tam = 0;
+	nodoActual = NULL;
+	nodoActual = NULL;
+}
+
+//metodos publicos de ITClave
+
+ITClave::ITClave() : it() {
+}
+
+ITClave::~ITClave() {
+	delete it.nodoActual;
+}
+
+ITClave::ITClave(const ITClave& otro) {
+//	if(otro.dicc.raiz != NULL) dicc.raiz = new Nodo(*otro.dicc.raiz);
+//	dicc.tam = otro.dicc.tam;
+}
+
+const bool ITClave::HayMas() const {
+	if (it.nodosRecorridos < it.tam - 1) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+Nat c ITClave::ClaveActual() const {
+	return *(it.nodoActual).clave;
+}
+
+void ITClaveAvanzar() {
+	it.nodosRecorridos = it.nodosRecorridos + 1;
+	itConj itNodosNivelActual = ITClave(DameNodos(it.raiz, 1, it.nivelActual));
+	bool bAvanzar = true;
+	while (bAvanzar) {
+		Avanzar(itNodosNivelActual);
+		if (Anterior(itNodosNivelActual) == Actual(it)) {
+			bAvanzar = false;
+		}
+	}
+	if (HaySiguiente(itNodosNivelActual)) {
+		it.nodoActual = Siguiente(itNodosNivelActual);
+	} else {
+		it.nivelActual = it.nivelActual + 1;
+		it.nodoActual = Siguiente(CrearIT(DameNodos(it.raiz, 1, it.nivelActual)));
+	}
+}
+
+//metodos privados de ITClave
+
+const Lista ITClave::Siguientes() const {
+	ITClave itVar = it;
+	Lista siguientes = Lista();
+	while (HayMas(itVar)) {
+		siguientes.AgregarAtras(ClaveActual(itVar));
+		Avanzar(it);
+	}
+	return siguientes;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
 
 
 
