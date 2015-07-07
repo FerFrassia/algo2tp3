@@ -2,28 +2,27 @@
 #define DCNET_H
 
 #include "aed2.h"
-#include "red.h"
 
 class DCNet{
 public:
 
-	DCNet(Red&);
+	DCNet IniciarDCNet(red);
 
 	~DCNet();
 
-	Red& Red();
+	red Red();
 
-	Lista<Compu> CaminoRecorrido(const Paquete);
+	Lista CaminoRecorrido(Paquete);
 
 	Nat CantidadEnviados(Compu);
 
-	DiccRapido<Paquete>::ITClave EnEspera(Compu);
+	It EnEspera(Compu);
 
 	void CrearPaquete(Paquete);
 
 	void AvanzarSegundo();
 
-	bool PaqueteEnTransito(Paquete);
+	bool PaqueteEnTransito?(Paquete);
 
 	Compu LaQueMasEnvio();
 
@@ -31,20 +30,22 @@ private:
 
 	Red red;
 	<Compu enviados> masEnviante;
-	DiccString<hostname> compYPaq;
+	DiccString<>
 
-struct InfoCompu {
 
-	DiccRapido<T> masPriori;
-	DiccRapido<T> paqYCam;
-	Nat enviados;
 
-		InfoCompu(): masPriori(Vacio()), compYPaq(Vacio()),enviados(0){} 
-};
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
-
-
-}
-#endif 
