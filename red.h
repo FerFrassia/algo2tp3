@@ -27,8 +27,6 @@ public:
 
     Conj<Compu>::Iterador Computadoras();
 
-    Conj<Estacion> *computadoras;
-
     bool Conectadas(const Compu c1, const Compu c2);
 
     Interfaz InterfazUsada(const Compu c1, const Compu c2);
@@ -46,9 +44,22 @@ public:
     bool HayCamino(const Compu c1, const Compu c2);
 
 private:
+    // Funciones Privadas
     Conj<Lista<Compu>> CalcularCaminosMinimos(const Compu c1, const Compu c2);
 
     Conj<Lista<Compu>> CaminosImportantes(const Compu c1, const Compu c2, const Lista parcial);
+
+    //Estructura de representación
+    typedef struct TuplaDirectas {
+        DiccRapido<Interfaz>* directas;
+        Conj<Compu>* compusDirectas;
+        TuplaDirectas() : directas(NULL), compusDirectas(NULL) {}
+    };
+
+    DiccRapido<TuplaDirectas>* directasEInterfaces;
+    DiccRapido<DiccRapido<Conj<Lista<Compu>>>>* deOrigenADestino;
+    Conj<Compu>* computadoras;
+
 };
 
 #endif //TP3___IMPLEMENTACION_RED_H
