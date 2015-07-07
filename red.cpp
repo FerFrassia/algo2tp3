@@ -2,7 +2,7 @@
 // Created by Sebastián on 28/06/2015.
 //
 
-#include "dicc_rapido.h"
+#include "dicc_trie.h"
 #include "TiposSimples.h"
 #include "Red.h"
 #include "aed2/TiposBasicos.h"
@@ -11,16 +11,19 @@
 #include "aed2/Vector.h"
 #include "aed2/Lista.h"
 
+Red::TuplaDirectas::TuplaDirectas() {
+    directas = new DiccString<Interfaz>();
+}
 
 Red::Red() {
-    directasEInterfaces = new DiccRapido<TuplaDirectas>();
-    deOrigenADestino = new DiccRapido<DiccRapido<Conj<Lista<Compu>>>>();
+    directasEInterfaces = new DiccString<TuplaDirectas>();
+    deOrigenADestino = new DiccString<DiccString<Conj<Lista<Compu>>>>();
     computadoras = new Conj<Compu>();
 }
 
 Red::Red(const Red& original) {
-    directasEInterfaces = new DiccRapido<TuplaDirectas>(*original.directasEInterfaces);
-    deOrigenADestino = new DiccRapido<DiccRapido<Conj<Lista<Compu>>>>(*original.deOrigenADestino);
+    directasEInterfaces = new DiccString<TuplaDirectas>(*original.directasEInterfaces);
+    deOrigenADestino = new DiccString<DiccString<Conj<Lista<Compu>>>>(*original.deOrigenADestino);
     computadoras = new Conj<Compu>(*original.computadoras);
 }
 
@@ -52,11 +55,11 @@ void Red::AgregarComputadora(const Compu c) {
     Conj<Compu>::Iterador itComputadoras = computadoras->CrearIt();
 
     while (itComputadoras.HaySiguiente()){
-        (deOrigenADestino->Obtener((itComputadoras.Siguiente()).hostname)).Definir(c.hostname, DiccRapido::Vacio());
+        (deOrigenADestino->Obtener((itComputadoras.Siguiente()).hostname)).Definir(c.hostname, DiccString::Vacio());
         itComputadoras.Avanzar();
     }
 
-    DiccRapido diccNuevaCompu = DiccRapido::Vacio();
+    DiccString diccNuevaCompu = DiccString::Vacio();
 }
 
 void Red::Conectar(const Compu c1, const Interfaz i1, const Compu c2, const Interfaz i2) { }

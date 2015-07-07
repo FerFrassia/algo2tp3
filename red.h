@@ -5,7 +5,7 @@
 #ifndef TP3___IMPLEMENTACION_RED_H
 #define TP3___IMPLEMENTACION_RED_H
 
-#include "dicc_rapido.h"
+#include "dicc_trie.h"
 #include "TiposSimples.h"
 #include "aed2/TiposBasicos.h"
 #include "aed2/Conj.h"
@@ -19,6 +19,24 @@ using namespace aed2;
 class Red {
 
 public:
+
+    class TuplaDirectas;
+
+    class TuplaDirectas {
+
+    public:
+        TuplaDirectas();
+        TuplaDirectas(const TuplaDirectas &orig);
+        ~TuplaDirectas();
+        DiccString<Interfaz>* Directas();
+        Conj<Compu>* CompusDirectas();
+
+    private:
+        DiccString<Interfaz>* directas;
+        Conj<Compu>* compusDirectas;
+
+    };
+
     Red();
 
     Red(const Red &orig);
@@ -49,15 +67,8 @@ private:
 
     Conj<Lista<Compu>> CaminosImportantes(const Compu c1, const Compu c2, const Lista parcial);
 
-    //Estructura de representación
-    typedef struct TuplaDirectas {
-        DiccRapido<Interfaz>* directas;
-        Conj<Compu>* compusDirectas;
-        TuplaDirectas() : directas(NULL), compusDirectas(NULL) {}
-    };
-
-    DiccRapido<TuplaDirectas>* directasEInterfaces;
-    DiccRapido<DiccRapido<Conj<Lista<Compu>>>>* deOrigenADestino;
+    DiccString<TuplaDirectas>* directasEInterfaces;
+    DiccString<DiccString<Conj<Lista<Compu>>>>* deOrigenADestino;
     Conj<Compu>* computadoras;
 
 };
