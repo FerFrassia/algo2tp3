@@ -13,18 +13,18 @@ namespace aed2{
     typedef String Hostname;
     typedef Nat Interfaz;
 
-    typedef struct Compu {
+    struct Compu {
         Hostname hostname;
-        Conj<Interfaz > interfaces;
-        Compu(const Hostname& h) : interfaces(NULL) {}
+        Conj<Interfaz> interfaces;
+        //Compu(const Hostname& h) : interfaces(new Conj<Interfaz>) {}
     };
 
-    typedef struct Paquete {
+    struct Paquete {
         Nat id;
         Nat prioridad;
         Compu origen;
         Compu destino;
-        Paquete(const String& h) : interfaces(NULL) {}
+        //Paquete(const String& h) : interfaces(NULL) {}
     };
 
 } // namespace aed2

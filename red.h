@@ -34,7 +34,6 @@ public:
     private:
         DiccString<Interfaz>* directas;
         Conj<Compu>* compusDirectas;
-
     };
 
     Red();
@@ -57,18 +56,18 @@ public:
 
     bool UsaInterfaz(const Compu c, const Interfaz i);
 
-    Conj<Conj<Lista<Compu>>>::Iterador CaminosMinimos(const Compu c1, const Compu c2);
+    Conj<Conj<Lista<Compu> > >::Iterador CaminosMinimos(const Compu c1, const Compu c2);
 
     bool HayCamino(const Compu c1, const Compu c2);
 
 private:
     // Funciones Privadas
-    Conj<Lista<Compu>> CalcularCaminosMinimos(const Compu c1, const Compu c2);
+    Conj<Lista<Compu> > CalcularCaminosMinimos(const Compu c1, const Compu c2);
 
-    Conj<Lista<Compu>> CaminosImportantes(const Compu c1, const Compu c2, const Lista parcial);
+    Conj<Lista<Compu> > CaminosImportantes(const Compu c1, const Compu c2, const Lista<Compu> parcial);
 
     DiccString<TuplaDirectas>* directasEInterfaces;
-    DiccString<DiccString<Conj<Lista<Compu>>>>* deOrigenADestino;
+    DiccString<DiccString<Conj<Lista<Compu> > > >* deOrigenADestino;
     Conj<Compu>* computadoras;
 
 };

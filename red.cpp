@@ -12,25 +12,46 @@
 #include "aed2/Lista.h"
 
 Red::TuplaDirectas::TuplaDirectas() {
-    directas = new DiccString<Interfaz>();
+    directas = new DiccString<Interfaz>;
+    compusDirectas = new Conj<Compu>;
 }
+
+Red::TuplaDirectas::TuplaDirectas(const TuplaDirectas &orig) {
+    directas = orig.directas;
+    compusDirectas = orig.compusDirectas;
+}
+
+Red::TuplaDirectas::~TuplaDirectas() {
+    delete directas;
+    delete  compusDirectas;
+}
+
+DiccString<Interfaz>* Red::TuplaDirectas::Directas() {
+    return directas;
+}
+
+Conj<Compu>* Red::TuplaDirectas::CompusDirectas() {
+    return compusDirectas;
+}
+
+
 
 Red::Red() {
-    directasEInterfaces = new DiccString<TuplaDirectas>();
-    deOrigenADestino = new DiccString<DiccString<Conj<Lista<Compu>>>>();
-    computadoras = new Conj<Compu>();
+    directasEInterfaces = &new DiccString<TuplaDirectas>;
+    deOrigenADestino = &new DiccString<DiccString<Conj<Lista<Compu>>>>;
+    computadoras = &new Conj<Compu>;
 }
 
-Red::Red(const Red& original) {
-    directasEInterfaces = new DiccString<TuplaDirectas>(*original.directasEInterfaces);
-    deOrigenADestino = new DiccString<DiccString<Conj<Lista<Compu>>>>(*original.deOrigenADestino);
-    computadoras = new Conj<Compu>(*original.computadoras);
+Red::Red(const Red &original) {
+    directasEInterfaces = new DiccString<TuplaDirectas>(original.directasEInterfaces);
+    deOrigenADestino = new DiccString<DiccString<Conj<Lista<Compu>>>>(original.deOrigenADestino);
+    computadoras = new Conj<Compu>(original.computadoras);
 }
 
 Red::~Red() {
-    delete directasEInterfaces;
-    delete deOrigenADestino;
-    delete computadoras;
+    delete *directasEInterfaces;
+    delete *deOrigenADestino;
+    delete *computadoras;
 }
 
 Conj<Compu>::Iterador Red::Computadoras() {
@@ -38,20 +59,20 @@ Conj<Compu>::Iterador Red::Computadoras() {
 }
 
 bool Red::Conectadas(const Compu c1, const Compu c2) {
-    return (directasEInterfaces->Obtener(c1.hostname).directas).Definido(c2.hostname);
+    //return (directasEInterfaces->Obtener(c1.hostname).directas).Definido(c2.hostname);
 
     //return (uniones -> Significado(est1)).Definido(est2);
 }
 
 Interfaz Red::InterfazUsada(const Compu c1, const Compu c2) {
-    (directasEInterfaces->Obtener(c1.hostname).directas).Obtener(c2.hostname);
+    //(directasEInterfaces->Obtener(c1.hostname).directas).Obtener(c2.hostname);
     //return (*sendas)[((uniones -> Significado(est1)).Significado(est2))];
 }
 
 // Iniciar red?
 
 void Red::AgregarComputadora(const Compu c) {
-    directasEInterfaces->Definir(c.hostname, <TuplaDirectas::directas->Vacio(), TuplaDirectas::compusDirectas->Conj())>;
+/*    directasEInterfaces->Definir(c.hostname, <TuplaDirectas::directas->Vacio(), TuplaDirectas::compusDirectas->Conj())>;
     Conj<Compu>::Iterador itComputadoras = computadoras->CrearIt();
 
     while (itComputadoras.HaySiguiente()){
@@ -59,7 +80,7 @@ void Red::AgregarComputadora(const Compu c) {
         itComputadoras.Avanzar();
     }
 
-    DiccString diccNuevaCompu = DiccString::Vacio();
+    DiccString diccNuevaCompu = DiccString::Vacio();*/
 }
 
 void Red::Conectar(const Compu c1, const Interfaz i1, const Compu c2, const Interfaz i2) { }
