@@ -26,18 +26,17 @@ using namespace aed2;
 		return *red;
 	}
 
-	Lista DCNet::CaminoRecorrido(const Paquete p){
-		Lista<Compu> res;
-		DiccString<hostname>::Iterador it(CompYPaq);
+	Lista<Compu> DCNet::CaminoRecorrido(const Paquete p){
+		
+		DiccString<hostname>::Iterador it(compYPaq);
 		bool esta = false ;
 		while(it.HaySiguiente() && !esta){
 			if (((it.ValorActual()).paqyCam).def(Paquete)){
 				esta = true;
-				res(((it.ValorActual()).paqyCam).Obtener(Paquete));}
+				return ((it.ValorActual()).paqyCam).Obtener(Paquete);}
 			it.Avanzar();
 		}
 
-		return res;
 		}
 
 
@@ -54,8 +53,8 @@ using namespace aed2;
 
 
 	void DCNnet::CrearPaquete(Paquete p){
-		DiccRapido<Nat> diccprio = CompYPaq.Obtener((p.origen).hostname).masPriori;
-		DiccRapido<Paquete> dicccam = CompYPaq.Obtener((p.origen).hostname).paqYCam;
+		DiccRapido<Nat> diccprio = compYPaq.Obtener((p.origen).hostname).masPriori;
+		DiccRapido<Paquete> dicccam = compYPaq.Obtener((p.origen).hostname).paqYCam;
 
 		if (! diccprio.def(p.prioridad)){
 			Conj<Paquete> cj;
