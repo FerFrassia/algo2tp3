@@ -4,14 +4,22 @@
 #include "aed2.h"
 #include "red.h"
 #include "dicc_trie.h"
+#include "dicc_rapido.h"
+#include "TiposSimples.h"
 
-
+template <typename T> 
+struct tupla {
+		T pri;
+		T seg;
+		T ter;
+		T cuart;
+};
 
 
 class DCNet{
 public:
 
-	DCNet(Red);
+	DCNet(Red&);
 
 	~DCNet();
 
@@ -38,12 +46,10 @@ private:
 	DiccString<Hostname> compYPaq;
 
 	struct InfoCompu{
-		DiccRapido<prioridad> masPriori;
+		DiccRapido<Nat> masPriori;
 		DiccRapido<Paquete> paqYCam;
 		Nat enviados;
-
-
-
+		InfoCompu(){masPriori(new DiccRapido()); paqYCam(new DiccRapido()); enviados(0);} 
 	};
 
 };

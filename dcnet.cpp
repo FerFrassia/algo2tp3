@@ -3,24 +3,31 @@
 using namespace aed2;
 
 
-	DCNet::IniciarDCNet(Red& lared){
+	DCNet::DCNet(Red& lared){
 		red = Red(lared);
 
-		Conj<Compu>::Iterador it CrearIt(lared.Computadoras());
-		masEnviante = <it.Siguiente(),0)>
+		Conj<Compu>::Iterador it = CrearIt(lared.Computadoras());
+		masEnviante = make_pair<it.Siguiente(), 0>;
 		
-		CompYPaq = new DiccString<hostname>();
+		compYPaq = new DiccString<Hostname>();
 
 		while (it.HaySiguiente()){
-			InfoCompu nuevainfo= new InfoCompu(); 
+			DCNet::InfoCompu nuevainfo= new InfoCompu(); 
 
-			dicc.definir((it.Siguiente()).hostname() , nuevainfo );
+			compYPaq.definir((it.Siguiente()).hostname() , nuevainfo );
 			it.Avanzar();
 			}
 
 		}
 
-	~DCNet();
+	~DCNet(){
+
+		delete red;
+		delete compYPaq;
+		delete masEnviante;
+
+
+	}
 
 	&Red DCNet::Red(){
 		return *red;
@@ -28,12 +35,12 @@ using namespace aed2;
 
 	Lista<Compu> DCNet::CaminoRecorrido(const Paquete p){
 		
-		DiccString<hostname>::Iterador it(compYPaq);
+		DiccString<Hostname>::Iterador it = Iterador(compYPaq);
 		bool esta = false ;
 		while(it.HaySiguiente() && !esta){
 			if (((it.ValorActual()).paqyCam).def(Paquete)){
 				esta = true;
-				return ((it.ValorActual()).paqyCam).Obtener(Paquete);}
+				return ((it.ValorActual()).paqyCam).Obtener(Paquete));}
 			it.Avanzar();
 		}
 
@@ -41,12 +48,12 @@ using namespace aed2;
 
 
 	Nat DCNet::CantidadEnviados(Compu c){
-		return = (CompYPaq.Obtener(c.hostname)).enviados;
+		return = (compYPaq.obtener(c.hostname)).enviados;
 	}
 
 	DiccRapido<Paquete>::ITClave DCNet::EnEspera(Compu c){
 
-		DiccRapido<Paquete>::ITClave It((compYPaq.Obtener(c.hostname)).paqYCam)
+		DiccRapido<Paquete>::ITClave It((compYPaq.obtener(c.hostname)).paqYCam)
 		return It;
 	}
 
@@ -67,7 +74,7 @@ using namespace aed2;
 		}
 		Lista<Compu> l;
 		l.AgregarAtras(p.origen);
-		dicccam.definir(p,l)
+		dicccam.definir(p,l);
 	}
 
 	/*void DCNet::AvanzarSegundo(){
@@ -113,7 +120,7 @@ using namespace aed2;
 
 	}*/
 
-	bool PaqueteEnTransito?(Paquete){
+	bool DCNet::PaqueteEnTransito(Paquete){
 		Conj<Compu>::Iterador it = CrearIt(red.Computadoras());
 		bool esta = false;
 			while(it.HaySiguiente() && ! esta ){
@@ -124,7 +131,7 @@ using namespace aed2;
 			return esta;
 	}
 
-	Compu LaQueMasEnvio(){
+	Compu DCNet::LaQueMasEnvio(){
 		return masEnviante.Compu;
 
 
