@@ -6,8 +6,8 @@
 #define TP3___IMPLEMENTACION_RED_H
 
 #include "dicc_trie.h"
-#include "TiposSimples.h"
 #include "aed2/TiposBasicos.h"
+#include "TiposSimples.h"
 #include "aed2/Conj.h"
 #include "aed2/Arreglo.h"
 #include "aed2/Vector.h"
@@ -50,13 +50,13 @@ public:
 
     void AgregarComputadora(const Compu c);
 
-    void Conectar(const Compu c1, const Interfaz i1, const Compu c2, const Interfaz i2);
+    void Conectar(Compu c1, Interfaz i1, Compu c2, Interfaz i2);
 
     Conj<Compu>::Iterador Vecinos(const Compu c);
 
     bool UsaInterfaz(const Compu c, const Interfaz i);
 
-    Conj<Conj<Lista<Compu> > >::Iterador CaminosMinimos(const Compu c1, const Compu c2);
+    Conj<Lista<Compu> >::Iterador CaminosMinimos(const Compu c1, const Compu c2);
 
     bool HayCamino(const Compu c1, const Compu c2);
 

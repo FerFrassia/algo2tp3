@@ -36,6 +36,8 @@ class Conj
 
     void Eliminar(const T& e);
 
+    T& DameUno();
+
     // Observadores
 
     bool EsVacio() const;
