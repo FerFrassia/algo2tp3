@@ -35,7 +35,32 @@ namespace aed2{
         Compu origen;
         Compu destino;
         //Paquete(const String& h) : interfaces(NULL) {}
-    };
+                const bool operator==(const Paquete& otra) const;
+                const bool operator!=(const Paquete& otra) const;
+                const bool operator<(const Paquete& otra) const;
+                const bool operator>(const Paquete& otra) const;
+        };
+
+
+    const bool Paquete::operator==(const Paquete& otra) const {
+        return (id == otra.id);
+    }
+
+    const bool Paquete::operator!=(const Paquete& otra) const {
+        return (id != otra.id);
+    }
+    
+    const bool Paquete::operator<(const Paquete& otra) const {
+        return (id < otra.id);
+    }
+    
+    const bool Paquete::operator>(const Paquete& otra) const {
+        return (id > otra.id);
+    }
+
+
+   
+
 
 } // namespace aed2
 

@@ -4,7 +4,7 @@
 #include "aed2.h"
 #include "red.h"
 #include "dicc_trie.h"
-#include "dicc_rapido.h"
+#include "DiccRapido.h"
 #include "TiposSimples.h"
 
 using namespace std;
@@ -24,7 +24,7 @@ public:
 
 	Nat CantidadEnviados(Compu);
 
-	DiccRapido<Paquete>::ITClave EnEspera(Compu);
+	DiccRapido<Paquete,Lista <Compu> >::ITClave EnEspera(Compu);
 
 	void CrearPaquete(Paquete);
 
@@ -36,17 +36,26 @@ public:
 
 private:
 
-	Red red;
-	tuple<Compu, Nat> masEnviante;
-	DiccString<Hostname> compYPaq;
+		struct masEnvio{
+		
+			Compu comp;
+			Nat enviados;
 
+			masEnvio(Compu c, Nat n) : comp(c), enviados(n) {};
+		};
+
+	Red* red;
+	masEnvio* masEnviante;
+	DiccString<Hostname>* compYPaq;
+
+	
 	
 
 	struct InfoCompu{
-		DiccRapido<Nat> masPriori;
-		DiccRapido<Paquete> paqYCam;
+		DiccRapido<Nat,Conj<Paquete> >* masPriori;
+		DiccRapido<Paquete,Lista<Compu> >* paqYCam;
 		Nat enviados;
-		InfoCompu() : masPriori(new DiccRapido<Nat>()), paqYCam(new DiccRapido<Paquete>()), enviados(0) {}; 
+		InfoCompu() : masPriori(new DiccRapido<Nat,Conj<Paquete> >()), paqYCam(new DiccRapido<Paquete,Lista<Compu> >()), enviados(0) {}; 
 	};
 
 };
