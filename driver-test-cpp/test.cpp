@@ -4,6 +4,7 @@
 #include "aed2/Lista.h"
 #include "aed2/Conj.h"
 #include "aed2/Dicc.h"
+#include "dicc_rapido.h"
 
 #include <string>
 #include <iostream>
@@ -124,11 +125,20 @@ void test_dcnet_ejemplo() {
 	ASSERT_EQ(dcnet.laQueMasEnvio(), c1);
 		
 }
+void dicc_vacio() {
+	DiccRapido<int, int>();
+}
 
+void definir_dicc_vacio() {
+	DiccRapido<int, int> dicc;
+
+	dicc.Definir(5, 8);
+}
 
 int main(int argc, char **argv)
 {
     RUN_TEST(test_dcnet_ejemplo);
+	RUN_TEST(dicc_vacio);
 	
 	/******************************************************************
 	 * TODO: escribir casos de test exhaustivos para todas            *

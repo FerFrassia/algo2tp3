@@ -3,74 +3,81 @@
 using namespace aed2;
 
 
-	DCNet::IniciarDCNet(Red& lared){
-		red = Red(lared);
+	DCNet::DCNet(Red& lared){
+		red = *new Red(lared);
 
-		Conj<Compu>::Iterador it CrearIt(lared.Computadoras());
-		masEnviante = <it.Siguiente(),0)>
+		Conj<Compu>::Iterador it = Iterador(lared.Computadoras());
+		masEnviante = new tuple<it.Siguiente(), 0>;
 		
-		CompYPaq = new DiccString<hostname>();
+		compYPaq = new DiccString<Hostname>();
 
 		while (it.HaySiguiente()){
-			InfoCompu nuevainfo= new InfoCompu(); 
+			DCNet::InfoCompu nuevainfo= new InfoCompu(); 
 
-			dicc.definir((it.Siguiente()).hostname() , nuevainfo );
+			compYPaq.definir((it.Siguiente()).hostname() , nuevainfo );
 			it.Avanzar();
 			}
 
 		}
 
-	~DCNet();
+	DCNet::~DCNet(){
 
-	&Red DCNet::Red(){
+		delete red;
+		delete compYPaq;
+		delete masEnviante;
+
+
+	}
+
+	Red& DCNet::Red(){
 		return *red;
 	}
 
 	Lista<Compu> DCNet::CaminoRecorrido(const Paquete p){
 		
-		DiccString<hostname>::Iterador it(compYPaq);
+		DiccString<Hostname>::Iterador it = Iterador(compYPaq);
 		bool esta = false ;
 		while(it.HaySiguiente() && !esta){
-			if (((it.ValorActual()).paqyCam).def(Paquete)){
+			if (((it.ValorActual()).paqyCam).Def(Paquete)){
 				esta = true;
 				return ((it.ValorActual()).paqyCam).Obtener(Paquete);}
 			it.Avanzar();
 		}
 
-		}
+	}
 
 
 	Nat DCNet::CantidadEnviados(Compu c){
-		return = (CompYPaq.Obtener(c.hostname)).enviados;
+		return = (compYPaq.obtener(c.hostname)).enviados;
 	}
 
 	DiccRapido<Paquete>::ITClave DCNet::EnEspera(Compu c){
 
-		DiccRapido<Paquete>::ITClave It((compYPaq.Obtener(c.hostname)).paqYCam)
+		DiccRapido<Paquete>::ITClave It((compYPaq.obtener(c.hostname)).paqYCam)
 		return It;
 	}
 
 
 
 	void DCNnet::CrearPaquete(Paquete p){
-		DiccRapido<Nat> diccprio = compYPaq.Obtener((p.origen).hostname).masPriori;
-		DiccRapido<Paquete> dicccam = compYPaq.Obtener((p.origen).hostname).paqYCam;
+		DiccRapido<Nat> diccprio = compYPaq.obtener((p.origen).hostname).masPriori;
+		DiccRapido<Paquete> dicccam = compYPaq.obtener((p.origen).hostname).paqYCam;
 
-		if (! diccprio.def(p.prioridad)){
+		if (! diccprio.Def(p.prioridad)){
 			Conj<Paquete> cj;
 			cj.AgregarRapido(p);
-			diccprio.definir(p.prioridad, cj);
+			diccprio.Definir(p.prioridad, cj);
 		}else{
 			Conj<Paquete> cj(diccprio.Obtener(p.prioridad));
 			cj.AgregarRapido(p);
-			diccprio.definir(p.prioridad, cj);
+			diccprio.Definir(p.prioridad, cj);
 		}
 		Lista<Compu> l;
 		l.AgregarAtras(p.origen);
-		dicccam.definir(p,l)
+		dicccam.Definir(p,l);
 	}
 
-	/*void DCNet::AvanzarSegundo(){
+	void DCNet::AvanzarSegundo(){
 		Conj<Compu>::Iterador it(red.Computadoras());
 
 		Lista l;
@@ -84,37 +91,48 @@ using namespace aed2;
 				Conj<Compu>::Iterador it CrearIt(diccprio.Obtener(diccprio.ClaveMax()));
 				Paquete paq = it.Siguiente();
 
-			l.AgregarAdelante(tupla(paq,it.Siguiente(),dicccam.Obtener(paq)));
+			l.AgregarAdelante(tuple<paq,it.Siguiente(),dicccam.Obtener(paq)>);
+			//el componente 0 de la tupla es el paquete, 
+			//el componente 1 es la computadora en la que esta
+			//el componente 2 es la lista de computadoras por la que ya paso
 			diccprio.Obtener(diccprio.ClaveMax()).Eliminar(paq);
 				if(Vacio(diccprio.Obtener(diccprio.ClaveMax()))){
 					diccprio.Borrar(diccprio.ClaveMax());
 				}
 			dicccam.Borrar(paq);
-			compYPaq.Obtener((it.Siguiente()).hostname).enviados ++;
-			if (compYPaq.Obtener((it.Siguiente()).hostname).enviados) > masEnviante.enviados {
-				masEnviante = tupla (it.Siguiente() , compYPaq.Obtener((it.Siguiente()).hostname).enviados);
+			get<1>(compYPaq.Obtener((it.Siguiente()).hostname)) ++;
+			if (get<1>(compYPaq.Obtener((it.Siguiente()).hostname)) > get<1>(masEnviante) {
+				masEnviante = tuple <it.Siguiente() , compYPaq.Obtener((it.Siguiente()).hostname).enviados>;
 			}
 
 
 			}
 		it.Avanzar();
 		}
-		Lista::Iterador itaux l.CrearIt();
+		Lista::Iterador itaux = l.CrearIt();
 
 		while(itaux.HaySiguiente()){
-			Compu proxpc = 
+			Compu proxpc = ((red.CaminosMinimos(get<1>(itaux.Siguiente()),(get<0>(itaux.Siguiente())).destino)).Siguiente()).Primero();
+			DiccRapido<Nat> diccprio = (CompYPaq.Obtener(proxpc.hostname)).masPriori;
+			DiccRapido<Paquete> dicccam = (CompYPaq.Obtener(proxpc.hostname)).paqYCam;
+			
+			if (proxpc != get<0>(itaux.Siguiente()).destino){
+				if (diccprio.Def((itaux.Siguiente()).prioridad)){
+					Conj<Paquete> mismaPrio = (diccprio.Obtener(get<0>((itaux.Siguiente())).prioridad)).Agregar(get<0>(itaux.Siguiente()));
+					diccprio.Definir(get<0>(itaux.Siguiente()).prioridad,mismaPrio);
+				}else{
+					Conj<Paquete> conjvacio;
+					diccprio.Definir(get<0>(itaux.Siguiente()).prioridad,conjvacio.Agregar(get<0>(itaux.Siguiente())));
+				}
+			}else{
+				dicccam.Definir(get<0>(itaux.Siguiente()),get<2>(itaux.Siguiente()).AgregarAtras(proxpc));
+			}
+			itaux.Avanzar();
 		}
+	}
 
-
-
-
-
-
-
-	}*/
-
-	bool PaqueteEnTransito?(Paquete){
-		Conj<Compu>::Iterador it = CrearIt(red.Computadoras());
+	bool DCNet::PaqueteEnTransito(Paquete){
+		Conj<Compu>::Iterador it = Iterador(red.Computadoras());
 		bool esta = false;
 			while(it.HaySiguiente() && ! esta ){
 				esta = ((compYPaq.Obtener((it.Siguiente()).hostname)).paqYcam).Def(Paquete);
@@ -124,8 +142,8 @@ using namespace aed2;
 			return esta;
 	}
 
-	Compu LaQueMasEnvio(){
-		return masEnviante.Compu;
+	Compu DCNet::LaQueMasEnvio(){
+		return get<0>(masEnviante);
 
 
 	}

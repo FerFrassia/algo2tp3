@@ -4,14 +4,17 @@
 #include "aed2.h"
 #include "red.h"
 #include "dicc_trie.h"
+#include "dicc_rapido.h"
+#include "TiposSimples.h"
 
+using namespace std;
 
 
 
 class DCNet{
 public:
 
-	DCNet(Red);
+	DCNet(Red&);
 
 	~DCNet();
 
@@ -34,16 +37,16 @@ public:
 private:
 
 	Red red;
-	pair<Compu, Nat> masEnviante;
+	tuple<Compu, Nat> masEnviante;
 	DiccString<Hostname> compYPaq;
 
+	
+
 	struct InfoCompu{
-		DiccRapido<prioridad> masPriori;
+		DiccRapido<Nat> masPriori;
 		DiccRapido<Paquete> paqYCam;
 		Nat enviados;
-
-
-
+		InfoCompu() : masPriori(new DiccRapido<Nat>()), paqYCam(new DiccRapido<Paquete>()), enviados(0) {}; 
 	};
 
 };
