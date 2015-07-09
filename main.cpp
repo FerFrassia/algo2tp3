@@ -1,4 +1,5 @@
 #include <iostream>
+#include "red.h"
 
 using namespace std;
 

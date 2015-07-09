@@ -17,13 +17,17 @@ namespace aed2{
         Hostname hostname;
         Conj<Interfaz> interfaces;
         //Compu(const Hostname& h) : interfaces(new Conj<Interfaz>) {}
+        const bool operator==(const Compu& otra) const;
         const bool operator!=(const Compu& otra) const;
     };
+
+    const bool Compu::operator==(const Compu& otra) const {
+        return (hostname == otra.hostname) && (interfaces == otra.interfaces);
+    }
 
     const bool Compu::operator!=(const Compu& otra) const {
         return !((hostname == otra.hostname) || (interfaces == otra.interfaces));
     }
-
 
     struct Paquete {
         Nat id;

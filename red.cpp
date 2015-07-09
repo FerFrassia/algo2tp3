@@ -34,8 +34,6 @@ Conj<Compu>* Red::TuplaDirectas::CompusDirectas() {
     return compusDirectas;
 }
 
-
-
 Red::Red() {
     directasEInterfaces = new DiccString<TuplaDirectas>;
     deOrigenADestino = new DiccString<DiccString<Conj<Lista<Compu> > > >;
@@ -117,8 +115,8 @@ void Red::Conectar(Compu c1, Interfaz i1, Compu c2, Interfaz i2) {
     }
 }
 
-Conj<Compu>::Iterador Red::Vecinos(const Compu c) {
-    return (directasEInterfaces->obtener(c.hostname))->CompusDirectas()->CrearIt();
+Conj<Compu> Red::Vecinos(const Compu c) {
+    return *(directasEInterfaces->obtener(c.hostname))->CompusDirectas();
 }
 
 bool Red::UsaInterfaz(const Compu c, const Interfaz i) {
@@ -145,57 +143,39 @@ bool Red::HayCamino(const Compu c1, const Compu c2) {
 
 Conj<Lista<Compu> > Red::CalcularCaminosMinimos(const Compu c1, const Compu c2) {
     Conj<Lista<Compu> >* res = new Conj<Lista<Compu> >;
-    Conj<Lista<Compu> >* conjLinealCaminosImportantes = new Conj<Lista<Compu> >;
+    Conj<Lista<Compu> > conjLinealCaminosImportantes = Conj<Lista<Compu> >();
 
     Lista<Compu>* parcial = new Lista<Compu>;
     parcial->AgregarAtras(c1);
 
     conjLinealCaminosImportantes = CaminosImportantes(c1, c2, *parcial);
 
-    Conj<Lista<Compu> >::Iterador itCaminosImportantes = conjLinealCaminosImportantes->CrearIt();
+    Conj<Lista<Compu> >::Iterador itCaminosImportantes = conjLinealCaminosImportantes.CrearIt();
     while (itCaminosImportantes.HaySiguiente()) {
-        if (res->EsVacio() || res->CrearIt().Siguiente().Longitud() itCaminosImportantes.Siguiente().Longitud()) {
+        if (res->EsVacio() || res->CrearIt().Siguiente().Longitud() == itCaminosImportantes.Siguiente().Longitud()) {
+            res->Agregar(itCaminosImportantes.Siguiente());
+        }else if (res->CrearIt().Siguiente().Longitud() < itCaminosImportantes.Siguiente().Longitud()){
             res = new Conj<Lista<Compu> >;
-            itCaminosImportantes.Siguiente().AgregarAtras(res);
+            res->Agregar(itCaminosImportantes.Siguiente());
         }
     }
 }
 
-Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, const Lista<Compu> parcial) { }
+Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, Lista<Compu> parcial) {
+    Conj<Lista<Compu> >* res = new Conj<Lista<Compu> >;
 
-//void Mapa::Agregar(const Estacion est) {
-//    estaciones -> Agregar(est);
-//    uniones -> Definir(est, DiccString<Nat>());
-//}
-//
-//void Mapa::Conectar(const Estacion est1, const Estacion est2, const Rest& rest) {
-//    (uniones -> Significado(est1)).Definir(est2, cantSendas);
-//    (uniones -> Significado(est2)).Definir(est1, cantSendas);
-//    sendas -> Agregar(cantSendas, rest);
-//    cantSendas++;
-//}
-//
-//Nat Mapa::NroConexion(const Estacion est1, const Estacion est2) {
-//    return (uniones -> Significado(est1)).Significado(est2);
-//}
-//
-//Arreglo<bool> Mapa::EvaluarSendas(const Conj<Caracteristica>& carac) {
-//    Arreglo<bool> res = Arreglo<bool>(cantSendas);
-//    Nat i = 0;
-//    while(i < cantSendas) {
-//        Rest rest = (*sendas)[i];
-//        res.Definir(i, rest.Verifica(carac));
-//        i++;
-//    }
-//    return res;
-//}
-//
-//Arreglo<Rest> Mapa::Restricciones() {
-//    Arreglo<Rest> res = Arreglo<Rest>(cantSendas);
-//    Nat i = 0;
-//    while(i < cantSendas) {
-//        res.Definir(i, (*sendas)[i]);
-//        i++;
-//    }
-//    return res;
-//}
+    if (Vecinos(c1).Pertenece(c2)) {
+        parcial.AgregarAtras(c2);
+        res->Agregar(parcial);
+    }else{
+        Conj<Compu>::Iterador itVecinos = Vecinos(c1).CrearIt();
+        while (itVecinos.HaySiguiente()) {
+            if (parcial.Esta(itVecinos.Siguiente())) {
+                Lista<Compu> auxParcial = Lista<Compu>(parcial);
+                auxParcial.AgregarAtras(itVecinos.Siguiente());
+                res->Union(CaminosImportantes(itVecinos.Siguiente(), c2, auxParcial));
+            }
+            itVecinos.Avanzar();
+        }
+    }
+}

@@ -63,6 +63,10 @@ class Lista
   /// Elimina el último elemento
   void Comienzo();
 
+  //*** Extendido por >Grupo 24
+  bool Esta(const T& elem);
+  //***
+
   /// Inserción de elementos
   Iterador AgregarAdelante(const T& elem);
   Iterador AgregarAtras(const T& elem);
@@ -674,6 +678,29 @@ bool operator == (const Lista<T>& l1, const Lista<T>& l2)
 
   return not it1.HaySiguiente() and not it2.HaySiguiente();
 }
+
+//*** Funciones extendidas.
+
+
+template <typename T>
+bool operator != (const Lista<T>& orig, const Lista<T>& otra)
+{
+  return !(orig == otra);
+}
+
+template<typename T>
+bool Lista<T>::Esta(const T& elem) {
+  Iterador it = CrearIt();
+
+  while (it.HaySiguiente()) {
+    if (it.Siguiente() == elem)
+      return true;
+    it.Avanzar();
+  }
+
+  return false;
+}
+//***
 
 }
 

@@ -52,7 +52,7 @@ public:
 
     void Conectar(Compu c1, Interfaz i1, Compu c2, Interfaz i2);
 
-    Conj<Compu>::Iterador Vecinos(const Compu c);
+    Conj<Compu> Vecinos(const Compu c);
 
     bool UsaInterfaz(const Compu c, const Interfaz i);
 
@@ -64,7 +64,7 @@ private:
     // Funciones Privadas
     Conj<Lista<Compu> > CalcularCaminosMinimos(const Compu c1, const Compu c2);
 
-    Conj<Lista<Compu> > CaminosImportantes(const Compu c1, const Compu c2, const Lista<Compu> parcial);
+    Conj<Lista<Compu> > CaminosImportantes(const Compu c1, const Compu c2, Lista<Compu> parcial);
 
     DiccString<TuplaDirectas>* directasEInterfaces;
     DiccString<DiccString<Conj<Lista<Compu> > > >* deOrigenADestino;

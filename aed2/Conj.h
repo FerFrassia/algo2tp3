@@ -46,6 +46,10 @@ class Conj
 
     Nat Cardinal() const;
 
+    //*** Funciones extendidas por Grupo 24
+    void Union(const Conj<T>& otro);
+    //***
+
     Iterador CrearIt();
     const_Iterador CrearIt() const;
 
@@ -186,6 +190,15 @@ Nat Conj<T>::Cardinal() const{
 template<class T>
 bool Conj<T>::operator==(const Conj<T>& otro) const {
     return dicc_ == otro.dicc_;
+}
+
+template<class T>
+void Conj<T>::Union(const aed2::Conj<T> &otro) {
+  const_Iterador itOtro = otro.CrearIt();
+
+  while (itOtro.HaySiguiente()) {
+    Agregar(itOtro.Siguiente());
+  }
 }
 
 template<class T>
