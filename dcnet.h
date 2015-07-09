@@ -7,13 +7,8 @@
 #include "dicc_rapido.h"
 #include "TiposSimples.h"
 
-template <typename T> 
-struct tupla {
-		T pri;
-		T seg;
-		T ter;
-		T cuart;
-};
+using namespace std;
+
 
 
 class DCNet{
@@ -42,14 +37,16 @@ public:
 private:
 
 	Red red;
-	pair<Compu, Nat> masEnviante;
+	tuple<Compu, Nat> masEnviante;
 	DiccString<Hostname> compYPaq;
+
+	
 
 	struct InfoCompu{
 		DiccRapido<Nat> masPriori;
 		DiccRapido<Paquete> paqYCam;
 		Nat enviados;
-		InfoCompu(){masPriori(new DiccRapido()); paqYCam(new DiccRapido()); enviados(0);} 
+		InfoCompu() : masPriori(new DiccRapido<Nat>()), paqYCam(new DiccRapido<Paquete>()), enviados(0) {}; 
 	};
 
 };
