@@ -1,20 +1,25 @@
 #ifndef DCNET_H
 #define DCNET_H
 
-#include "aed2.h"
 #include "red.h"
 #include "dicc_trie.h"
 #include "DiccRapido.h"
+#include "aed2/TiposBasicos.h"
 #include "TiposSimples.h"
+#include "Red.h"
+#include "aed2/Conj.h"
+#include "aed2/Arreglo.h"
+#include "aed2/Vector.h"
+#include "aed2/Lista.h"
 
 using namespace std;
 
 
 
-class DCNet{
+class DCNet {
 public:
 
-	DCNet(Red&);
+	DCNet(const Red &);
 
 	~DCNet();
 
@@ -24,7 +29,7 @@ public:
 
 	Nat CantidadEnviados(Compu);
 
-	DiccRapido<Paquete,Lista <Compu> >::ITClave EnEspera(Compu);
+	DiccRapido<Paquete, Lista<Compu> >::ITClave EnEspera(Compu);
 
 	void CrearPaquete(Paquete);
 
@@ -36,27 +41,24 @@ public:
 
 private:
 
-		struct masEnvio{
-		
-			Compu comp;
-			Nat enviados;
+	struct e_InfoCompu {
+		DiccRapido<Nat, Conj<Paquete> >* masPriori;
+		DiccRapido<Paquete, Lista<Compu> >* paqYCam;
+		Nat enviados;
 
-			masEnvio(Compu c, Nat n) : comp(c), enviados(n) {};
-		};
+		e_InfoCompu() : masPriori(new DiccRapido<Nat, Conj<Paquete> >()),
+					  paqYCam(new DiccRapido<Paquete, Lista<Compu> >()), enviados(0) { };
+	};
+
+	struct e_masEnvio {
+		Compu comp;
+		Nat enviados;
+		e_masEnvio(Compu c, Nat n) : comp(c), enviados(n) { };
+	};
 
 	Red* red;
-	masEnvio* masEnviante;
-	DiccString<Hostname>* compYPaq;
-
-	
-	
-
-	struct InfoCompu{
-		DiccRapido<Nat,Conj<Paquete> >* masPriori;
-		DiccRapido<Paquete,Lista<Compu> >* paqYCam;
-		Nat enviados;
-		InfoCompu() : masPriori(new DiccRapido<Nat,Conj<Paquete> >()), paqYCam(new DiccRapido<Paquete,Lista<Compu> >()), enviados(0) {}; 
-	};
+	e_masEnvio* masEnviante;
+	DiccString<e_InfoCompu>* compYPaq;
 
 };
 
