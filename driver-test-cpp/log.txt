@@ -1,0 +1,222 @@
+In file included from dicc_rapido.cpp:3:0:
+dicc_rapido.h: In member function ‘DiccRapido<Tc, Ts>::ITClave DiccRapido<Tc, Ts>::Claves() const’:
+dicc_rapido.h:369:17: error: there are no arguments to ‘CrearIT’ that depend on a template parameter, so a declaration of ‘CrearIT’ must be available [-fpermissive]
+  return CrearIT();
+                 ^
+dicc_rapido.h:369:17: note: (if you use ‘-fpermissive’, G++ will accept your code, but allowing the use of an undeclared name is deprecated)
+dicc_rapido.h: At global scope:
+dicc_rapido.h:374:1: error: invalid use of template-name ‘aed2::Conj’ without an argument list
+ Conj DiccRapido::DameNodos(const nodo* p, Nat actual, const Nat destino) const {
+ ^
+dicc_rapido.h:387:6: error: ‘template<class Tc, class Ts> class DiccRapido’ used without template parameters
+ void DiccRapido::Rotar(nodo* p) {
+      ^
+dicc_rapido.h:387:24: error: variable or field ‘Rotar’ declared void
+ void DiccRapido::Rotar(nodo* p) {
+                        ^
+dicc_rapido.h:387:24: error: ‘nodo’ was not declared in this scope
+dicc_rapido.h:387:30: error: ‘p’ was not declared in this scope
+ void DiccRapido::Rotar(nodo* p) {
+                              ^
+dicc_rapido.h:404:6: error: ‘template<class Tc, class Ts> class DiccRapido’ used without template parameters
+ void DiccRapido::RotarSimpleIzq(nodo* p) {
+      ^
+dicc_rapido.h:404:33: error: variable or field ‘RotarSimpleIzq’ declared void
+ void DiccRapido::RotarSimpleIzq(nodo* p) {
+                                 ^
+dicc_rapido.h:404:33: error: ‘nodo’ was not declared in this scope
+dicc_rapido.h:404:39: error: ‘p’ was not declared in this scope
+ void DiccRapido::RotarSimpleIzq(nodo* p) {
+                                       ^
+dicc_rapido.h:430:6: error: ‘template<class Tc, class Ts> class DiccRapido’ used without template parameters
+ void DiccRapido::RotarSimpleDer(nodo* p) {
+      ^
+dicc_rapido.h:430:33: error: variable or field ‘RotarSimpleDer’ declared void
+ void DiccRapido::RotarSimpleDer(nodo* p) {
+                                 ^
+dicc_rapido.h:430:33: error: ‘nodo’ was not declared in this scope
+dicc_rapido.h:430:39: error: ‘p’ was not declared in this scope
+ void DiccRapido::RotarSimpleDer(nodo* p) {
+                                       ^
+dicc_rapido.h:456:6: error: ‘template<class Tc, class Ts> class DiccRapido’ used without template parameters
+ void DiccRapido::RotarDobleIzq(nodo* p) {
+      ^
+dicc_rapido.h:456:32: error: variable or field ‘RotarDobleIzq’ declared void
+ void DiccRapido::RotarDobleIzq(nodo* p) {
+                                ^
+dicc_rapido.h:456:32: error: ‘nodo’ was not declared in this scope
+dicc_rapido.h:456:38: error: ‘p’ was not declared in this scope
+ void DiccRapido::RotarDobleIzq(nodo* p) {
+                                      ^
+dicc_rapido.h:462:6: error: ‘template<class Tc, class Ts> class DiccRapido’ used without template parameters
+ void DiccRapido::RotarDobleDer(nodo* p) {
+      ^
+dicc_rapido.h:462:32: error: variable or field ‘RotarDobleDer’ declared void
+ void DiccRapido::RotarDobleDer(nodo* p) {
+                                ^
+dicc_rapido.h:462:32: error: ‘nodo’ was not declared in this scope
+dicc_rapido.h:462:38: error: ‘p’ was not declared in this scope
+ void DiccRapido::RotarDobleDer(nodo* p) {
+                                      ^
+dicc_rapido.h:468:5: error: ‘template<class Tc, class Ts> class DiccRapido’ used without template parameters
+ Nat DiccRapido::Altura(const nodo* p) const {
+     ^
+dicc_rapido.h:468:30: error: ‘nodo’ does not name a type
+ Nat DiccRapido::Altura(const nodo* p) const {
+                              ^
+dicc_rapido.h:468:36: error: ISO C++ forbids declaration of ‘p’ with no type [-fpermissive]
+ Nat DiccRapido::Altura(const nodo* p) const {
+                                    ^
+dicc_rapido.h:468:39: error: non-member function ‘aed2::Nat Altura(const int*)’ cannot have cv-qualifier
+ Nat DiccRapido::Altura(const nodo* p) const {
+                                       ^
+dicc_rapido.h: In function ‘aed2::Nat Altura(const int*)’:
+dicc_rapido.h:469:11: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+  if (*(p).izq == NULL && *(p).der == NULL) {
+           ^
+dicc_rapido.h:469:31: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+  if (*(p).izq == NULL && *(p).der == NULL) {
+                               ^
+dicc_rapido.h:472:12: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+   if (*(p).izq != NULL *(p).der == NULL) {
+            ^
+dicc_rapido.h:472:29: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+   if (*(p).izq != NULL *(p).der == NULL) {
+                             ^
+dicc_rapido.h:473:18: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+    return *(*(p).izq).alt + 1;
+                  ^
+dicc_rapido.h:475:13: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+    if (*(p).izq == NULL && *(p).der != NULL) {
+             ^
+dicc_rapido.h:475:33: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+    if (*(p).izq == NULL && *(p).der != NULL) {
+                                 ^
+dicc_rapido.h:476:19: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+     return *(*(p).der).alt + 1;
+                   ^
+dicc_rapido.h:478:23: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+     return max(*(*(p).izq).alt, *(*(p).der).alt) + 1;
+                       ^
+dicc_rapido.h:478:40: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+     return max(*(*(p).izq).alt, *(*(p).der).alt) + 1;
+                                        ^
+dicc_rapido.h:478:48: error: there are no arguments to ‘max’ that depend on a template parameter, so a declaration of ‘max’ must be available [-fpermissive]
+     return max(*(*(p).izq).alt, *(*(p).der).alt) + 1;
+                                                ^
+dicc_rapido.h: At global scope:
+dicc_rapido.h:485:5: error: ‘template<class Tc, class Ts> class DiccRapido’ used without template parameters
+ Nat DiccRapido::FactorDesbalance(const nodo* p) const {
+     ^
+dicc_rapido.h:485:40: error: ‘nodo’ does not name a type
+ Nat DiccRapido::FactorDesbalance(const nodo* p) const {
+                                        ^
+dicc_rapido.h:485:46: error: ISO C++ forbids declaration of ‘p’ with no type [-fpermissive]
+ Nat DiccRapido::FactorDesbalance(const nodo* p) const {
+                                              ^
+dicc_rapido.h:485:49: error: non-member function ‘aed2::Nat FactorDesbalance(const int*)’ cannot have cv-qualifier
+ Nat DiccRapido::FactorDesbalance(const nodo* p) const {
+                                                 ^
+dicc_rapido.h: In function ‘aed2::Nat FactorDesbalance(const int*)’:
+dicc_rapido.h:486:11: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+  if (*(p).izq == NULL && *(p).der == NULL) {
+           ^
+dicc_rapido.h:486:31: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+  if (*(p).izq == NULL && *(p).der == NULL) {
+                               ^
+dicc_rapido.h:489:12: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+   if (*(p).izq != NULL && *(p).der == NULL) {
+            ^
+dicc_rapido.h:489:32: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+   if (*(p).izq != NULL && *(p).der == NULL) {
+                                ^
+dicc_rapido.h:490:18: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+    return *(*(p).izq).alt;
+                  ^
+dicc_rapido.h:492:13: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+    if (*(p).izq == NULL && *(p).der !== NULL) {
+             ^
+dicc_rapido.h:492:33: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+    if (*(p).izq == NULL && *(p).der !== NULL) {
+                                 ^
+dicc_rapido.h:492:39: error: expected primary-expression before ‘=’ token
+    if (*(p).izq == NULL && *(p).der !== NULL) {
+                                       ^
+dicc_rapido.h:493:20: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+     return -*(*(p).der).alt;
+                    ^
+dicc_rapido.h:495:19: error: request for member ‘izq’ in ‘p’, which is of non-class type ‘const int*’
+     return *(*(p).izq).alt - *(*(p).der).alt;
+                   ^
+dicc_rapido.h:495:37: error: request for member ‘der’ in ‘p’, which is of non-class type ‘const int*’
+     return *(*(p).izq).alt - *(*(p).der).alt;
+                                     ^
+dicc_rapido.h: At global scope:
+dicc_rapido.h:503:1: error: ‘ITClave’ does not name a type
+ ITClave::e_estr::e_estr() {
+ ^
+dicc_rapido.h:513:1: error: ‘ITClave’ does not name a type
+ ITClave::ITClave() : it() {
+ ^
+dicc_rapido.h:517:1: error: ‘ITClave’ does not name a type
+ ITClave::~ITClave() {
+ ^
+dicc_rapido.h:522:1: error: ‘ITClave’ does not name a type
+ ITClave::ITClave(const ITClave& otro) {
+ ^
+dicc_rapido.h:528:12: error: ‘ITClave’ has not been declared
+ const bool ITClave::HayMas() const {
+            ^
+dicc_rapido.h:528:30: error: non-member function ‘const bool HayMas()’ cannot have cv-qualifier
+ const bool ITClave::HayMas() const {
+                              ^
+dicc_rapido.h: In function ‘const bool HayMas()’:
+dicc_rapido.h:529:6: error: ‘it’ was not declared in this scope
+  if (it.nodosRecorridos < it.tam - 1) {
+      ^
+dicc_rapido.h: At global scope:
+dicc_rapido.h:537:6: error: expected initializer before ‘ITClave’
+ T& c ITClave::ClaveActual() const {
+      ^
+dicc_rapido.h: In function ‘void ITClaveAvanzar()’:
+dicc_rapido.h:543:2: error: ‘it’ was not declared in this scope
+  it.nodosRecorridos = it.nodosRecorridos + 1;
+  ^
+dicc_rapido.h:544:2: error: ‘itConj’ was not declared in this scope
+  itConj itNodosNivelActual = ITClave(DameNodos(it.raiz, 1, it.nivelActual));
+  ^
+dicc_rapido.h:544:9: error: expected ‘;’ before ‘itNodosNivelActual’
+  itConj itNodosNivelActual = ITClave(DameNodos(it.raiz, 1, it.nivelActual));
+         ^
+dicc_rapido.h:547:11: error: ‘itNodosNivelActual’ was not declared in this scope
+   Avanzar(itNodosNivelActual);
+           ^
+dicc_rapido.h:547:29: error: there are no arguments to ‘Avanzar’ that depend on a template parameter, so a declaration of ‘Avanzar’ must be available [-fpermissive]
+   Avanzar(itNodosNivelActual);
+                             ^
+dicc_rapido.h:548:34: error: there are no arguments to ‘Anterior’ that depend on a template parameter, so a declaration of ‘Anterior’ must be available [-fpermissive]
+   if (Anterior(itNodosNivelActual) == Actual(it)) {
+                                  ^
+dicc_rapido.h:548:48: error: there are no arguments to ‘Actual’ that depend on a template parameter, so a declaration of ‘Actual’ must be available [-fpermissive]
+   if (Anterior(itNodosNivelActual) == Actual(it)) {
+                                                ^
+dicc_rapido.h:552:19: error: ‘itNodosNivelActual’ was not declared in this scope
+  if (HaySiguiente(itNodosNivelActual)) {
+                   ^
+dicc_rapido.h:552:37: error: there are no arguments to ‘HaySiguiente’ that depend on a template parameter, so a declaration of ‘HaySiguiente’ must be available [-fpermissive]
+  if (HaySiguiente(itNodosNivelActual)) {
+                                     ^
+dicc_rapido.h:553:47: error: there are no arguments to ‘Siguiente’ that depend on a template parameter, so a declaration of ‘Siguiente’ must be available [-fpermissive]
+   it.nodoActual = Siguiente(itNodosNivelActual);
+                                               ^
+dicc_rapido.h:556:73: error: there are no arguments to ‘DameNodos’ that depend on a template parameter, so a declaration of ‘DameNodos’ must be available [-fpermissive]
+   it.nodoActual = Siguiente(CrearIT(DameNodos(it.raiz, 1, it.nivelActual)));
+                                                                         ^
+dicc_rapido.h: At global scope:
+dicc_rapido.h:562:7: error: invalid use of template-name ‘aed2::Lista’ without an argument list
+ const Lista ITClave::Siguientes() const {
+       ^
+dicc_rapido.cpp: In function ‘int main()’:
+dicc_rapido.cpp:8:12: error: missing template arguments before ‘(’ token
+  DiccRapido();
+            ^
