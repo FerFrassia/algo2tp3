@@ -35,6 +35,14 @@ class DiccRapido {
 
 		ITClave Claves() const;
 
+		Tc& Raiz();
+
+		Tc& HijoIzq(const Tc& c);
+
+		Tc& HijoDer(const Tc& c);
+
+		Tc& Padre(const Tc& c);
+
 		//iterador de clave
 		class ITClave {
 			public:
@@ -251,6 +259,7 @@ void DiccRapido<Tc, Ts>::Definir(const Tc& c, const Ts& s) {
 				Nodo* padrePNodo = (*pNodo).padre;
 				if (abs(FactorDesbalance(pNodo)) > 1) {
 					Rotar(pNodo);
+					//(*pNodo).alt = Altura(pNodo);
 				} else {
 					(*pNodo).alt = Altura(pNodo);
 				}
@@ -264,6 +273,7 @@ template<class Tc, class Ts>
 void DiccRapido<Tc, Ts>::Borrar(const Tc& c) {
 	Nodo* pNodo = dicc.raiz;
 	Nodo* nuevoPNodo = NULL;
+	Nodo* pNodo2 = NULL;
 	while (c != (*pNodo).clave) {
 		if (c > (*pNodo).clave) {
 			pNodo = (*pNodo).der;
@@ -274,21 +284,23 @@ void DiccRapido<Tc, Ts>::Borrar(const Tc& c) {
 	if((*pNodo).izq == NULL && (*pNodo).der == NULL) {
 		if ((*pNodo).padre == NULL) {
 			dicc.raiz = NULL;
-			delete pNodo;
 		} else {
 			if (pNodo == (*((*pNodo).padre)).izq) {
 				(*((*pNodo).padre)).izq = NULL;
 			} else {
 				(*((*pNodo).padre)).der = NULL;
 			}
-			delete pNodo;
 		}
-	} else {
+	(*pNodo).padre = NULL;
+	(*pNodo).izq = NULL;
+	(*pNodo).der = NULL; 
+	delete pNodo;
+	} 
+	 else {
 		if ((*pNodo).izq == NULL && (*pNodo).der != NULL) {
 			if ((*pNodo).padre == NULL) {
 				(*((*pNodo).der)).padre = NULL;
 				dicc.raiz = (*pNodo).der;
-				delete pNodo;
 			} else {
 				if (pNodo == (*((*pNodo).padre)).izq) {
 					(*((*pNodo).padre)).izq = (*pNodo).der;
@@ -296,14 +308,16 @@ void DiccRapido<Tc, Ts>::Borrar(const Tc& c) {
 					(*((*pNodo).padre)).der = (*pNodo).der;
 				}
 				(*(*pNodo).der).padre = (*pNodo).padre;
-				delete pNodo;
 			}
+		(*pNodo).padre = NULL;
+		(*pNodo).izq = NULL;
+		(*pNodo).der = NULL; 
+		delete pNodo;
 		} else {
 			if ((*pNodo).izq != NULL && (*pNodo).der == NULL) {
 				if ((*pNodo).padre == NULL) {
 					(*(*pNodo).izq).padre = NULL;
 					dicc.raiz = (*pNodo).izq;
-					delete pNodo;
 				} else {
 					if (pNodo == (*((*pNodo).padre)).izq) {
 						(*((*pNodo).padre)).izq = (*pNodo).izq;
@@ -311,8 +325,11 @@ void DiccRapido<Tc, Ts>::Borrar(const Tc& c) {
 						(*((*pNodo).padre)).der = (*pNodo).izq;
 					}
 					(*((*pNodo).izq)).padre = (*pNodo).padre;
-					delete pNodo;
 				}
+			(*pNodo).padre = NULL;
+			(*pNodo).izq = NULL;
+			(*pNodo).der = NULL; 
+			delete pNodo;	
 			} else {
 				nuevoPNodo = (*pNodo).der;
 				while ((*nuevoPNodo).izq != NULL) {
@@ -334,24 +351,24 @@ void DiccRapido<Tc, Ts>::Borrar(const Tc& c) {
 						(*((*nuevoPNodo).padre)).der = NULL;
 					}
 				}
+			pNodo2 = (*nuevoPNodo).padre;
+			(*nuevoPNodo).padre = NULL;
+			(*nuevoPNodo).izq = NULL;
+			(*nuevoPNodo).der = NULL; 
+			delete nuevoPNodo;
 			}
 		}
 	}
 	dicc.tam = dicc.tam - 1;
-	if (nuevoPNodo != NULL) {
-		pNodo = (*nuevoPNodo).padre;
-	}
-	delete nuevoPNodo;
-	/*while (pNodo != NULL) {
-		Nodo* padrePNodo = (*pNodo).padre;
-		if (abs(FactorDesbalance(pNodo)) > 1) {
-			Rotar(pNodo);
+	while (pNodo2 != NULL) {
+		Nodo* padrePNodo = (*pNodo2).padre;
+		if (abs(FactorDesbalance(pNodo2)) > 1) {
+			Rotar(pNodo2);
 		} else {
-			(*pNodo).alt = Altura(pNodo);
+			(*pNodo2).alt = Altura(pNodo2);
 		}
-		pNodo = padrePNodo;
-	}
-	*/
+		pNodo2 = padrePNodo;
+	}	
 }
 
 template<class Tc, class Ts>
@@ -371,6 +388,56 @@ Tc& DiccRapido<Tc, Ts>::ClaveMax() const {
 	}
 	return (*pNodo).clave;
 }
+
+//BORRAR ESTA OPERACIOMMNNNNNNNN!!!!
+template<class Tc, class Ts>
+Tc& DiccRapido<Tc, Ts>::Raiz() {
+	return (*dicc.raiz).clave;
+}
+
+
+//BORRAR ESTA OPERACIOMMNNNNNNNN!!!!
+template<class Tc, class Ts>
+Tc& DiccRapido<Tc, Ts>::HijoIzq(const Tc& c) {
+	Nodo* pNodo = dicc.raiz;
+	while ((*pNodo).clave != c) {
+		if (c > (*pNodo).clave) {
+			pNodo = (*pNodo).der;
+		} else {
+			pNodo = (*pNodo).izq;
+		}
+	}
+	return (*(*pNodo).izq).clave;
+}
+
+//BORRAR ESTA OPERACIONNN!!!
+template<class Tc, class Ts>
+Tc& DiccRapido<Tc, Ts>::HijoDer(const Tc& c) {
+		Nodo* pNodo = dicc.raiz;
+	while ((*pNodo).clave != c) {
+		if (c > (*pNodo).clave) {
+			pNodo = (*pNodo).der;
+		} else {
+			pNodo = (*pNodo).izq;
+		}
+	}
+	return (*(*pNodo).der).clave;
+}
+
+//BORRAR ESTA OPERACIONNN!!!
+template<class Tc, class Ts>
+Tc& DiccRapido<Tc, Ts>::Padre(const Tc& c) {
+		Nodo* pNodo = dicc.raiz;
+	while ((*pNodo).clave != c) {
+		if (c > (*pNodo).clave) {
+			pNodo = (*pNodo).der;
+		} else {
+			pNodo = (*pNodo).izq;
+		}
+	}
+	return (*(*pNodo).padre).clave;
+}
+
 
 template<class Tc, class Ts>
 typename DiccRapido<Tc, Ts>::ITClave DiccRapido<Tc, Ts>::Claves() const {
@@ -395,15 +462,15 @@ template<class Tc, class Ts>
 void DiccRapido<Tc, Ts>::Rotar(Nodo* p) {
 	if (FactorDesbalance(p) < -1) {
 		if (FactorDesbalance((*p).der) > 0) {
-			return RotarDobleIzq(p);
+			RotarDobleIzq(p);
 		} else {
-			return RotarSimpleIzq(p);
+			RotarSimpleIzq(p);
 		} 
 	} else {
 		if (FactorDesbalance((*p).izq) < 0) {
-			return RotarDobleDer(p);
+			RotarDobleDer(p);
 		} else {
-			return RotarSimpleDer(p);
+			RotarSimpleDer(p);
 		}
 	}
 }
@@ -422,6 +489,8 @@ void DiccRapido<Tc, Ts>::RotarSimpleIzq(Nodo* p) {
 		} else {
 			(*padre).der = r2;
 		}
+	} else {
+		dicc.raiz = r2;
 	}
 	(*r2).padre = padre;
 	(*r2).izq = r;
@@ -449,6 +518,8 @@ void DiccRapido<Tc, Ts>::RotarSimpleDer(Nodo* p) {
 		} else {
 			(*padre).der = r2;
 		}
+	} else {
+		dicc.raiz = r2;
 	}
 	(*r2).padre = padre;
 	(*r2).der = r;
