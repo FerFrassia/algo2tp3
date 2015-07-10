@@ -137,7 +137,6 @@ namespace aed2 {
     template<class T>
     std::ostream& operator<<(std::ostream& os, const Arreglo<T>&);
 
-
 template<class T>
 Arreglo<T>::Arreglo() : array(NULL), size(0) {}
 

@@ -2,7 +2,9 @@
 #define DRIVER_H_
 
 #include "Tipos.h"
-#include "aed2/TiposBasicos.h"
+#include "../aed2/TiposBasicos.h"
+#include "dcnet.h"
+
 
 //#include ...
 
@@ -38,12 +40,12 @@ class Driver
        /// Observadores DCNet //////////////////////////////////////////////////////////////
     
         Nat CantidadNodosRecorridosPor(const Paquete& p) const;
-        const Computadora& IesimoNodoRecorridoPor(const Paquete& p) const;
+        const Computadora& IesimoNodoRecorridoPor(const Paquete& p, const Nat i) const;
 
         Nat CantidadEnviadosPor(const Computadora& c) const;
     
         Nat CantidadEnEsperaEn(const Computadora& c) const;
-        const Paquete& IesimoEnEsperaEn(const Computadora& c) const;
+        const Paquete& IesimoEnEsperaEn(const Computadora& c, const Nat i) const;
 
         /// Acciones DCNet ////////////////////////////////////////////////////////////
 
@@ -65,6 +67,8 @@ class Driver
      * con el cuál interactuar. Además, pueden declarar todas las        *
      * funciones auxiliares que les hagan falta.                         *
      *********************************************************************/
+     Red*  lared;
+     DCNet* eldcnet;
 
 }; // class Driver
 

@@ -1,6 +1,5 @@
 #include "Driver.h"
 #include "ArbolSintactico.h"
-#include "TiposBasicos.h"
 
 namespace aed2 {
 
@@ -62,7 +61,7 @@ Nat Driver::CantidadNodosRecorridosPor(const Paquete& p) const {
     return 0;
 }
 
-const Computadora& Driver::IesimoNodoRecorridoPor(const Paquete& p) const {
+const Computadora& Driver::IesimoNodoRecorridoPor(const Paquete& p, const Nat i) const {
     // TODO
 }
 
@@ -76,7 +75,7 @@ Nat Driver::CantidadEnEsperaEn(const Computadora& c) const {
     return 0;
 }
 
-const Paquete& Driver::IesimoEnEsperaEn(const Computadora& c) const {
+const Paquete& Driver::IesimoEnEsperaEn(const Computadora& c, const Nat i) const {
     // TODO
     return 0;
 }

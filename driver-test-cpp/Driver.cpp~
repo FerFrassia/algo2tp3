@@ -1,26 +1,41 @@
 #include "Driver.h"
-#include "ArbolSintactico.h"
 #include "TiposBasicos.h"
 
 namespace aed2 {
 
 Driver::Driver() {
-    // TODO
+    lared = new  Red();
+    eldcnet = new DCNet(lared);
 }
 
 Driver::~Driver() {
-    // TODO
+    delete lared;
+    delete eldcnet;
 }
 
 // TAD RED
 Nat Driver::CantidadComputadoras() const {
-    // TODO
-    return 0;
+    Conj<Compu>::Iterador it = (lared->Computadoras()).CrearIt();
+    int res = 0;
+        while(it.HaySiguiente()){
+            res ++;
+            it.Avanzar();
+        }
+     return res;
 
 }
 
 const Computadora& Driver::IesimaComputadora(const Nat i) const {
-    // TODO
+    Conj<Compu>::Iterador it = (lared->Computadoras()).CrearIt();
+    int n = 0;
+    Computadora res;
+        while(it.HaySiguiente()){
+            if(n == i){
+                
+            }
+            it.Avanzar();
+        }
+     return res;
 	return 0;
 }
         
