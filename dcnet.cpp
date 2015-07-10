@@ -1,9 +1,9 @@
 #include "dcnet.h"
+#include "red.h"
 #include "dicc_trie.h"
 #include "DiccRapido.h"
 #include "aed2/TiposBasicos.h"
 #include "TiposSimples.h"
-#include "Red.h"
 #include "aed2/Conj.h"
 #include "aed2/Arreglo.h"
 #include "aed2/Vector.h"
@@ -71,9 +71,9 @@ Nat DCNet::CantidadEnviados(Compu c) {
 }
 
 DiccRapido<Paquete, Lista<Compu> >::ITClave DCNet::EnEspera(Compu c) {
-//    DiccRapido<Paquete, Lista<Compu> >* dicc = compYPaq->obtener(c.hostname)->paqYCam;
-//    DiccRapido<Paquete, Lista<Compu> >::ITClave* It = new DiccRapido<Paquete, Lista<Compu> >::ITClave(*dicc);
-//    return It;
+    DiccRapido<Paquete, Lista<Compu> >* dicc = compYPaq->obtener(c.hostname)->paqYCam;
+    DiccRapido<Paquete, Lista<Compu> >::ITClave It = dicc->Claves();
+    return It;
 }
 
 void DCNet::CrearPaquete(Paquete p) {

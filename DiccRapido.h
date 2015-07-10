@@ -61,17 +61,19 @@ class DiccRapido {
 
 			private:
 
-				struct Itclave {
+				struct e_it {
 
 					int nivelActual;
 					int NodosRecorridos;
 					int tam;
 					typename DiccRapido<Tc, Ts>::Nodo* NodoActual;
 					typename DiccRapido<Tc, Ts>::Nodo* raiz;
-					Itclave(): nivelActual(1), NodosRecorridos(0), tam(0), NodoActual(NULL), raiz(NULL) {}
+					e_it(): nivelActual(1), NodosRecorridos(0), tam(0), NodoActual(NULL), raiz(NULL) {}
 				};
 
 				const Lista<Tc> Siguientes() const;
+
+				e_it it;
 		};
 
 
@@ -596,7 +598,8 @@ DiccRapido<Tc, Ts>::ITClave::ITClave() {
 
 template<class Tc, class Ts>
 DiccRapido<Tc, Ts>::ITClave::~ITClave() {
-	delete dicc.NodoActual;
+	delete it.NodoActual;
+	delete it.raiz;
 }
 
 template<class Tc, class Ts>
