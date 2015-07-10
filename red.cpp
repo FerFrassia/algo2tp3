@@ -5,7 +5,7 @@
 #include "dicc_trie.h"
 #include "aed2/TiposBasicos.h"
 #include "TiposSimples.h"
-#include "Red.h"
+#include "red.h"
 #include "aed2/Conj.h"
 #include "aed2/Arreglo.h"
 #include "aed2/Vector.h"

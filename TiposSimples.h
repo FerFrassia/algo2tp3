@@ -17,20 +17,20 @@ namespace aed2{
         Hostname hostname;
         Conj<Interfaz> interfaces;
         //Compu(const Hostname& h) : interfaces(new Conj<Interfaz>) {}
-        const bool operator==(const Compu& otra) const;
-        const bool operator!=(const Compu& otra) const;
+   //     const bool operator==(const Compu& otra) const;
+    //    const bool operator!=(const Compu& otra) const;
       
+        const bool operator==(const Compu& otra) const {
+            return (hostname == otra.hostname) && (interfaces == otra.interfaces);
+        }
+
+        const bool operator!=(const Compu& otra) const {
+            return !((hostname == otra.hostname) || (interfaces == otra.interfaces));
+        }
 
     };
 
 
-        const bool Compu::operator==(const Compu& otra) const {
-            return (hostname == otra.hostname) && (interfaces == otra.interfaces);
-        }
-
-        const bool Compu::operator!=(const Compu& otra) const {
-            return !((hostname == otra.hostname) || (interfaces == otra.interfaces));
-        }
 
   
 
@@ -40,28 +40,29 @@ namespace aed2{
         Compu origen;
         Compu destino;
         //Paquete(const String& h) : interfaces(NULL) {}
-                const bool operator==(const Paquete& otra) const;
-                const bool operator!=(const Paquete& otra) const;
-                const bool operator<(const Paquete& otra) const;
-                const bool operator>(const Paquete& otra) const;
+       //         const bool operator==(const Paquete& otra) const;
+        //        const bool operator!=(const Paquete& otra) const;
+         //       const bool operator<(const Paquete& otra) const;
+          //      const bool operator>(const Paquete& otra) const;
         
-        };
 
-                const bool Paquete::operator==(const Paquete& otra) const {
+                const bool operator==(const Paquete& otra) const {
                    return (id == otra.id);
                 }
 
-                const bool Paquete::operator!=(const Paquete& otra) const {
+                const bool operator!=(const Paquete& otra) const {
                     return (id != otra.id);
                 }
                 
-                const bool Paquete::operator<(const Paquete& otra) const {
+                const bool operator<(const Paquete& otra) const {
                     return (id < otra.id);
                 }
                 
-                const bool Paquete::operator>(const Paquete& otra) const {
+                const bool operator>(const Paquete& otra) const {
                     return (id > otra.id);
                 }
+        };
+
 
 
    

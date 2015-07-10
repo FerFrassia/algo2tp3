@@ -36,7 +36,10 @@ class Conj
 
     void Eliminar(const T& e);
 
-    T& DameUno();
+    const T& DameUno(){
+      Conj<T>::Iterador it = CrearIt();
+      return it.Siguiente();
+    }
 
     // Observadores
 

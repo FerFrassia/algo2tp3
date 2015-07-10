@@ -53,16 +53,17 @@ Red DCNet::DameRed() {
 }
 
 Lista<Compu> DCNet::CaminoRecorrido(const Paquete p) {
-    typename aed2::Vector<string>::const_Iterador it = (compYPaq->claves()).CrearIt();
+    vector<string> vr = (compYPaq->claves());
+    int i=0;
 	bool esta = false;
 	Lista<Compu> res;
-	while (it.HaySiguiente() && !esta) {
-        if ((compYPaq->obtener(it.Siguiente())->paqYCam)->Def(p)) {
+	while (vr.size() < i && !esta) {
+        if ((compYPaq->obtener(vr[i])->paqYCam)->Def(p)) {
 			esta = true;
-			res = ((compYPaq->obtener(it.Siguiente()))->paqYCam)->Obtener(p);
+			res = ((compYPaq->obtener(vr[i]))->paqYCam)->Obtener(p);
 		}
 
-		it.Avanzar();
+		i++;
 	}
 	return res;
 }
