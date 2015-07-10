@@ -12,6 +12,7 @@
 using namespace aed2;
 
 
+
 /*Este Struct solamente se utiliza en la funcion "Avanzar Segundo" y es requerido para poder guardar la informacion
   	de los paquetes a mover.*/
 
@@ -52,17 +53,17 @@ Red DCNet::DameRed() {
 }
 
 Lista<Compu> DCNet::CaminoRecorrido(const Paquete p) {
-    DiccString<e_InfoCompu>::Iterador it = DiccString<e_InfoCompu >::Iterador(compYPaq);
+    typename aed2::Vector<string>::const_Iterador it = (compYPaq->claves()).CrearIt();
 	bool esta = false;
 	Lista<Compu> res;
-//	while (it.HaySiguiente() && !esta) {
-//        if (((it.valorActual())->paqYCam).Def(Paquete)) {
-//			esta = true;
-//			res = ((it.valorActual()).paqYCam).Obtener(Paquete);
-//		}
-//
-//		it.avanzar();
-//	}
+	while (it.HaySiguiente() && !esta) {
+        if ((compYPaq->obtener(it.Siguiente())->paqYCam)->Def(p)) {
+			esta = true;
+			res = ((compYPaq->obtener(it.Siguiente()))->paqYCam)->Obtener(p);
+		}
+
+		it.Avanzar();
+	}
 	return res;
 }
 

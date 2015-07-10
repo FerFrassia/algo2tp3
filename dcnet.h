@@ -11,7 +11,8 @@
 #include "aed2/Vector.h"
 #include "aed2/Lista.h"
 
-using namespace std;
+
+using namespace aed2;
 
 
 
