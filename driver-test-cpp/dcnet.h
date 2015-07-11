@@ -39,6 +39,11 @@ public:
 
 	Compu LaQueMasEnvio();
 
+
+
+	Paquete DamePaquete(Nat);
+	Compu DameCompu(Hostname);
+
 private:
 
 	struct e_InfoCompu {

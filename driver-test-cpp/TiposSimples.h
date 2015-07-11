@@ -16,7 +16,7 @@ namespace aed2{
     struct Compu {
         Hostname hostname;
         Conj<Interfaz> interfaces;
-        //Compu(const Hostname& h) : interfaces(new Conj<Interfaz>) {}
+       // Compu(const Hostname& h,Conj<Interfaz> ci) :  hostname(h), interfaces(ci) {};
    //     const bool operator==(const Compu& otra) const;
     //    const bool operator!=(const Compu& otra) const;
       
@@ -39,7 +39,7 @@ namespace aed2{
         Nat prioridad;
         Compu origen;
         Compu destino;
-        //Paquete(const String& h) : interfaces(NULL) {}
+          //  Paquete(const Nat& i,const Nat& p,const Compu& o,const Compu& d ) : id(i), prioridad(p), origen(o), destino(d)    {};
        //         const bool operator==(const Paquete& otra) const;
         //        const bool operator!=(const Paquete& otra) const;
          //       const bool operator<(const Paquete& otra) const;
@@ -50,6 +50,13 @@ namespace aed2{
                    return (id == otra.id);
                 }
 
+          /*      const void operator=(const Paquete& otra) const {
+                   (prioridad == otra.prioridad);
+                   (id == otra.id);
+                   (origen == otra.origen);
+                   (destino = otra.destino);
+                }
+*/
                 const bool operator!=(const Paquete& otra) const {
                     return (id != otra.id);
                 }
