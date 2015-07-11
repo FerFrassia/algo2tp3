@@ -55,7 +55,7 @@ class DiccRapido {
 
 				ITClave(const ITClave& otro);	
 
-				const bool HayMas(ITClave& it) const;
+				const bool HayMas() const;
 
 				Tc& ClaveActual() const;
 
@@ -120,7 +120,7 @@ class DiccRapido {
 			e_dicc();
 		};
 
-		Conj<Tc&> DameNodos( Nodo* p, int actual, const int destino) const;
+		Conj<Tc> DameNodos(Nodo* p, int actual, const int destino) const;
 
 		void Rotar(Nodo* p);
 
@@ -456,14 +456,18 @@ typename DiccRapido<Tc, Ts>::ITClave DiccRapido<Tc, Ts>::Claves() const {
 
 //metodos privados de DiccRapido
 template<class Tc, class Ts>
-Conj<Tc&> DiccRapido<Tc, Ts>::DameNodos(Nodo* p, int actual, const int destino) const {
-	Conj<Tc&> res;
+Conj<Tc> DiccRapido<Tc, Ts>::DameNodos(Nodo* p, int actual, const int destino) const {
+	Conj<Tc> res;
+	//Conj<Tc>* res = new Conj<Tc>;
+	//Conj<Lista<Compu> >* res = new Conj<Lista<Compu> >;
 	//Conj<typename DiccRapido<Tc, Ts>::Nodo*> res = *(new  Conj<typename DiccRapido<Tc, Ts>::Nodo*>());
 	if (p != NULL) {
 		if (actual == destino) {
-			res.Agregar((*p).clave);
+			res.Agregar(((*p).clave));
 		} else {
-			(DameNodos((*p).izq, actual + 1, destino)).Union(DameNodos((*p).der, actual + 1, destino));
+			Conj<Tc> nodosIzq = DameNodos((*p).izq, actual + 1, destino);
+			nodosIzq.Union(DameNodos((*p).der, actual + 1, destino));
+			res = nodosIzq;
 		}
 	}
 	return res;
@@ -615,8 +619,8 @@ DiccRapido<Tc, Ts>::ITClave::ITClave(const ITClave& otro) : it(otro.it.diccIt) {
 }
 
 template<class Tc, class Ts>
-const bool DiccRapido<Tc, Ts>::ITClave::HayMas(ITClave& it) const {
-	if (dicc.nodosRecorridos < dicc.tam - 1) {
+const bool DiccRapido<Tc, Ts>::ITClave::HayMas() const {
+	if (it.nodosRecorridos < it.tam - 1) {
 		return true;
 	} else {
 		return false;
@@ -630,12 +634,17 @@ Tc& DiccRapido<Tc, Ts>::ITClave::ClaveActual() const {
 
 template<class Tc, class Ts>
 void DiccRapido<Tc, Ts>::ITClave::Avanzar() {
-/*
 	it.nodosRecorridos = it.nodosRecorridos + 1;
-	typename Conj<Tc&>::Iterador itNodosNivelActual = it.diccIt.DameNodos(it.raiz, 1, it.nivelActual).CrearIt();
-	while (itNodosNivelActual.Siguiente() != (*(it.nodoActual)).clave) {
+	Conj<Tc> NodosNivelActual = it.diccIt.DameNodos(it.raiz, 1, it.nivelActual);
+	typename Conj<Tc>::Iterador itNodosNivelActual = NodosNivelActual.CrearIt();
+
+	itNodosNivelActual.Avanzar();
+
+
+	while (*(&(itNodosNivelActual.Anterior())) != (*(it.nodoActual)).clave) {
 		itNodosNivelActual.Avanzar();
 	}
+
 	if (itNodosNivelActual.HaySiguiente()) {
 
 		Nodo* pNodo = it.raiz;
@@ -645,14 +654,15 @@ void DiccRapido<Tc, Ts>::ITClave::Avanzar() {
 			} else {
 				pNodo = (*pNodo).izq;
 			}
-		}		
-
+		}
+		Tc& c = (*pNodo).clave;		
 		it.nodoActual = pNodo;
 	} else {
 		it.nivelActual = it.nivelActual + 1;
 
 		Nodo* pNodo = it.raiz;
-		Tc& c = (it.diccIt.DameNodos(it.raiz, 1, it.nivelActual)).DameUno();
+		Conj<Tc> NodosNivelAbajo = it.diccIt.DameNodos(it.raiz, 1, it.nivelActual);
+		Tc c = NodosNivelAbajo.DameUno();
 
 		while ((*pNodo).clave != c ) {
 			if (c > (*pNodo).clave) {
@@ -661,21 +671,20 @@ void DiccRapido<Tc, Ts>::ITClave::Avanzar() {
 				pNodo = (*pNodo).izq;
 			}
 		}	
-
 		it.nodoActual = pNodo;
-	}	
-*/
+	}
 }
 
 //metodos privados de ITClave
 template<class Tc, class Ts>
 const Lista<Tc> DiccRapido<Tc, Ts>::ITClave::Siguientes() const {
-	ITClave itVar = dicc;
+	ITClave itVar = new ITClave(this);
 	Lista<Tc> siguientes = Lista<Tc>();
 	while (HayMas(itVar)) {
-		siguientes.AgregarAtras(ClaveActual(itVar));
-		dicc.Avanzar;
+		siguientes.AgregarAtras(itVar.ClaveActual());
+		itVar.Avanzar;
 	}
+	delete itVar;
 	return siguientes;
 }
 

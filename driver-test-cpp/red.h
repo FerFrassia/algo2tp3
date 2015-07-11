@@ -56,13 +56,17 @@ public:
 
     void Conectar(Compu c1, Interfaz i1, Compu c2, Interfaz i2); // Chequeado
 
-    Conj<Compu> Vecinos(const Compu c);
+    Conj<Compu> Vecinos(const Compu c); // Chequeado
 
     bool UsaInterfaz(const Compu c, const Interfaz i); // Chequeado
 
     Conj<Lista<Compu> >::Iterador CaminosMinimos(const Compu c1, const Compu c2);
 
-    bool HayCamino(const Compu c1, const Compu c2);
+    //*** Borrar
+    Conj<Lista<Compu> > CaminosMinimos2(const Compu c1, const Compu c2);
+    //***
+
+    bool HayCamino(const Compu c1, const Compu c2); // Chequeado
 
 private:
     // Funciones Privadas

@@ -249,9 +249,34 @@ int main(){
 
 	std::cout << "Avanzo Iterador \n";
 	iterador.Avanzar();
-/*
+
 	std::cout << "Pido Clave: " << iterador.ClaveActual();
 	std::cout << "\n";
+
+	std::cout << "Avanzo Iterador \n";
+	iterador.Avanzar();
+
+	std::cout << "Pido Clave: " << iterador.ClaveActual();
+	std::cout << "\n";
+
+	std::cout << "Avanzo Iterador \n";
+	iterador.Avanzar();
+
+	std::cout << "Pido Clave: " << iterador.ClaveActual();
+	std::cout << "\n";
+
+	std::cout << "Avanzo Iterador \n";
+	iterador.Avanzar();
+
+	std::cout << "Pido Clave: " << iterador.ClaveActual();
+	std::cout << "\n";
+
+	std::cout << "Avanzo Iterador \n";
+	iterador.Avanzar();
+
+	std::cout << "Pido Clave: " << iterador.ClaveActual();
+	std::cout << "\n";
+
 
 /*
 	std::cout << "\n";
