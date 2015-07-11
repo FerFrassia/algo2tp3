@@ -13,7 +13,6 @@ int main(){
 	std::cout << "Vacio?: " << dicc.Vacio();
 	std::cout << "\n";
 
-
 	//0
 	std::cout << "Def?(5): " << dicc.Def(5);
 	std::cout << "\n";
@@ -195,17 +194,19 @@ int main(){
 	std::cout << "ClaveMax: " << dicc.ClaveMax();
 	std::cout << "\n";
 
+//TESTEO DE BORRADO
+/*
 	std::cout << "\n";
-	std::cout << "Borro(10)\n";
-	dicc.Borrar(10);
+	std::cout << "Borro(7)\n";
+	dicc.Borrar(7);
 
-	std::cout << "Def?(10): " << dicc.Def(10);
+	std::cout << "Def?(7): " << dicc.Def(7);
 	std::cout << "\n";
 
 	std::cout << "Raiz: " << dicc.Raiz();
 	std::cout << "\n";
 
-	std::cout << "Izq(7): " << dicc.HijoIzq(7);
+	std::cout << "Izq(8): " << dicc.HijoIzq(8);
 	std::cout << "\n";
 
 	std::cout << "Padre(5): " << dicc.Padre(5);
@@ -217,26 +218,41 @@ int main(){
 	std::cout << "Padre(3): " << dicc.Padre(3);
 	std::cout << "\n";
 
-	std::cout << "Der(7): " << dicc.HijoDer(7);
+	std::cout << "Der(8): " << dicc.HijoDer(8);
+	std::cout << "\n";
+
+	std::cout << "Padre(10): " << dicc.Padre(10);
+	std::cout << "\n";
+
+	std::cout << "Der(10): " << dicc.HijoDer(10);
 	std::cout << "\n";
 
 	std::cout << "Padre(12): " << dicc.Padre(12);
 	std::cout << "\n";
 
-	std::cout << "Izq(12): " << dicc.HijoDer(12);
-	std::cout << "\n";
-
-	std::cout << "Padre(8): " << dicc.Padre(8);
-	std::cout << "\n";
-/*
 	std::cout << "Izq(10): " << dicc.HijoIzq(10);
 	std::cout << "\n";
 
 	std::cout << "Padre(8): " << dicc.Padre(8);
 	std::cout << "\n";
-*/
+
 	std::cout << "ClaveMax: " << dicc.ClaveMax();
 	std::cout << "\n";
+
+*/
+//TESTEO DE CREAR IT
+	std::cout << "Creo Iterador \n";
+	DiccRapido<int, int>::ITClave iterador = dicc.Claves();
+
+	std::cout << "Pido Clave: " << iterador.ClaveActual();
+	std::cout << "\n";
+
+	std::cout << "Avanzo Iterador \n";
+	iterador.Avanzar();
+/*
+	std::cout << "Pido Clave: " << iterador.ClaveActual();
+	std::cout << "\n";
+
 /*
 	std::cout << "\n";
 	std::cout << "Borro(10)\n";
