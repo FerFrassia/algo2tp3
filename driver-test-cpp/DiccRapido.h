@@ -640,7 +640,6 @@ void DiccRapido<Tc, Ts>::ITClave::Avanzar() {
 
 	itNodosNivelActual.Avanzar();
 
-
 	while (*(&(itNodosNivelActual.Anterior())) != (*(it.nodoActual)).clave) {
 		itNodosNivelActual.Avanzar();
 	}
