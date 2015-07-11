@@ -1,5 +1,5 @@
 //
-// Created by Sebastián on 28/06/2015.
+// Created by Sebastiï¿½n on 28/06/2015.
 //
 
 #ifndef TP3___IMPLEMENTACION_TIPOSSIMPLES_H
@@ -8,7 +8,7 @@
 #include "aed2/TiposBasicos.h"
 #include "aed2/Conj.h"
 
-namespace aed2{
+namespace aed2 {
 
     typedef String Hostname;
     typedef Nat Interfaz;
@@ -17,22 +17,19 @@ namespace aed2{
         Hostname hostname;
         Conj<Interfaz> interfaces;
         //Compu(const Hostname& h) : interfaces(new Conj<Interfaz>) {}
-   //     const bool operator==(const Compu& otra) const;
-    //    const bool operator!=(const Compu& otra) const;
-      
-        const bool operator==(const Compu& otra) const {
+        //     const bool operator==(const Compu& otra) const;
+        //    const bool operator!=(const Compu& otra) const;
+
+        const bool operator==(const Compu &otra) const {
             return (hostname == otra.hostname) && (interfaces == otra.interfaces);
         }
 
-        const bool operator!=(const Compu& otra) const {
-            return !((hostname == otra.hostname) || (interfaces == otra.interfaces));
+        const bool operator!=(const Compu &otra) const {
+            return !((hostname == otra.hostname) && (interfaces == otra.interfaces));
         }
 
     };
 
-
-
-  
 
     struct Paquete {
         Nat id;
@@ -40,34 +37,28 @@ namespace aed2{
         Compu origen;
         Compu destino;
         //Paquete(const String& h) : interfaces(NULL) {}
-       //         const bool operator==(const Paquete& otra) const;
+        //         const bool operator==(const Paquete& otra) const;
         //        const bool operator!=(const Paquete& otra) const;
-         //       const bool operator<(const Paquete& otra) const;
-          //      const bool operator>(const Paquete& otra) const;
-        
-
-                const bool operator==(const Paquete& otra) const {
-                   return (id == otra.id);
-                }
-
-                const bool operator!=(const Paquete& otra) const {
-                    return (id != otra.id);
-                }
-                
-                const bool operator<(const Paquete& otra) const {
-                    return (id < otra.id);
-                }
-                
-                const bool operator>(const Paquete& otra) const {
-                    return (id > otra.id);
-                }
-        };
+        //       const bool operator<(const Paquete& otra) const;
+        //      const bool operator>(const Paquete& otra) const;
 
 
+        const bool operator==(const Paquete &otra) const {
+            return (id == otra.id);
+        }
 
-   
+        const bool operator!=(const Paquete &otra) const {
+            return (id != otra.id);
+        }
 
-   
+        const bool operator<(const Paquete &otra) const {
+            return (id < otra.id);
+        }
+
+        const bool operator>(const Paquete &otra) const {
+            return (id > otra.id);
+        }
+    };
 
 
 } // namespace aed2

@@ -692,12 +692,14 @@ template<typename T>
 bool Lista<T>::Esta(const T& elem) {
   Iterador it = CrearIt();
 
+  std::cout << "Entra esta." << "\n";
   while (it.HaySiguiente()) {
+    std::cout << "Entra while esta." << "\n";
     if (it.Siguiente() == elem)
       return true;
     it.Avanzar();
   }
-
+  std::cout << "Sale esta." << "\n";
   return false;
 }
 //***

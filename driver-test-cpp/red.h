@@ -1,5 +1,5 @@
 //
-// Created by Sebastián on 28/06/2015.
+// Created by Sebastiï¿½n on 28/06/2015.
 //
 
 #ifndef TP3___IMPLEMENTACION_RED_H
@@ -44,17 +44,21 @@ public:
 
     Conj<Compu>::Iterador Computadoras();
 
-    bool Conectadas(const Compu c1, const Compu c2);
+    //*** Borrar
+    Conj<Compu> Computadoras2();
+    //***
 
-    Interfaz InterfazUsada(const Compu c1, const Compu c2);
+    bool Conectadas(const Compu c1, const Compu c2); // Chequeado
 
-    void AgregarComputadora(const Compu c);
+    Interfaz InterfazUsada(const Compu c1, const Compu c2); // Chequeado
 
-    void Conectar(Compu c1, Interfaz i1, Compu c2, Interfaz i2);
+    void AgregarComputadora(const Compu c); // Chequeado
+
+    void Conectar(Compu c1, Interfaz i1, Compu c2, Interfaz i2); // Chequeado
 
     Conj<Compu> Vecinos(const Compu c);
 
-    bool UsaInterfaz(const Compu c, const Interfaz i);
+    bool UsaInterfaz(const Compu c, const Interfaz i); // Chequeado
 
     Conj<Lista<Compu> >::Iterador CaminosMinimos(const Compu c1, const Compu c2);
 
