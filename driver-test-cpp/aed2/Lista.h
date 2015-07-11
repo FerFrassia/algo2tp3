@@ -10,9 +10,10 @@
 
 #include <ostream>
 #include "TiposBasicos.h"
+#include "../TiposSimples.h"
 
-namespace aed2
-{
+using namespace aed2;
+//{
 
 template <typename T>
 class Lista
@@ -694,16 +695,23 @@ bool Lista<T>::Esta(const T& elem) {
 
   std::cout << "Entra esta." << "\n";
   while (it.HaySiguiente()) {
-    std::cout << "Entra while esta." << "\n";
-    if (it.Siguiente() == elem)
-      return true;
-    it.Avanzar();
+      std::cout << "Entra while esta." << "\n";
+
+      std::cout << "it siguiente hostname:" << it.Siguiente().hostname << "\n";
+      std::cout << "elem hostname:" << elem.hostname << "\n";
+
+      if (elem == it.Siguiente()) {
+          std::cout << "Entra if while esta." << "\n";
+          return true;
+      }
+      std::cout << "Sale if while esta.." << "\n";
+      it.Avanzar();
   }
   std::cout << "Sale esta." << "\n";
   return false;
 }
 //***
 
-}
+//}
 
 #endif // AED2_LISTA_H_INCLUDED

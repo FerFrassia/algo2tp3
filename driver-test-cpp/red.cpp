@@ -187,8 +187,8 @@ Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, List
         Conj<Compu>::Iterador itVecinos = Vecinos(c1).CrearIt();
         while (itVecinos.HaySiguiente()) {
             if (parcial.Esta(itVecinos.Siguiente())) {
-//                Lista<Compu> auxParcial = Lista<Compu>(parcial);
-//                auxParcial.AgregarAtras(itVecinos.Siguiente());
+                Lista<Compu> auxParcial = Lista<Compu>(parcial);
+                auxParcial.AgregarAtras(itVecinos.Siguiente());
                 res->Union(CaminosImportantes(itVecinos.Siguiente(), c2, auxParcial));
             }
             itVecinos.Avanzar();

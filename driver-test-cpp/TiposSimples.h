@@ -21,7 +21,15 @@ namespace aed2 {
         //    const bool operator!=(const Compu& otra) const;
 
         const bool operator==(const Compu &otra) const {
-            return (hostname == otra.hostname) && (interfaces == otra.interfaces);
+            std::cout << "Entra igualdad." << "\n";
+            std::cout << "Hostname c1:" << hostname << "\n";
+            std::cout << "Hostname c2:" << otra.hostname << "\n";
+
+            bool res1 = (hostname == otra.hostname);
+            std::cout << "Medio igualdad." << "\n";
+            bool res2 = (interfaces == otra.interfaces);
+            std::cout << "Sale igualdad." << "\n";
+            return res1 && res2;
         }
 
         const bool operator!=(const Compu &otra) const {
