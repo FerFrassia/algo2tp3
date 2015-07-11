@@ -166,3 +166,47 @@ bool DCNet::PaqueteEnTransito(Paquete p) {
 Compu DCNet::LaQueMasEnvio() {
 	return masEnviante->comp;
 }
+
+
+Paquete DCNet::DamePaquete(Nat n){
+	vector<string> vr = (compYPaq->claves());
+    int i=0;
+	bool esta = false;
+	Paquete p;
+	while (vr.size() < i && !esta) {
+    	DiccRapido<Paquete, Lista<Compu> >::ITClave it = (compYPaq->obtener(vr[i])->paqYCam)->Claves();
+    	while(it.HayMas()){
+
+    		if((it.ClaveActual()).id == n){
+    			p.id = (it.ClaveActual()).id;
+				p.prioridad = (it.ClaveActual()).prioridad;
+				p.origen = (it.ClaveActual()).origen;
+				p.destino = (it.ClaveActual()).destino;
+
+				return p;
+				}
+    		it.Avanzar();
+    	}
+		
+		i++;
+	}
+}
+
+
+Compu DCNet::DameCompu(Hostname h){
+
+	Conj<Compu>::Iterador it = red->Computadoras();
+	int i=0;
+	Compu pc;
+
+	while (it.HaySiguiente()) {
+		if((it.Siguiente()).hostname == h){
+            pc.hostname = h;
+            pc.interfaces = (it.Siguiente()).interfaces;
+            return pc;
+        }
+		it.Avanzar();
+	}
+}
+
+

@@ -189,7 +189,7 @@ Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, List
             if (parcial.Esta(itVecinos.Siguiente())) {
 //                Lista<Compu> auxParcial = Lista<Compu>(parcial);
 //                auxParcial.AgregarAtras(itVecinos.Siguiente());
-//                res->Union(CaminosImportantes(itVecinos.Siguiente(), c2, auxParcial));
+                res->Union(CaminosImportantes(itVecinos.Siguiente(), c2, auxParcial));
             }
             itVecinos.Avanzar();
         }

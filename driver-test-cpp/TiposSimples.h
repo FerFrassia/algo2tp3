@@ -42,7 +42,6 @@ namespace aed2 {
         //       const bool operator<(const Paquete& otra) const;
         //      const bool operator>(const Paquete& otra) const;
 
-
         const bool operator==(const Paquete &otra) const {
             return (id == otra.id);
         }
