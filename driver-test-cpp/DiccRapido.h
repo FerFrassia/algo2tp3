@@ -70,7 +70,7 @@ class DiccRapido {
 					int tam;
 					typename DiccRapido<Tc, Ts>::Nodo* nodoActual;
 					typename DiccRapido<Tc, Ts>::Nodo* raiz;
-					e_it(const DiccRapido<Tc, Ts>& dicc): nivelActual(1), nodosRecorridos(0), tam(0), nodoActual(NULL), raiz(NULL), diccIt(dicc) {}
+					e_it(const DiccRapido<Tc, Ts>& dicc): nivelActual(1), nodosRecorridos(0), tam(dicc.dicc.tam), nodoActual(NULL), raiz(NULL), diccIt(dicc) {}
 
 					~e_it() {
 						nodoActual = NULL;
@@ -202,7 +202,7 @@ DiccRapido<Tc, Ts>::DiccRapido() {
 
 template<class Tc, class Ts>
 DiccRapido<Tc, Ts>::~DiccRapido() {
-	delete dicc.raiz;
+	if (dicc.raiz != NULL) delete dicc.raiz;
 }
 
 template<class Tc, class Ts>
@@ -611,15 +611,14 @@ template<class Tc, class Ts>
 DiccRapido<Tc, Ts>::ITClave::ITClave(const DiccRapido<Tc, Ts>& dicc) : it(dicc) {
 	it.nivelActual = 1;
 	it.nodosRecorridos = 0;
-	it.tam = 0;
+	it.tam = dicc.dicc.tam;
 	it.nodoActual = dicc.dicc.raiz;
 	it.raiz = dicc.dicc.raiz;
 }
 
 template<class Tc, class Ts>
 DiccRapido<Tc, Ts>::ITClave::~ITClave() {
-	if (it.nodoActual != NULL) delete it.nodoActual;
-	if (it.raiz != NULL) delete it.raiz;
+// NO ESCRIBIR NADA ACA!
 }
 
 template<class Tc, class Ts>
@@ -633,7 +632,7 @@ DiccRapido<Tc, Ts>::ITClave::ITClave(const ITClave& otro) : it(otro.it.diccIt) {
 
 template<class Tc, class Ts>
 const bool DiccRapido<Tc, Ts>::ITClave::HayMas() const {
-	if (it.nodosRecorridos < it.tam) {
+	if (it.nodosRecorridos < it.tam - 1) {
 		return true;
 	} else {
 		return false;
@@ -668,6 +667,7 @@ void DiccRapido<Tc, Ts>::ITClave::Avanzar() {
 			}
 		}		
 		it.nodoActual = pNodo;
+		pNodo = NULL;
 	} else {
 		it.nivelActual = it.nivelActual + 1;
 
@@ -683,6 +683,10 @@ void DiccRapido<Tc, Ts>::ITClave::Avanzar() {
 			}
 		}	
 		it.nodoActual = pNodo;
+		pNodo = NULL;
+	}
+	if (it.nodosRecorridos == it.tam) {
+		itNodosNivelActual.Retroceder();
 	}
 }
 
