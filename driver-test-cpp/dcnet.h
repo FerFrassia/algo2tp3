@@ -1,15 +1,15 @@
 #ifndef DCNET_H
 #define DCNET_H
 
-#include "red.h"
-#include "dicc_trie.h"
-#include "DiccRapido.h"
-#include "aed2/TiposBasicos.h"
 #include "TiposSimples.h"
+#include "aed2/TiposBasicos.h"
 #include "aed2/Conj.h"
 #include "aed2/Arreglo.h"
 #include "aed2/Vector.h"
 #include "aed2/Lista.h"
+#include "dicc_trie.h"
+#include "DiccRapido.h"
+#include "red.h"
 
 
 using namespace aed2;

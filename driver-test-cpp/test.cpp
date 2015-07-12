@@ -4,8 +4,8 @@
 #include "aed2/Conj.h"
 #include "aed2/Dicc.h"
 #include "DiccRapido.h"
-#include "dcnet.h"
 #include "red.h"
+#include "dcnet.h"
 #include "Driver.h"
 #include "mini_test.h"
 
@@ -138,10 +138,18 @@ void test_dcnet_ejemplo() {
 
 	std::cout << "Hace conectar entre c1 y c2 \n";
 
+	std::cout << "prioridad del paquete 0"<<dcnet.prioridad(0) <<"\n";
+
 
 	dcnet.CrearPaquete(c1, c2, 3);
 
 	std::cout << "Crea un paquete \n";
+	
+	dcnet.AvanzarSegundo();	
+
+	std::cout << "Avanza un segundo \n";
+	dcnet.CrearPaquete(c2, c1, 2);
+	std::cout << "Crea otro paquete \n";
 	dcnet.AvanzarSegundo();	
 
 	std::cout << "Avanza un segundo \n";

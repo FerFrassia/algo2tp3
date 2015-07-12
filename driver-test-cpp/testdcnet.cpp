@@ -1,14 +1,14 @@
 #include "mini_test.h"
-#include "dcnet.h"
-#include "red.h"
-#include "dicc_trie.h"
-#include "DiccRapido.h"
-#include "aed2/TiposBasicos.h"
 #include "TiposSimples.h"
+#include "aed2/TiposBasicos.h"
 #include "aed2/Conj.h"
 #include "aed2/Arreglo.h"
 #include "aed2/Vector.h"
 #include "aed2/Lista.h"
+#include "dicc_trie.h"
+#include "DiccRapido.h"
+#include "red.h"
+#include "dcnet.h"
 
 #include <string>
 #include <iostream>
@@ -124,6 +124,7 @@ void IniciarDCNET() {
 	std::cout << "cant enviados por c5 " << dcnet.CantidadEnviados(c5) << "\n";
 	std::cout << "cant enviados por c6 " << dcnet.CantidadEnviados(c6) << "\n";
 	std::cout << "la que mas envio " << (dcnet.LaQueMasEnvio()).hostname << "\n";
+	assert((dcnet.LaQueMasEnvio()).hostname == c6.hostname);
 
 
 	assert(dcnet.CantidadEnviados(c1) == 0);
@@ -185,6 +186,7 @@ void IniciarDCNET() {
 	//tiene que pasar por dos computadoras para llegar y c1 tiene que se la que mas envio
 	std::cout << "esta el paquete 1 en transito : " << (dcnet.PaqueteEnTransito(paq1)) << "\n";
 	assert(dcnet.PaqueteEnTransito(paq1) == true);
+	assert((dcnet.LaQueMasEnvio()).hostname == c1.hostname);
 
 	dcnet.AvanzarSegundo();
 	std::cout << "Avanzo segundo \n";
@@ -207,6 +209,8 @@ void IniciarDCNET() {
 // Aca ya tiene que haber llegado a destino
 	std::cout << "esta el paquete 1 en transito : " << (dcnet.PaqueteEnTransito(paq1)) << "\n";
 	assert(dcnet.PaqueteEnTransito(paq1) == false);
+
+	assert((dcnet.LaQueMasEnvio()).hostname == c1.hostname);
 
 	std::cout << "la longitud camino recorrido por el paquete1 es : " << (dcnet.CaminoRecorrido(paq1)).Longitud() << "\n";
 	std::cout << "La que mas envio es  : " << (dcnet.LaQueMasEnvio()).hostname << "\n";
@@ -289,6 +293,8 @@ std::cout << "Creo paquete 3 \n";
 
 	std::cout << "esta el paquete 4 en transito : " << (dcnet.PaqueteEnTransito(paq4)) << "\n";
 	assert(dcnet.PaqueteEnTransito(paq4) == false);
+
+	assert((dcnet.LaQueMasEnvio()).hostname == c1.hostname);
 	
 	_Paquete paq2;
 	paq2.id = 2;

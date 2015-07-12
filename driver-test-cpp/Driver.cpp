@@ -1,5 +1,12 @@
+#include "TiposSimples.h"
+#include "TiposBasicos.h"
+#include "aed2/Lista.h"
+#include "aed2/Conj.h"
+#include "aed2/Dicc.h"
+#include "DiccRapido.h"
+#include "red.h"
+#include "dcnet.h"
 #include "Driver.h"
-#include "aed2/TiposBasicos.h"
 
 namespace aed2 {
 
@@ -88,7 +95,7 @@ namespace aed2 {
 
 // TAD DCNET
     void Driver::AgregarComputadora(const Computadora& ip, const Conj<Interfaz>& ci) {
-        //ASSERT(eldcnet == NULL)
+        assert(eldcnet == NULL);
         Compu c;
         c.hostname = ip;
         c.interfaces = ci;
@@ -97,7 +104,7 @@ namespace aed2 {
     }
 
     void Driver::Conectar(const Computadora& c1, const Interfaz& i1, const Computadora& c2, const Interfaz& i2) {
-        //ASSERT(eldcnet == NULL)
+        assert(eldcnet == NULL);
         Conj<Compu>::Iterador it = lared->Computadoras();
 
         lared->Conectar(lared->DameCompu(c1),i1,lared->DameCompu(c2),i2);
@@ -158,12 +165,14 @@ namespace aed2 {
 
 
         ::_Paquete paq;
-        paq.id = iddelproximopaquete;///?;
+        paq.id = iddelproximopaquete;///?
         iddelproximopaquete ++;
         paq.prioridad = prioridad;
 
         paq.destino = lared->DameCompu(destino);
         paq.origen = lared->DameCompu(origen);
+
+
 
         eldcnet -> CrearPaquete(paq);
 
@@ -173,11 +182,17 @@ namespace aed2 {
         if(eldcnet==NULL){
             eldcnet = new DCNet(*lared);
         }
-        eldcnet->AvanzarSegundo();
+
+
+
+
+        eldcnet -> AvanzarSegundo();
     }
 
     const Computadora& Driver::laQueMasEnvio() const {
+        std::cout << "entro a la funcion la que mas envio \n";
         return (eldcnet->LaQueMasEnvio()).hostname;
+        std::cout << "devuelvo el que mas envio \n";
 
     }
 
