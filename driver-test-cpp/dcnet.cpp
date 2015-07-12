@@ -230,44 +230,36 @@ Compu& DCNet::LaQueMasEnvio() {
 _Paquete DCNet::DamePaquete(Nat n){
 	Conj<Compu>::Iterador it = red->Computadoras();
 	std::cout << "Creo un iterador a las computadoras \n";
-	_Paquete p;
-	Compu orip;
-	Compu desp;
-	std::cout << "inicializo un paquete \n";
+
 	while (it.HaySiguiente()) {
-    	DiccRapido<_Paquete, Lista<Compu> >::ITClave itcl = ((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Claves();
+		std::cout << "Checkeo si hay paquetes en esa compu \n";
+		if(false==(((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Vacio())){
+			std::cout << "Hay paquetes \n";
+	    	DiccRapido<_Paquete, Lista<Compu> >::ITClave itcl = ((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Claves();
+	    	std::cout << "creo un iterador a los paquetes \n";
+	    	while(itcl.HayMas()){
 
-    	std::cout << "creo un iterador a las claves del diccionario de paquetes y caminos \n";
-    	while(itcl.HayMas()){
+    			std::cout << "pregunto si todavia hay paquetes por revisar \n";
 
-    		std::cout << "pregunto si todavia hay paquetes por revisar \n";
-
-    		if((itcl.ClaveActual()).id == n){
-    			std::cout << "si el paquete era el que buscaba le asigno los datos al paquete que habia creado \n";
-    			
-    			//Nat i = (itcl.ClaveActual()).id;
-    			
-				//Nat prio = (itcl.ClaveActual()).prioridad;
-				
-				orip.hostname = ((itcl.ClaveActual()).origen).hostname ; 
-				orip.interfaces = ((itcl.ClaveActual()).origen).interfaces;
-
-				desp.hostname = ((itcl.ClaveActual()).destino).hostname ; 
-				desp.interfaces = ((itcl.ClaveActual()).destino).interfaces;
-
-				p( ((itcl.ClaveActual()).id) ,((itcl.ClaveActual()).prioridad) ,orip, desp );
-    			return p;
-				
-				
-				}
-
+    			if((itcl.ClaveActual()).id == n){
+    				std::cout << "si el paquete era el que buscaba le asigno los datos al paquete que habia creado \n";
+    				return itcl.ClaveActual();
+			}	
     		itcl.Avanzar();
     		std::cout << "No era el paquete que buscaba asi que paso al siguiente \n";
+    		}
+    		return itcl.ClaveActual();
+    		std::cout << "Recorri todos y era el ultimo \n";
+
     	}
-		
-		it.Avanzar();
-		std::cout << "paso a buscar en la siguiente compu \n";
+    	std::cout << "No hay paquetes en esta compu \n";
+	it.Avanzar();
+	std::cout << "paso a buscar en la siguiente compu \n";
 	}
-}
+	
+		
+	}
+
+
 
 

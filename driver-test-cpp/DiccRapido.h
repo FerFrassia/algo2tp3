@@ -5,7 +5,6 @@
 #include "aed2/Conj.h"
 #include "aed2/TiposBasicos.h"
 #include <stdlib.h>
-#include <algorithm>
 
 using namespace aed2;
 
@@ -143,6 +142,10 @@ class DiccRapido {
 		int Altura(const Nodo* p) const;
 
 		int FactorDesbalance(const Nodo* p) const;
+
+		int Abs(int a);
+
+		int Max(int a, int b) const;
 
 		e_dicc dicc;
 
@@ -284,9 +287,8 @@ void DiccRapido<Tc, Ts>::Definir(const Tc& c, const Ts& s) {
 			dicc.tam = dicc.tam + 1;
 			while (pNodo != NULL) {
 				Nodo* padrePNodo = (*pNodo).padre;
-				if (abs(FactorDesbalance(pNodo)) > 1) {
+				if (Abs(FactorDesbalance(pNodo)) > 1) {
 					Rotar(pNodo);
-					//(*pNodo).alt = Altura(pNodo);
 				} else {
 					(*pNodo).alt = Altura(pNodo);
 				}
@@ -389,7 +391,7 @@ void DiccRapido<Tc, Ts>::Borrar(const Tc& c) {
 	dicc.tam = dicc.tam - 1;
 	while (pNodo2 != NULL) {
 		Nodo* padrePNodo = (*pNodo2).padre;
-		if (abs(FactorDesbalance(pNodo2)) > 1) {
+		if (Abs(FactorDesbalance(pNodo2)) > 1) {
 			Rotar(pNodo2);
 		} else {
 			(*pNodo2).alt = Altura(pNodo2);
@@ -583,7 +585,7 @@ int DiccRapido<Tc, Ts>::Altura(const Nodo* p) const {
 			if ((*p).izq == NULL && (*p).der != NULL) {
 				return (*((*p).der)).alt + 1;
 			} else {
-				return std::max((*((*p).izq)).alt, (*((*p).der)).alt) + 1;
+				return Max((*((*p).izq)).alt, (*((*p).der)).alt) + 1;
 			}
 		}
 	}
@@ -603,6 +605,24 @@ int DiccRapido<Tc, Ts>::FactorDesbalance(const Nodo* p) const {
 				return (*((*p).izq)).alt - ((*((*p).der)).alt);
 			}
 		}
+	}
+}
+
+template<class Tc, class Ts>
+int DiccRapido<Tc, Ts>::Abs(int a) {
+	if (a < 0) {
+		return -a;
+	} else {
+		return a;
+	}
+}
+
+template<class Tc, class Ts>
+int DiccRapido<Tc, Ts>::Max(int a,int b) const {
+	if (a < b) {
+		return b;
+	} else {
+		return a;
 	}
 }
 

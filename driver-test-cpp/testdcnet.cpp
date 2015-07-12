@@ -162,6 +162,12 @@ void IniciarDCNET() {
 	//Verifico si el paquete esta en transito
 	std::cout << "esta el paquete 1 en transito : " << (dcnet.PaqueteEnTransito(paq1)) << "\n";
 	assert(dcnet.PaqueteEnTransito(paq1) == true);
+	std::cout << "origen de paq1 es  : " << ((dcnet.DamePaquete(1)).origen).hostname << "\n";
+	std::cout << "des de paq1 es " << ((dcnet.DamePaquete(1)).destino).hostname << "\n";
+	std::cout << "prioridad de paq1 es : " << (dcnet.DamePaquete(1)).prioridad << "\n";
+	
+
+
 
 	dcnet.AvanzarSegundo();
 	std::cout << "Avanzo segundo \n";
@@ -378,6 +384,12 @@ std::cout << "Creo paquete 3 \n";
 		         C5/e1---------C4/e0 
   */
 
+	std::cout << "origen de paq2 es  : " << ((dcnet.DamePaquete(2)).origen).hostname << "\n";
+	std::cout << "destino de paq2 es " << ((dcnet.DamePaquete(2)).destino).hostname << "\n";
+	std::cout << "prioridad de paq2 es : " << (dcnet.DamePaquete(2)).prioridad << "\n";
+	std::cout << "origen de paq5 es  : " << ((dcnet.DamePaquete(5)).origen).hostname << "\n";
+	std::cout << "destino de paq5 es " << ((dcnet.DamePaquete(5)).destino).hostname << "\n";
+	std::cout << "prioridad de paq5 es : " << (dcnet.DamePaquete(5)).prioridad << "\n";
 dcnet.AvanzarSegundo();
 std::cout << "Avanzo segundo \n";
 

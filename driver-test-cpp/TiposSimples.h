@@ -17,11 +17,15 @@ namespace aed2 {
         Hostname hostname;
         Conj<Interfaz> interfaces;
 
-        Compu() : hostname(), interfaces() {};
-        Compu(Hostname h , Conj<Interfaz> ci ) : hostname(h), interfaces(ci) {}
+     //   Compu() : hostname(), interfaces() {};
+      //  Compu(Hostname h , Conj<Interfaz> ci ) : hostname(h), interfaces(ci) {}
 
         const bool operator==(const Compu &otra) const {
             return (hostname == otra.hostname) && (interfaces == otra.interfaces);
+        }
+        void operator=(const Compu &otra)  {
+           hostname = otra.hostname;
+           interfaces = otra.interfaces;
         }
 
         const bool operator!=(const Compu &otra) const {
@@ -38,9 +42,16 @@ namespace aed2 {
         Compu origen;
         Compu destino;
 
-        _Paquete() : id(), prioridad(),origen(),destino() {};
+        //_Paquete() : id(), prioridad(),origen(),destino() {};
 
-        _Paquete(Nat& i, Nat& p, Compu& o,Compu& d ) : id(i) , prioridad(p), origen(o), destino(d) {};
+        //_Paquete(Nat& i, Nat& p, Compu& o,Compu& d ) : id(i) , prioridad(p), origen(o), destino(d) {};
+
+        void operator=(const _Paquete &otra)  {
+           id = otra.id;
+           prioridad = otra.prioridad;
+           origen =otra.origen;
+           destino = otra.destino;
+        } 
 
         const bool operator==(const _Paquete &otra) const {
             return (id == otra.id);

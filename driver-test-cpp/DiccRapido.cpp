@@ -1,6 +1,9 @@
 #include "aed2/TiposBasicos.h"
+
 #include <stdlib.h>
 #include <iostream>
+#include "aed2/Lista.h"
+#include "aed2/Conj.h"
 #include "DiccRapido.h"
 
 

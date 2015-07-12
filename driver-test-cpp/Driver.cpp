@@ -198,18 +198,18 @@ namespace aed2 {
     }
 
     const Computadora& Driver::origen(const Paquete& p) const {
-        assert(eldcnet != NULL);
+        assert(p < iddelproximopaquete);
         return ((eldcnet->DamePaquete(p)).origen).hostname;
 
     }
 
     const Computadora& Driver::destino(const Paquete& p) const {
-        assert(eldcnet != NULL);
+         assert(p < iddelproximopaquete);
         return ((eldcnet->DamePaquete(p)).destino).hostname;
     }
 
     Nat Driver::prioridad(const Paquete& p) const {
-        assert(eldcnet != NULL);
+         assert(p < iddelproximopaquete);
         return (eldcnet->DamePaquete(p)).prioridad;
     }
 }

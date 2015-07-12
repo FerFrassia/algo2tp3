@@ -1,3 +1,5 @@
+//g++ test.cpp Driver.cpp dcnet.cpp red.cpp -o test
+
 #include "TiposSimples.h"
 #include "TiposBasicos.h"
 #include "aed2/Lista.h"
