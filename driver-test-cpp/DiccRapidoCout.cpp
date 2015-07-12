@@ -1,9 +1,6 @@
 #include "aed2/TiposBasicos.h"
-
 #include <stdlib.h>
 #include <iostream>
-#include "aed2/Lista.h"
-#include "aed2/Conj.h"
 #include "DiccRapido.h"
 
 
@@ -12,11 +9,11 @@ using namespace aed2;
 int main(){
 	DiccRapido<int, int> dicc;
 
-	//1
+	
 	std::cout << "Vacio?: " << dicc.Vacio();
 	std::cout << "\n";
 
-	//0
+	
 	std::cout << "Def?(5): " << dicc.Def(5);
 	std::cout << "\n";
 ////////////////////////defino 5
@@ -36,12 +33,9 @@ int main(){
 	std::cout << "Vacio?: " << dicc.Vacio();
 	std::cout << "\n";
 
-
 	std::cout << "Obtener(5): " << dicc.Obtener(5);
 	std::cout << "\n";
 	
-
-	//3
 	std::cout << "ClaveMax: " << dicc.ClaveMax();
 	std::cout << "\n";
 
@@ -193,9 +187,85 @@ int main(){
 	std::cout << "Padre(8): " << dicc.Padre(8);
 	std::cout << "\n";
 
+	std::cout << "ClaveMax: " << dicc.ClaveMax();
+	std::cout << "\n";
+
+//TESTEO DE REDEFINIR
+
+	std::cout << "\n";
+	std::cout << "Redefino(7, 7)\n";
+	dicc.Definir(7, 7);
+
+	std::cout << "Redefino(5, 5)\n";
+	dicc.Definir(5, 5);
+
+	std::cout << "Redefino(10, 10)\n";
+	dicc.Definir(10, 10);
+
+	std::cout << "Redefino(8, 8)\n";
+	dicc.Definir(8, 8);
+
+	std::cout << "Redefino(12, 12)\n";
+	dicc.Definir(12, 12);
+
+	std::cout << "Redefino(3, 3)\n";
+	dicc.Definir(3, 3);
+
+	std::cout << "Obtener(7): " << dicc.Obtener(7);
+	std::cout << "\n";
+
+	std::cout << "Obtener(10): " << dicc.Obtener(10);
+	std::cout << "\n";
+
+	std::cout << "Obtener(5): " << dicc.Obtener(5);
+	std::cout << "\n";
+
+	std::cout << "Obtener(8): " << dicc.Obtener(8);
+	std::cout << "\n";
+
+	std::cout << "Obtener(12): " << dicc.Obtener(12);
+	std::cout << "\n";
+
+	std::cout << "Obtener(3): " << dicc.Obtener(3);
+	std::cout << "\n";
+
+	std::cout << "Raiz: " << dicc.Raiz();
+	std::cout << "\n";
+
+	std::cout << "Izq(7): " << dicc.HijoIzq(7);
+	std::cout << "\n";
+
+	std::cout << "Padre(5): " << dicc.Padre(5);
+	std::cout << "\n";
+
+	std::cout << "Izq(5): " << dicc.HijoIzq(5);
+	std::cout << "\n";
+
+	std::cout << "Padre(3): " << dicc.Padre(3);
+	std::cout << "\n";
+
+	std::cout << "Der(7): " << dicc.HijoDer(7);
+	std::cout << "\n";
+
+	std::cout << "Padre(10): " << dicc.Padre(10);
+	std::cout << "\n";
+
+	std::cout << "Der(10): " << dicc.HijoDer(10);
+	std::cout << "\n";
+
+	std::cout << "Padre(12): " << dicc.Padre(12);
+	std::cout << "\n";
+
+	std::cout << "Izq(10): " << dicc.HijoIzq(10);
+	std::cout << "\n";
+
+	std::cout << "Padre(8): " << dicc.Padre(8);
+	std::cout << "\n";
 
 	std::cout << "ClaveMax: " << dicc.ClaveMax();
 	std::cout << "\n";
+
+
 
 //TESTEO DE BORRADO
 /*
@@ -243,7 +313,8 @@ int main(){
 	std::cout << "\n";
 
 */
-//TESTEO DE CREAR IT
+//TESTEO DE ITERADOR
+	std::cout << "\n";
 	std::cout << "Creo Iterador \n";
 	DiccRapido<int, int>::ITClave iterador = dicc.Claves();
 
@@ -297,6 +368,49 @@ int main(){
 
 	std::cout << "HayMas?: " << iterador.HayMas();
 	std::cout << "\n";
+
+//CHEQUEO SI TENGO EL MISMO ARBOL DESPUES DE HABER ITERADO TODO
+
+	std::cout << "\n";
+	std::cout << "Chequeo del Arbol despues de haber iterado todo \n";
+
+	std::cout << "Raiz: " << dicc.Raiz();
+	std::cout << "\n";
+
+	std::cout << "Izq(7): " << dicc.HijoIzq(7);
+	std::cout << "\n";
+
+	std::cout << "Padre(5): " << dicc.Padre(5);
+	std::cout << "\n";
+
+	std::cout << "Izq(5): " << dicc.HijoIzq(5);
+	std::cout << "\n";
+
+	std::cout << "Padre(3): " << dicc.Padre(3);
+	std::cout << "\n";
+
+	std::cout << "Der(7): " << dicc.HijoDer(7);
+	std::cout << "\n";
+
+	std::cout << "Padre(10): " << dicc.Padre(10);
+	std::cout << "\n";
+
+	std::cout << "Der(10): " << dicc.HijoDer(10);
+	std::cout << "\n";
+
+	std::cout << "Padre(12): " << dicc.Padre(12);
+	std::cout << "\n";
+
+	std::cout << "Izq(10): " << dicc.HijoIzq(10);
+	std::cout << "\n";
+
+	std::cout << "Padre(8): " << dicc.Padre(8);
+	std::cout << "\n";
+
+
+	std::cout << "ClaveMax: " << dicc.ClaveMax();
+	std::cout << "\n";
+
 
 
 /*

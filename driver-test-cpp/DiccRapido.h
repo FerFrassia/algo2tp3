@@ -473,9 +473,6 @@ typename DiccRapido<Tc, Ts>::ITClave DiccRapido<Tc, Ts>::Claves() const {
 template<class Tc, class Ts>
 Conj<Tc> DiccRapido<Tc, Ts>::DameNodos(Nodo* p, int actual, const int destino) const {
 	Conj<Tc> res;
-	//Conj<Tc>* res = new Conj<Tc>;
-	//Conj<Lista<Compu> >* res = new Conj<Lista<Compu> >;
-	//Conj<typename DiccRapido<Tc, Ts>::Nodo*> res = *(new  Conj<typename DiccRapido<Tc, Ts>::Nodo*>());
 	if (p != NULL) {
 		if (actual == destino) {
 			res.Agregar(((*p).clave));
