@@ -72,6 +72,8 @@ public:
 
     bool HayCamino(const Compu c1, const Compu c2); // Chequeado
 
+    Compu DameCompu(Hostname);
+
 private:
     // Funciones Privadas
     Conj<Lista<Compu> > CalcularCaminosMinimos(const Compu c1, const Compu c2);

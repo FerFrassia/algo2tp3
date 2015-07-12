@@ -206,6 +206,7 @@ Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, List
     Conj<Lista<Compu> > res;
 
     Conj<Compu> cVecinos = Vecinos(c1);
+
     if (cVecinos.Pertenece(c2)) {
         parcial.AgregarAtras(c2);
         res.Agregar(parcial);
@@ -222,6 +223,20 @@ Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, List
         }
     }
     return res;
+}
+
+Compu Red::DameCompu(Hostname h) {
+    Conj<Compu>::Iterador it = Computadoras();
+    Compu pc;
+
+    while (it.HaySiguiente()) {
+        if ((it.Siguiente()).hostname == h) {
+            pc.hostname = h;
+            pc.interfaces = (it.Siguiente()).interfaces;
+            return pc;
+        }
+        it.Avanzar();
+    }
 }
 
 int main(){

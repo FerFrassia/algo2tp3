@@ -1,10 +1,14 @@
-#include "Driver.h"
-#include "mini_test.h"
+#include "TiposSimples.h"
 #include "TiposBasicos.h"
 #include "aed2/Lista.h"
 #include "aed2/Conj.h"
 #include "aed2/Dicc.h"
 #include "DiccRapido.h"
+#include "dcnet.h"
+#include "red.h"
+#include "Driver.h"
+#include "mini_test.h"
+
 
 #include <string>
 #include <iostream>

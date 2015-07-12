@@ -1,9 +1,11 @@
 #ifndef DRIVER_H_
 #define DRIVER_H_
 
+#include "TiposSimples.h"
 #include "Tipos.h"
-#include "../aed2/TiposBasicos.h"
+#include "aed2/TiposBasicos.h"
 #include "dcnet.h"
+#include "red.h"
 
 
 //#include ...

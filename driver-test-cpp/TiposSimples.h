@@ -1,5 +1,5 @@
 //
-// Created by Sebasti�n on 28/06/2015.
+// Created by Sebastián on 28/06/2015.
 //
 
 #ifndef TP3___IMPLEMENTACION_TIPOSSIMPLES_H
@@ -16,9 +16,6 @@ namespace aed2 {
     struct Compu {
         Hostname hostname;
         Conj<Interfaz> interfaces;
-        //Compu(const Hostname& h) : interfaces(new Conj<Interfaz>) {}
-        //     const bool operator==(const Compu& otra) const;
-        //    const bool operator!=(const Compu& otra) const;
 
         const bool operator==(const Compu &otra) const {
             return (hostname == otra.hostname) && (interfaces == otra.interfaces);
@@ -30,17 +27,11 @@ namespace aed2 {
 
     };
 
-
     struct _Paquete {
         Nat id;
         Nat prioridad;
         Compu origen;
         Compu destino;
-        //Paquete(const String& h) : interfaces(NULL) {}
-        //         const bool operator==(const Paquete& otra) const;
-        //        const bool operator!=(const Paquete& otra) const;
-        //       const bool operator<(const Paquete& otra) const;
-        //      const bool operator>(const Paquete& otra) const;
 
         const bool operator==(const _Paquete &otra) const {
             return (id == otra.id);
