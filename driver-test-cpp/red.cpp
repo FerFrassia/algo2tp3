@@ -62,6 +62,13 @@ Conj<Compu> Red::Computadoras2() {
 }
 //***
 
+//*** Borrar
+void Red::DefinirDummy() {
+    DiccString<Conj<Lista<Compu> > > diccDummy;
+    deOrigenADestino->definir("dummy", diccDummy);
+}
+//***
+
 bool Red::Conectadas(const Compu c1, const Compu c2) {
     return directasEInterfaces->obtener(c1.hostname)->Directas()->definido(c2.hostname);
 }
@@ -102,8 +109,8 @@ void Red::AgregarComputadora(const Compu c) {
 
 void Red::Conectar(Compu c1, Interfaz i1, Compu c2, Interfaz i2) {
 
-    std::cout << "*** Conectando " << c1.hostname << " con ";
-    std::cout << "" << c2.hostname << "... \n";
+    //std::cout << "*** Conectando " << c1.hostname << " con ";
+    //std::cout << "" << c2.hostname << "... \n";
 
     TuplaDirectas* tupSig1 = directasEInterfaces->obtener(c1.hostname);
     tupSig1->Directas()->definir(c2.hostname, i1);
@@ -116,19 +123,19 @@ void Red::Conectar(Compu c1, Interfaz i1, Compu c2, Interfaz i2) {
     Conj<Compu>::Iterador itOrigenes = computadoras->CrearIt();
 
     while (itOrigenes.HaySiguiente()) {
-        std::cout << "\n";
+        //std::cout << "\n";
         DiccString<Conj<Lista<Compu> > >* dicCompu = deOrigenADestino->obtener((itOrigenes.Siguiente()).hostname);
 
         Conj<Compu>::Iterador itDestinos = computadoras->CrearIt();
         while (itDestinos.HaySiguiente()) {
-            std::cout << "* Definiendo Origen: " << itOrigenes.Siguiente().hostname << " - ";
-            std::cout << "Destino: " << itDestinos.Siguiente().hostname << "\n";
+            //std::cout << "* Definiendo Origen: " << itOrigenes.Siguiente().hostname << " - ";
+            //std::cout << "Destino: " << itDestinos.Siguiente().hostname << "\n";
             if (itOrigenes.Siguiente() != itDestinos.Siguiente()) {
                 Conj<Lista<Compu> > cCaminosMinimos = CalcularCaminosMinimos(itOrigenes.Siguiente(), itDestinos.Siguiente());
-                std::cout << "Cantidad de caminos mínimos encontrados: " << cCaminosMinimos.Cardinal() << "\n\n";
+                //std::cout << "Cantidad de caminos mínimos encontrados: " << cCaminosMinimos.Cardinal() << "\n\n";
                 dicCompu->definir((itDestinos.Siguiente()).hostname, cCaminosMinimos);
             }else{
-                std::cout << "IGUALES - SALTEAR" << "\n\n";
+                //std::cout << "IGUALES - SALTEAR" << "\n\n";
             }
             itDestinos.Avanzar();
         }
@@ -169,37 +176,40 @@ bool Red::HayCamino(const Compu c1, const Compu c2) {
 }
 
 Conj<Lista<Compu> > Red::CalcularCaminosMinimos(const Compu c1, const Compu c2) {
-    std::cout << "Calculando caminos mínimos entre " << c1.hostname << " y " << c2.hostname << "\n";
-    Conj<Lista<Compu> >* res = new Conj<Lista<Compu> >;
-    Conj<Lista<Compu> > conjLinealCaminosImportantes = Conj<Lista<Compu> >();
+    //std::cout << "Calculando caminos mínimos entre " << c1.hostname << " y " << c2.hostname << "\n";
+    Conj<Lista<Compu> > res;
+    //Conj<Lista<Compu> > conjLinealCaminosImportantes = Conj<Lista<Compu> >();
+    Conj<Lista<Compu> > conjLinealCaminosImportantes;
 
-    Lista<Compu>* parcial = new Lista<Compu>;
-    parcial->AgregarAtras(c1);
-    conjLinealCaminosImportantes = CaminosImportantes(c1, c2, *parcial);
-    std::cout << "Caminos importantes detectados: " << conjLinealCaminosImportantes.Cardinal() << "\n";
+    Lista<Compu> parcial;
+    parcial.AgregarAtras(c1);
+    conjLinealCaminosImportantes = CaminosImportantes(c1, c2, parcial);
+    //std::cout << "Caminos importantes detectados: " << conjLinealCaminosImportantes.Cardinal() << "\n";
 
     Conj<Lista<Compu> >::Iterador itCaminosImportantes = conjLinealCaminosImportantes.CrearIt();
     while (itCaminosImportantes.HaySiguiente()) {
-        if (res->EsVacio() || res->CrearIt().Siguiente().Longitud() == itCaminosImportantes.Siguiente().Longitud()) {
-            res->Agregar(itCaminosImportantes.Siguiente());
-        }else if (res->CrearIt().Siguiente().Longitud() < itCaminosImportantes.Siguiente().Longitud()){
-            res = new Conj<Lista<Compu> >;
-            res->Agregar(itCaminosImportantes.Siguiente());
+        if (res.EsVacio() || res.CrearIt().Siguiente().Longitud() == itCaminosImportantes.Siguiente().Longitud()) {
+            res.Agregar(itCaminosImportantes.Siguiente());
+        }else if (res.CrearIt().Siguiente().Longitud() < itCaminosImportantes.Siguiente().Longitud()){
+            Conj<Lista<Compu> > res;
+            res.Agregar(itCaminosImportantes.Siguiente());
         }
         itCaminosImportantes.Avanzar();
     }
-    return *res;
+
+    return res;
 }
 
 Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, Lista<Compu> parcial) {
-    std::cout << "Calculando caminos importantes: " << "\n";
-    Conj<Lista<Compu> >* res = new Conj<Lista<Compu> >;
+    //std::cout << "Calculando caminos importantes: " << "\n";
+//    Conj<Lista<Compu> >* res = new Conj<Lista<Compu> >;
+    Conj<Lista<Compu> > res;
 
     Conj<Compu> cVecinos = Vecinos(c1);
 
     if (cVecinos.Pertenece(c2)) {
         parcial.AgregarAtras(c2);
-        res->Agregar(parcial);
+        res.Agregar(parcial);
     }else{
         Conj<Compu>::Iterador itVecinos = cVecinos.CrearIt();
 
@@ -207,17 +217,24 @@ Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, List
             if (!(parcial.Esta(itVecinos.Siguiente()))) {
                 Lista<Compu> auxParcial = Lista<Compu>(parcial);
                 auxParcial.AgregarAtras(itVecinos.Siguiente());
-                res->Union(CaminosImportantes(itVecinos.Siguiente(), c2, auxParcial));
+                res.Union(CaminosImportantes(itVecinos.Siguiente(), c2, auxParcial));
             }
             itVecinos.Avanzar();
         }
     }
-    return *res;
+    return res;
 }
 
 int main(){
     Red red;
 
+//    red.DefinirDummy();
+//    red.DefinirDummy();
+//    red.DefinirDummy();
+//    red.DefinirDummy();
+//    red.DefinirDummy();
+//    red.DefinirDummy();
+//
     std::cout << "Creo c1, c2 y c3 (Computadoras). \n\n";
     Compu c1;
     Compu c2;
@@ -261,6 +278,7 @@ int main(){
     std::cout << "Conectadas(c1, c2): " << red.Conectadas(c1, c2) << "\n\n";
     assert(red.Conectadas(c1, c2) == true);
 
+    assert(red.InterfazUsada(c2, c1) == 2);
     std::cout << "Chequeo si están conectadas: \n";
     std::cout << "Conectadas(c1, c3): " << red.Conectadas(c1, c3) << "\n\n";
     assert(red.Conectadas(c1, c3) == false);
@@ -271,7 +289,6 @@ int main(){
 
     std::cout << "Chequeo que la interfaz usada sea la correcta: \n";
     std::cout << "InterfazUsada(c2, c1): " << red.InterfazUsada(c2, c1) << "\n\n";
-    assert(red.InterfazUsada(c2, c1) == 2);
 
     std::cout << "Chequeo si usa una interfaz dada: \n";
     std::cout << "UsaInterfaz(c1, i1): " << red.UsaInterfaz(c1, i1) << "\n\n";
@@ -375,7 +392,7 @@ int main(){
     std::cout << "CaminosMinimos(c1, c2).Cardinal(): " << red.CaminosMinimos2(c1, c2).Cardinal() << "\n\n";
     assert(red.CaminosMinimos2(c1, c2).Cardinal() == 1);
 
-    // Chequeo caminos minimos con una red mas conmpleja.
+    // Chequeo caminos minimos con una red mas compleja.
 
     Red red2;
 

@@ -48,6 +48,10 @@ public:
     Conj<Compu> Computadoras2();
     //***
 
+    //*** Borrar
+    void DefinirDummy();
+    //***
+
     bool Conectadas(const Compu c1, const Compu c2); // Chequeado
 
     Interfaz InterfazUsada(const Compu c1, const Compu c2); // Chequeado

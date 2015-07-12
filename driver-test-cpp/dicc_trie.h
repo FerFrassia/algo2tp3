@@ -22,6 +22,7 @@ private:
     void _definir(const string &clave, T &_significado, int index)
     {
         cant++;
+
         if(index == clave.size())
         {
             es_final = true;
