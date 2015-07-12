@@ -66,7 +66,7 @@ bool Red::Conectadas(const Compu c1, const Compu c2) {
     return directasEInterfaces->obtener(c1.hostname)->Directas()->definido(c2.hostname);
 }
 
-Interfaz Red::InterfazUsada(const Compu c1, const Compu c2) {
+Interfaz& Red::InterfazUsada(const Compu c1, const Compu c2) {
     return *directasEInterfaces->obtener(c1.hostname)->Directas()->obtener(c2.hostname);
 }
 
@@ -214,6 +214,26 @@ Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, List
     }
     return *res;
 }
+
+
+
+Compu Red::DameCompu(Hostname h){
+
+    Conj<Compu>::Iterador it = Computadoras();
+
+    Compu pc;
+
+    while (it.HaySiguiente()) {
+        if((it.Siguiente()).hostname == h){
+            pc.hostname = h;
+            pc.interfaces = (it.Siguiente()).interfaces;
+            return pc;
+        }
+        it.Avanzar();
+    }
+}
+
+
 
 //int main(){
 //    Red red;

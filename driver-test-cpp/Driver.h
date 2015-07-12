@@ -69,6 +69,7 @@ class Driver
      *********************************************************************/
      Red*  lared;
      DCNet* eldcnet;
+     Nat iddelproximopaquete;
 
 }; // class Driver
 
