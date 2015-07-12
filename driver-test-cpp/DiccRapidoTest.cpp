@@ -580,14 +580,14 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Def(12), true);
 	ASSERT_EQ(dicc.Def(8), true);
 
-	ASSERT_EQ(dicc.Raiz(), 5);
+	ASSERT_EQ(dicc.Raiz(), 8);
+	ASSERT_EQ(dicc.HijoIzq(8), 5);
+	ASSERT_EQ(dicc.Padre(5), 8);
 	ASSERT_EQ(dicc.HijoIzq(5), 3);
 	ASSERT_EQ(dicc.Padre(3), 5);
-	ASSERT_EQ(dicc.HijoDer(5), 10);
-	ASSERT_EQ(dicc.Padre(10), 5);
-	ASSERT_EQ(dicc.HijoIzq(10), 8);
-	ASSERT_EQ(dicc.Padre(8), 10);
-	ASSERT_EQ(dicc.HijoIzq(10), 12);
+	ASSERT_EQ(dicc.HijoDer(8), 10);
+	ASSERT_EQ(dicc.Padre(10), 8);
+	ASSERT_EQ(dicc.HijoDer(10), 12);
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
