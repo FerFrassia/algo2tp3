@@ -10,10 +10,9 @@
 
 #include <ostream>
 #include "TiposBasicos.h"
-#include "../TiposSimples.h"
 
-using namespace aed2;
-//{
+namespace aed2
+{
 
 template <typename T>
 class Lista
@@ -694,14 +693,15 @@ bool Lista<T>::Esta(const T& elem) {
   Iterador it = CrearIt();
 
   while (it.HaySiguiente()) {
-      if (elem == it.Siguiente())
-          return true;
-      it.Avanzar();
+    if (it.Siguiente() == elem)
+      return true;
+    it.Avanzar();
   }
+
   return false;
 }
 //***
 
-//}
+}
 
 #endif // AED2_LISTA_H_INCLUDED

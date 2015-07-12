@@ -568,7 +568,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Obtener(10), 20);
 	ASSERT_EQ(dicc.Obtener(12), 24);
 
-	//BORRO RAIZ
+	//BORRO RAIZ CON DOS HIJOS
 	dicc.Borrar(7);
 
 	ASSERT_EQ(dicc.Vacio(), false);
@@ -598,6 +598,170 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Obtener(10), 20);
 	ASSERT_EQ(dicc.Obtener(12), 24);
 
+	//VUELVO A DEFINIR LA CLAVE 7
+	dicc.Definir(7, 1);
+
+	ASSERT_EQ(dicc.Vacio(), false);
+
+	ASSERT_EQ(dicc.Def(5), true);
+	ASSERT_EQ(dicc.Def(3), true);
+	ASSERT_EQ(dicc.Def(10), true);
+	ASSERT_EQ(dicc.Def(7), true);
+	ASSERT_EQ(dicc.Def(12), true);
+	ASSERT_EQ(dicc.Def(8), true);
+
+	ASSERT_EQ(dicc.Raiz(), 8);
+	ASSERT_EQ(dicc.HijoIzq(8), 5);
+	ASSERT_EQ(dicc.Padre(5), 8);
+	ASSERT_EQ(dicc.HijoIzq(5), 3);
+	ASSERT_EQ(dicc.Padre(3), 5);
+	ASSERT_EQ(dicc.HijoDer(5), 7);
+	ASSERT_EQ(dicc.Padre(7), 5);
+	ASSERT_EQ(dicc.HijoDer(8), 10);
+	ASSERT_EQ(dicc.Padre(10), 8);
+	ASSERT_EQ(dicc.HijoDer(10), 12);
+	ASSERT_EQ(dicc.Padre(12), 10);
+
+	ASSERT_EQ(dicc.ClaveMax(), 12);
+
+	ASSERT_EQ(dicc.Obtener(5), 10);
+	ASSERT_EQ(dicc.Obtener(7), 1);
+	ASSERT_EQ(dicc.Obtener(3), 6);
+	ASSERT_EQ(dicc.Obtener(8), 16);
+	ASSERT_EQ(dicc.Obtener(10), 20);
+	ASSERT_EQ(dicc.Obtener(12), 24);	
+
+	//BORRO NODO NO RAIZ CON DOS HIJOS
+	dicc.Borrar(5);
+
+	ASSERT_EQ(dicc.Vacio(), false);
+
+	ASSERT_EQ(dicc.Def(5), false);
+	ASSERT_EQ(dicc.Def(3), true);
+	ASSERT_EQ(dicc.Def(10), true);
+	ASSERT_EQ(dicc.Def(7), true);
+	ASSERT_EQ(dicc.Def(12), true);
+	ASSERT_EQ(dicc.Def(8), true);
+
+	ASSERT_EQ(dicc.Raiz(), 8);
+	ASSERT_EQ(dicc.HijoIzq(8), 7);
+	ASSERT_EQ(dicc.Padre(7), 8);
+	ASSERT_EQ(dicc.HijoIzq(7), 3);
+	ASSERT_EQ(dicc.Padre(3), 7);
+	ASSERT_EQ(dicc.HijoDer(8), 10);
+	ASSERT_EQ(dicc.Padre(10), 8);
+	ASSERT_EQ(dicc.HijoDer(10), 12);
+	ASSERT_EQ(dicc.Padre(12), 10);
+
+	ASSERT_EQ(dicc.ClaveMax(), 12);
+
+	ASSERT_EQ(dicc.Obtener(7), 1);
+	ASSERT_EQ(dicc.Obtener(3), 6);
+	ASSERT_EQ(dicc.Obtener(8), 16);
+	ASSERT_EQ(dicc.Obtener(10), 20);
+	ASSERT_EQ(dicc.Obtener(12), 24);
+
+	//BORRO NODO NO RAIZ CON UN HIJO IZQ
+	dicc.Borrar(7);
+
+	ASSERT_EQ(dicc.Vacio(), false);
+
+	ASSERT_EQ(dicc.Def(5), false);
+	ASSERT_EQ(dicc.Def(3), true);
+	ASSERT_EQ(dicc.Def(10), true);
+	ASSERT_EQ(dicc.Def(7), false);
+	ASSERT_EQ(dicc.Def(12), true);
+	ASSERT_EQ(dicc.Def(8), true);
+
+	ASSERT_EQ(dicc.Raiz(), 8);
+	ASSERT_EQ(dicc.HijoIzq(8), 3);
+	ASSERT_EQ(dicc.Padre(3), 8);
+	ASSERT_EQ(dicc.HijoDer(8), 10);
+	ASSERT_EQ(dicc.Padre(10), 8);
+	ASSERT_EQ(dicc.HijoDer(10), 12);
+	ASSERT_EQ(dicc.Padre(12), 10);
+
+	ASSERT_EQ(dicc.ClaveMax(), 12);
+
+	ASSERT_EQ(dicc.Obtener(3), 6);
+	ASSERT_EQ(dicc.Obtener(8), 16);
+	ASSERT_EQ(dicc.Obtener(10), 20);
+	ASSERT_EQ(dicc.Obtener(12), 24);
+
+	//BORRO NODO NO RAIZ CON UN HIJO DER
+	dicc.Borrar(10);
+
+	ASSERT_EQ(dicc.Vacio(), false);
+
+	ASSERT_EQ(dicc.Def(5), false);
+	ASSERT_EQ(dicc.Def(3), true);
+	ASSERT_EQ(dicc.Def(10), false);
+	ASSERT_EQ(dicc.Def(7), false);
+	ASSERT_EQ(dicc.Def(12), true);
+	ASSERT_EQ(dicc.Def(8), true);
+
+	ASSERT_EQ(dicc.Raiz(), 8);
+	ASSERT_EQ(dicc.HijoIzq(8), 3);
+	ASSERT_EQ(dicc.Padre(3), 8);
+	ASSERT_EQ(dicc.HijoDer(8), 12);
+	ASSERT_EQ(dicc.Padre(12), 8);
+
+	ASSERT_EQ(dicc.ClaveMax(), 12);
+
+	ASSERT_EQ(dicc.Obtener(3), 6);
+	ASSERT_EQ(dicc.Obtener(8), 16);
+	ASSERT_EQ(dicc.Obtener(12), 24);
+
+	//BORRO NODO NO RAIZ HOJA
+	dicc.Borrar(3);
+
+	ASSERT_EQ(dicc.Vacio(), false);
+
+	ASSERT_EQ(dicc.Def(5), false);
+	ASSERT_EQ(dicc.Def(3), false);
+	ASSERT_EQ(dicc.Def(10), false);
+	ASSERT_EQ(dicc.Def(7), false);
+	ASSERT_EQ(dicc.Def(12), true);
+	ASSERT_EQ(dicc.Def(8), true);
+
+	ASSERT_EQ(dicc.Raiz(), 8);
+	ASSERT_EQ(dicc.HijoDer(8), 12);
+	ASSERT_EQ(dicc.Padre(12), 8);
+
+	ASSERT_EQ(dicc.ClaveMax(), 12);
+
+	ASSERT_EQ(dicc.Obtener(8), 16);
+	ASSERT_EQ(dicc.Obtener(12), 24);
+
+	//BORRO NODO NO RAIZ HOJA
+	dicc.Borrar(12);
+
+	ASSERT_EQ(dicc.Vacio(), false);
+
+	ASSERT_EQ(dicc.Def(5), false);
+	ASSERT_EQ(dicc.Def(3), false);
+	ASSERT_EQ(dicc.Def(10), false);
+	ASSERT_EQ(dicc.Def(7), false);
+	ASSERT_EQ(dicc.Def(12), false);
+	ASSERT_EQ(dicc.Def(8), true);
+
+	ASSERT_EQ(dicc.Raiz(), 8);
+
+	ASSERT_EQ(dicc.ClaveMax(), 8);
+
+	ASSERT_EQ(dicc.Obtener(8), 16);
+
+	//BORRO RAIZ Y EL ARBOL QUEDA VACIO
+	dicc.Borrar(8);
+
+	ASSERT_EQ(dicc.Vacio(), true);
+
+	ASSERT_EQ(dicc.Def(5), false);
+	ASSERT_EQ(dicc.Def(3), false);
+	ASSERT_EQ(dicc.Def(10), false);
+	ASSERT_EQ(dicc.Def(7), false);
+	ASSERT_EQ(dicc.Def(12), false);
+	ASSERT_EQ(dicc.Def(8), false);
 
 }
 
