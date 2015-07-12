@@ -158,10 +158,7 @@ namespace aed2 {
 
 
     void Driver::CrearPaquete(const Computadora& origen, const Computadora& destino, Nat prioridad) {
-        if(eldcnet==NULL){
-            eldcnet = new DCNet(*lared);
-        }
-
+        assert(eldcnet != NULL);
 
         ::_Paquete paq;
         paq.id = iddelproximopaquete;///?
@@ -171,8 +168,7 @@ namespace aed2 {
         paq.destino = lared->DameCompu(destino);
         paq.origen = lared->DameCompu(origen);
 
-        eldcnet -> CrearPaquete(paq);
-
+        eldcnet->CrearPaquete(paq);
     }
 
     void Driver::AvanzarSegundo() {
