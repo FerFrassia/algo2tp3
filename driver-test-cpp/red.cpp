@@ -238,7 +238,7 @@ Compu Red::DameCompu(Hostname h) {
         it.Avanzar();
     }
 }
-
+/*
 int main(){
     Red red;
 
@@ -547,4 +547,84 @@ int main(){
     assert(red2.CaminosMinimos2(c1, c5).Cardinal() == 2);
     assert(red2.CaminosMinimos2(c6, c5).Cardinal() == 1);
     assert(red2.CaminosMinimos2(c5, c6).Cardinal() == 1);
-}
+
+    assert(red2.HayCamino(c1, c4) == true);
+
+     std::cout << "haycamino(c1, c4) " << (red2.CaminosMinimos(c1, c4)).Cardinal() << "\n\n";
+}*/
+     /* // Como es que funciona esto :X
+     int main (){
+        Red red;
+
+
+
+    Compu c1;
+    Compu c2;
+    Compu c3;
+    Compu c4;
+    Compu c5;
+    Compu c6;
+
+   
+    c1.hostname = "c1";
+
+   
+    c2.hostname = "c2";
+
+
+    c3.hostname = "c3";
+
+  
+    c4.hostname = "c4";
+
+    c5.hostname = "c5";
+
+    c6.hostname = "c6";
+
+   
+    red.AgregarComputadora(c1);
+
+    
+    red.AgregarComputadora(c2);
+
+    red.AgregarComputadora(c5);
+
+   
+    red.AgregarComputadora(c3);
+
+    red.AgregarComputadora(c4);
+
+    red.AgregarComputadora(c6);
+
+    Interfaz i1 = 1;
+    Interfaz i2 = 2;
+    Interfaz i3 = 3;
+
+    Interfaz i5 = 5;
+
+
+    red.Conectar(c1, i1, c2, i2);
+
+ 
+    red.Conectar(c1, i3, c3, i1);
+
+    red.Conectar(c3, i2, c5, i1);
+
+    red.Conectar(c2, i1, c4, i1);
+
+    red.Conectar(c4, i2, c5, i2);
+
+    red.Conectar(c6, i1, c1, i2);
+
+    red.Conectar(c6, i2, c2, i3);
+
+    red.Conectar(c6, i3, c5, i3);
+
+    std::cout << "la cantidad de caminos minimos: " << ((red.CaminosMinimos(c1, c4)).Siguiente()).Longitud() << "\n";
+    
+    Lista<Compu>::const_Iterador it = ((red.CaminosMinimos(c1, c4)).Siguiente()).CrearIt();
+    while(it.HaySiguiente()){
+            std::cout << (it.Siguiente()).hostname << "\n";
+       it.Avanzar();
+    }
+     }*/

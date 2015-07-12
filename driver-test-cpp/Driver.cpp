@@ -173,10 +173,6 @@ namespace aed2 {
         if(eldcnet==NULL){
             eldcnet = new DCNet(*lared);
         }
-
-
-
-
         eldcnet->AvanzarSegundo();
     }
 

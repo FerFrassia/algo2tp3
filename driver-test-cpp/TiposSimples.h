@@ -23,6 +23,8 @@ namespace aed2 {
 
         const bool operator!=(const Compu &otra) const {
             return !((hostname == otra.hostname) && (interfaces == otra.interfaces));
+
+            
         }
 
     };

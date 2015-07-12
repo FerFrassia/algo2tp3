@@ -101,6 +101,7 @@ void test_dcnet_ejemplo() {
 	conjIc1.Agregar(2);
 	conjIc1.Agregar(3);
 	
+    std::cout << "Agregar de conj funciona \n";
 	conjIc2.Agregar(1);
 	conjIc2.Agregar(2);
 	conjIc2.Agregar(3);
@@ -113,20 +114,41 @@ void test_dcnet_ejemplo() {
 	Computadora c3 = "dm.uba.ar";
 	
 	Driver dcnet;
+
+	
+
+    std::cout << "Creo un dcnet \n";
 	
 	dcnet.AgregarComputadora(c1, conjIc1);
+
+    std::cout << "Agrega 1 Computadora \n";
 	dcnet.AgregarComputadora(c2, conjIc2);
+	std::cout << "Agrega 2 Computadora \n";
+
 	dcnet.AgregarComputadora(c3, conjIc3);
+	std::cout << "Agrega 3 Computadora \n";
 	
 	// ejemplo - Indexado en 0 
 	Interfaz i1 = dcnet.IesimaInterfazDe(c1, 0); 
+	std::cout << "pide la interfaz de c1 << i1 << \n";
 	Interfaz i2 = dcnet.IesimaInterfazDe(c2, 2);
+	std::cout << "pide la interfaz de c2: <<i2<< \n";
 	
 	dcnet.Conectar(c1, i1, c2, i2);
+
+	std::cout << "Hace conectar entre c1 y c2 \n";
+
+
 	dcnet.CrearPaquete(c1, c2, 3);
+
+	std::cout << "Crea un paquete \n";
 	dcnet.AvanzarSegundo();	
 
+	std::cout << "Avanza un segundo \n";
+
 	ASSERT_EQ(dcnet.laQueMasEnvio(), c1);
+
+	std::cout << "Hace la que mas envio \n";
 		
 }
 void dicc_vacio() {
