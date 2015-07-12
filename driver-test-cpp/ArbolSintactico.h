@@ -5,6 +5,7 @@
 
 #include "Tipos.h"
 #include "aed2/TiposBasicos.h"
+#include "TiposSimples.h"
 
 #include<stdlib.h>
 #include<stdio.h>

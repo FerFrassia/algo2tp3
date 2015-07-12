@@ -32,8 +32,8 @@ DCNet::DCNet(const Red &lared) {
 	Conj<Compu>::Iterador it = red->Computadoras();
 	//std::cout << "creo un iterador de las computadoras \n";
 
-    masEnviante = new e_masEnvio(it.Siguiente(), 0);
-    //std::cout << "la mas enviante va a ser la primera del iterador con 0 enviados \n";
+	masEnviante = new e_masEnvio(it.Siguiente(), 0);
+	//std::cout << "la mas enviante va a ser la primera del iterador con 0 enviados \n";
 
 	compYPaq = new DiccString<e_InfoCompu>();
 	//std::cout << "creo un diccionario vacio \n";
@@ -43,10 +43,10 @@ DCNet::DCNet(const Red &lared) {
 
 		compYPaq->definir(((it.Siguiente()).hostname), *nuevainfo);
 
-	//	std::cout << "defino una computadora en el diccionario, con informacion vacia  \n";
+		//	std::cout << "defino una computadora en el diccionario, con informacion vacia  \n";
 
 		it.Avanzar();
-	//	std::cout << "avanzo a la siguiente computadora \n";
+		//	std::cout << "avanzo a la siguiente computadora \n";
 	}
 }
 
@@ -61,12 +61,12 @@ Red DCNet::DameRed() {
 }
 
 Lista<Compu> DCNet::CaminoRecorrido(const _Paquete p) {
-    Conj<Compu>::Iterador it = red->Computadoras();
+	Conj<Compu>::Iterador it = red->Computadoras();
 //std::cout << "creo un iterador de las computadoras \n";
 	bool esta = false;
 	Lista<Compu> res;
 	while (it.HaySiguiente() && !esta) {
-        if (((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Def(p)) {
+		if (((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Def(p)) {
 			esta = true;
 			res = ((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Obtener(p);
 		}
@@ -77,13 +77,13 @@ Lista<Compu> DCNet::CaminoRecorrido(const _Paquete p) {
 }
 
 Nat DCNet::CantidadEnviados(Compu c) {
-    return compYPaq->obtener(c.hostname)->enviados;
+	return compYPaq->obtener(c.hostname)->enviados;
 }
 
 DiccRapido<_Paquete, Lista<Compu> >::ITClave DCNet::EnEspera(Compu c) {
-    DiccRapido<_Paquete, Lista<Compu> >* dicc = (compYPaq->obtener(c.hostname))->paqYCam;
-    DiccRapido<_Paquete, Lista<Compu> >::ITClave It = dicc->Claves();
-    return It;
+	DiccRapido<_Paquete, Lista<Compu> >* dicc = (compYPaq->obtener(c.hostname))->paqYCam;
+	DiccRapido<_Paquete, Lista<Compu> >::ITClave It = dicc->Claves();
+	return It;
 }
 
 void DCNet::CrearPaquete(_Paquete p) {
@@ -95,8 +95,8 @@ void DCNet::CrearPaquete(_Paquete p) {
 		cj.AgregarRapido(p);
 		diccprio->Definir(p.prioridad, cj);
 	}
-    else
-    {
+	else
+	{
 		Conj<_Paquete> cj(diccprio->Obtener(p.prioridad));
 		cj.AgregarRapido(p);
 		diccprio->Definir(p.prioridad, cj);
@@ -118,39 +118,39 @@ void DCNet::AvanzarSegundo() {
 
 		if (!diccprio->Vacio()) {
 
-            _Paquete paq = (diccprio->Obtener(diccprio->ClaveMax())).DameUno();
-            //std::cout << "Agarre el paq de mayor prioridad \n";
+			_Paquete paq = (diccprio->Obtener(diccprio->ClaveMax())).DameUno();
+			//std::cout << "Agarre el paq de mayor prioridad \n";
 
 
-            l.AgregarAdelante(InfoPaquete(paq, it.Siguiente(), dicccam->Obtener(paq)));
+			l.AgregarAdelante(InfoPaquete(paq, it.Siguiente(), dicccam->Obtener(paq)));
 
-            //std::cout << "lo agrego a la lista de paquetes para mover \n";
-             dicccam->Borrar(paq);
-           // std::cout << "borro el paquete de la lista de paquetes y su camino recorrido \n";
-            (compYPaq->obtener((it.Siguiente()).hostname))->enviados++;
-            // std::cout << "Actualizo los enviados \n";
+			//std::cout << "lo agrego a la lista de paquetes para mover \n";
+			dicccam->Borrar(paq);
+			// std::cout << "borro el paquete de la lista de paquetes y su camino recorrido \n";
+			(compYPaq->obtener((it.Siguiente()).hostname))->enviados++;
+			// std::cout << "Actualizo los enviados \n";
 
-            diccprio->Obtener(diccprio->ClaveMax()).Eliminar(paq);
+			diccprio->Obtener(diccprio->ClaveMax()).Eliminar(paq);
 
-          //  std::cout << "Elimino el paquete de la lista de paquetes con esa misma prioridad \n";
+			//  std::cout << "Elimino el paquete de la lista de paquetes con esa misma prioridad \n";
 
-            if ((diccprio->Obtener(diccprio->ClaveMax())).EsVacio()) {
-            	
-                diccprio->Borrar(diccprio->ClaveMax());
-        //        std::cout << "si no quedaban mas paquetes borro esa definicion de prioridad \n";
-            }
-           
+			if ((diccprio->Obtener(diccprio->ClaveMax())).EsVacio()) {
 
-            if ((compYPaq->obtener((it.Siguiente()).hostname))->enviados > masEnviante->enviados) {
+				diccprio->Borrar(diccprio->ClaveMax());
+				//        std::cout << "si no quedaban mas paquetes borro esa definicion de prioridad \n";
+			}
 
-            	delete masEnviante;
-                masEnviante = new e_masEnvio(it.Siguiente(), compYPaq->obtener((it.Siguiente()).hostname)->enviados);
-      //          std::cout << "si la compu que acaba de enviar,es la que mas envio, actualizo\n";
-            }
-           
-        }
+
+			if ((compYPaq->obtener((it.Siguiente()).hostname))->enviados > masEnviante->enviados) {
+
+				delete masEnviante;
+				masEnviante = new e_masEnvio(it.Siguiente(), compYPaq->obtener((it.Siguiente()).hostname)->enviados);
+				//          std::cout << "si la compu que acaba de enviar,es la que mas envio, actualizo\n";
+			}
+
+		}
 		it.Avanzar();
-	//	std::cout << "paso a la siguiente compu\n";
+		//	std::cout << "paso a la siguiente compu\n";
 	}
 	//std::cout << "Ya recogi todos las paquetes que tienen que ser enviados\n";
 
@@ -160,14 +160,14 @@ void DCNet::AvanzarSegundo() {
 
 	while (itaux.HaySiguiente()) {
 
-		
-		Lista<Compu>::const_Iterador itCamino = ((red->CaminosMinimos(itaux.Siguiente().compuAnt, ((itaux.Siguiente()).paque).destino)).Siguiente()).CrearIt(); 
-        //std::cout << "Agarro el recorrido minimo que tiene que hacer la computadora en la que estaba hasta su destino\n";
-        itCamino.Avanzar();
-        //std::cout << "agarro el segundo elemento de la lista, ya que el camino minimo de 1 a 3 es [1,2,3]\n";
-        
-        Compu proxpc = itCamino.Siguiente();
-      //  std::cout << "busco a que compu tendria que ir el paquete\n";
+
+		Lista<Compu>::const_Iterador itCamino = ((red->CaminosMinimos(itaux.Siguiente().compuAnt, ((itaux.Siguiente()).paque).destino)).Siguiente()).CrearIt();
+		//std::cout << "Agarro el recorrido minimo que tiene que hacer la computadora en la que estaba hasta su destino\n";
+		itCamino.Avanzar();
+		//std::cout << "agarro el segundo elemento de la lista, ya que el camino minimo de 1 a 3 es [1,2,3]\n";
+
+		Compu proxpc = itCamino.Siguiente();
+		//  std::cout << "busco a que compu tendria que ir el paquete\n";
 		DiccRapido<Nat, Conj<_Paquete> >* diccprio = (compYPaq->obtener(proxpc.hostname))->masPriori;
 		DiccRapido<_Paquete, Lista<Compu> >* dicccam = (compYPaq->obtener(proxpc.hostname))->paqYCam;
 
@@ -175,28 +175,28 @@ void DCNet::AvanzarSegundo() {
 			//std::cout << "si la compu a la que tendria que ir el paquete es distinto al destino sigo\n";
 			if (diccprio->Def(((itaux.Siguiente()).paque).prioridad)) {
 				//std::cout << "Si ya existe una conj de paquetes de esa prioridad\n";
-	
-                Conj<_Paquete> mismaPrio = diccprio->Obtener(itaux.Siguiente().paque.prioridad);
-              // std::cout << "obtengo el conjunto de paquetes con esa prioridad\n";
+
+				Conj<_Paquete> mismaPrio = diccprio->Obtener(itaux.Siguiente().paque.prioridad);
+				// std::cout << "obtengo el conjunto de paquetes con esa prioridad\n";
 				diccprio->Definir(((itaux.Siguiente()).paque).prioridad, mismaPrio);
-			//	std::cout << "agrego el paquete a la lista de paquetes con esa misma prioridad\n";
+				//	std::cout << "agrego el paquete a la lista de paquetes con esa misma prioridad\n";
 			} else {
 				Conj<_Paquete> conjvacio;
-			//	std::cout << "Si no estaba definida esa prioridad creo una conj vacio de paquetes\n";
-                conjvacio.Agregar(itaux.Siguiente().paque);
-            //    std::cout << "Agrego el paquete a la lista vacia\n";
-                diccprio->Definir(itaux.Siguiente().paque.prioridad, conjvacio);
-          //      std::cout << "Defino esa prioridad con el conj solo con ese paquete\n";
+				//	std::cout << "Si no estaba definida esa prioridad creo una conj vacio de paquetes\n";
+				conjvacio.Agregar(itaux.Siguiente().paque);
+				//    std::cout << "Agrego el paquete a la lista vacia\n";
+				diccprio->Definir(itaux.Siguiente().paque.prioridad, conjvacio);
+				//      std::cout << "Defino esa prioridad con el conj solo con ese paquete\n";
 			}
 
 			((itaux.Siguiente()).camReco).AgregarAtras(proxpc);
-		//	std::cout << "Agrego la proxima pc a la que se movio el paquete a su camino recorrido\n";
+			//	std::cout << "Agrego la proxima pc a la que se movio el paquete a su camino recorrido\n";
 			dicccam->Definir((itaux.Siguiente()).paque, itaux.Siguiente().camReco);
-		//	std::cout << "Defino el paquete con su camino recorrido\n";
+			//	std::cout << "Defino el paquete con su camino recorrido\n";
 
 		}
 		//std::cout << "Si llego a su destino no hago nada\n";
- 
+
 		itaux.Avanzar();
 		//std::cout << "Avanzo al siguiente paquete a enviar\n";
 
@@ -210,10 +210,10 @@ bool DCNet::PaqueteEnTransito(_Paquete p) {
 	//std::cout << "creo un flag para saber si ya la encontre\n";
 	while (it.HaySiguiente() && !esta) {
 		//std::cout << "sigo recorriendo porque todavia no la encontre\n";
-        esta = compYPaq->obtener(it.Siguiente().hostname)->paqYCam->Def(p);
-      //  std::cout << "devuelvo si el paquete esta definido en esta computadora\n";
+		esta = compYPaq->obtener(it.Siguiente().hostname)->paqYCam->Def(p);
+		//  std::cout << "devuelvo si el paquete esta definido en esta computadora\n";
 		it.Avanzar();
-	//	std::cout << "Avanzo ala siguiente compu\n";
+		//	std::cout << "Avanzo ala siguiente compu\n";
 	}
 	return esta;
 	//std::cout << "devuelvo si estaba o no\n";
@@ -221,44 +221,45 @@ bool DCNet::PaqueteEnTransito(_Paquete p) {
 
 Compu& DCNet::LaQueMasEnvio() {
 
-	std::cout << "entro a la funcion la que mas envio \n";
+	//std::cout << "entro a la funcion la que mas envio \n";
 	return 	masEnviante->comp;
 	std::cout << "devuelvo la Compu mas enviante \n";
 }
 
 
 _Paquete DCNet::DamePaquete(Nat n){
+    _Paquete res;
 	Conj<Compu>::Iterador it = red->Computadoras();
 	std::cout << "Creo un iterador a las computadoras \n";
 
 	while (it.HaySiguiente()) {
-		std::cout << "Checkeo si hay paquetes en esa compu \n";
-		if(false==(((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Vacio())){
-			std::cout << "Hay paquetes \n";
-	    	DiccRapido<_Paquete, Lista<Compu> >::ITClave itcl = ((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Claves();
-	    	std::cout << "creo un iterador a los paquetes \n";
-	    	while(itcl.HayMas()){
+		//std::cout << "Checkeo si hay paquetes en esa compu \n";
+		if(!(((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Vacio())) {
+			//std::cout << "Hay paquetes \n";
+            DiccRapido<_Paquete, Lista<Compu> >* cl;
+            cl = (compYPaq->obtener(it.Siguiente().hostname))->paqYCam;
+			std::cout << "es vacio el dicc?: " << cl->Vacio() << "\n";
+            DiccRapido<_Paquete, Lista<Compu> >::ITClave itcl = cl->Claves();
 
-    			std::cout << "pregunto si todavia hay paquetes por revisar \n";
+			std::cout << "creo un iterador a los paquetes \n";
 
-    			if((itcl.ClaveActual()).id == n){
-    				std::cout << "si el paquete era el que buscaba le asigno los datos al paquete que habia creado \n";
-    				return itcl.ClaveActual();
-			}	
-    		itcl.Avanzar();
-    		std::cout << "No era el paquete que buscaba asi que paso al siguiente \n";
-    		}
-    		return itcl.ClaveActual();
-    		std::cout << "Recorri todos y era el ultimo \n";
+			while(itcl.HayMas()){
+				std::cout << "pregunto si todavia hay paquetes por revisar \n";
 
-    	}
-    	std::cout << "No hay paquetes en esta compu \n";
-	it.Avanzar();
-	std::cout << "paso a buscar en la siguiente compu \n";
+				if((itcl.ClaveActual()).id == n){
+					//std::cout << "si el paquete era el que buscaba le asigno los datos al paquete que habia creado \n";
+					return itcl.ClaveActual();
+				}
+				itcl.Avanzar();
+				//std::cout << "No era el paquete que buscaba asi que paso al siguiente \n";
+			}
+		}
+		//std::cout << "No hay paquetes en esta compu \n";
+		it.Avanzar();
+		//std::cout << "paso a buscar en la siguiente compu \n";
 	}
-	
-		
-	}
+    return res;
+}
 
 
 

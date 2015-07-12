@@ -132,7 +132,6 @@ namespace aed2 {
 
     Nat Driver::CantidadEnviadosPor(const Computadora& c) const {
         return eldcnet->CantidadEnviados(lared->DameCompu(c));
-
     }
 
     Nat Driver::CantidadEnEsperaEn(const Computadora& c) const {
@@ -172,8 +171,6 @@ namespace aed2 {
         paq.destino = lared->DameCompu(destino);
         paq.origen = lared->DameCompu(origen);
 
-
-
         eldcnet -> CrearPaquete(paq);
 
     }
@@ -182,10 +179,6 @@ namespace aed2 {
         if(eldcnet==NULL){
             eldcnet = new DCNet(*lared);
         }
-
-
-
-
         eldcnet -> AvanzarSegundo();
     }
 
@@ -204,12 +197,12 @@ namespace aed2 {
     }
 
     const Computadora& Driver::destino(const Paquete& p) const {
-         assert(p < iddelproximopaquete);
-        return ((eldcnet->DamePaquete(p)).destino).hostname;
+        assert(p < iddelproximopaquete);
+        return (eldcnet->DamePaquete(p).destino).hostname;
     }
 
     Nat Driver::prioridad(const Paquete& p) const {
-         assert(p < iddelproximopaquete);
+        assert(p < iddelproximopaquete);
         return (eldcnet->DamePaquete(p)).prioridad;
     }
 }
