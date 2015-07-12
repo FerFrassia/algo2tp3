@@ -62,6 +62,7 @@ void check_definir() {
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -99,6 +100,7 @@ void check_definir() {
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -136,6 +138,7 @@ void check_definir() {
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -173,6 +176,7 @@ void check_definir() {
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -210,6 +214,7 @@ void check_definir() {
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -247,6 +252,7 @@ void check_definir() {
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -284,6 +290,7 @@ void check_definir() {
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -326,6 +333,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -358,6 +366,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 20);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -390,6 +399,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 20);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -422,6 +432,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 20);
 	ASSERT_EQ(dicc.Obtener(7), 21);
@@ -454,6 +465,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 20);
 	ASSERT_EQ(dicc.Obtener(7), 21);
@@ -486,6 +498,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 20);
 	ASSERT_EQ(dicc.Obtener(7), 21);
@@ -518,6 +531,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 20);
 	ASSERT_EQ(dicc.Obtener(7), 21);
@@ -560,6 +574,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 14);
@@ -591,6 +606,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(3), 6);
@@ -623,6 +639,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(5), 10);
 	ASSERT_EQ(dicc.Obtener(7), 1);
@@ -654,6 +671,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(7), 1);
 	ASSERT_EQ(dicc.Obtener(3), 6);
@@ -682,6 +700,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 10);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(3), 6);
 	ASSERT_EQ(dicc.Obtener(8), 16);
@@ -707,6 +726,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 8);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 3);
 
 	ASSERT_EQ(dicc.Obtener(3), 6);
 	ASSERT_EQ(dicc.Obtener(8), 16);
@@ -729,6 +749,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Padre(12), 8);
 
 	ASSERT_EQ(dicc.ClaveMax(), 12);
+	ASSERT_EQ(dicc.ClaveMin(), 8);
 
 	ASSERT_EQ(dicc.Obtener(8), 16);
 	ASSERT_EQ(dicc.Obtener(12), 24);
@@ -748,6 +769,7 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Raiz(), 8);
 
 	ASSERT_EQ(dicc.ClaveMax(), 8);
+	ASSERT_EQ(dicc.ClaveMin(), 8);
 
 	ASSERT_EQ(dicc.Obtener(8), 16);
 
@@ -762,8 +784,14 @@ DiccRapido<int, int> dicc;
 	ASSERT_EQ(dicc.Def(7), false);
 	ASSERT_EQ(dicc.Def(12), false);
 	ASSERT_EQ(dicc.Def(8), false);
-
 }
+/*
+void check_crearIT() {
+    DiccRapido<int, int> dicc;
+    dicc.
+    
+}
+*/
 
 
 

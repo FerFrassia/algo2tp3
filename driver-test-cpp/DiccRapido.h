@@ -32,6 +32,8 @@ class DiccRapido {
 
 		Tc& ClaveMax() const;
 
+		Tc& ClaveMin() const;
+
 		ITClave Claves() const;
 
 //BEGIN METODOS DE TESTING
@@ -417,6 +419,17 @@ Tc& DiccRapido<Tc, Ts>::ClaveMax() const {
 	}
 	return (*pNodo).clave;
 }
+
+template<class Tc, class Ts>
+Tc& DiccRapido<Tc, Ts>::ClaveMin() const {
+	Nodo* pNodo = dicc.raiz;
+	while ((*pNodo).izq != NULL) {
+		pNodo = (*pNodo).izq;
+	}
+	return (*pNodo).clave;
+}
+
+
 
 //BEGIN METODOS DE TESTING
 template<class Tc, class Ts>
