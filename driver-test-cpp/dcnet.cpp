@@ -62,7 +62,7 @@ Red DCNet::DameRed() {
 
 Lista<Compu> DCNet::CaminoRecorrido(const _Paquete p) {
     Conj<Compu>::Iterador it = red->Computadoras();
-//std::cout << "creo un vector con las claves del diccionario de computadora \n";
+//std::cout << "creo un iterador de las computadoras \n";
 	bool esta = false;
 	Lista<Compu> res;
 	while (it.HaySiguiente() && !esta) {
@@ -219,35 +219,54 @@ bool DCNet::PaqueteEnTransito(_Paquete p) {
 	//std::cout << "devuelvo si estaba o no\n";
 }
 
-Compu DCNet::LaQueMasEnvio() {
+Compu& DCNet::LaQueMasEnvio() {
 
 	std::cout << "entro a la funcion la que mas envio \n";
-	return masEnviante->comp;
+	return 	masEnviante->comp;
 	std::cout << "devuelvo la Compu mas enviante \n";
 }
 
 
 _Paquete DCNet::DamePaquete(Nat n){
-	vector<string> vr = (compYPaq->claves());
-    int i=0;
-	bool esta = false;
+	Conj<Compu>::Iterador it = red->Computadoras();
+	std::cout << "Creo un iterador a las computadoras \n";
 	_Paquete p;
-	while (vr.size() < i && !esta) {
-    	DiccRapido<_Paquete, Lista<Compu> >::ITClave it = (compYPaq->obtener(vr[i])->paqYCam)->Claves();
-    	while(it.HayMas()){
+	Compu orip;
+	Compu desp;
+	std::cout << "inicializo un paquete \n";
+	while (it.HaySiguiente()) {
+    	DiccRapido<_Paquete, Lista<Compu> >::ITClave itcl = ((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Claves();
 
-    		if((it.ClaveActual()).id == n){
-    			p.id = (it.ClaveActual()).id;
-				p.prioridad = (it.ClaveActual()).prioridad;
-				p.origen = (it.ClaveActual()).origen;
-				p.destino = (it.ClaveActual()).destino;
+    	std::cout << "creo un iterador a las claves del diccionario de paquetes y caminos \n";
+    	while(itcl.HayMas()){
 
-				return p;
+    		std::cout << "pregunto si todavia hay paquetes por revisar \n";
+
+    		if((itcl.ClaveActual()).id == n){
+    			std::cout << "si el paquete era el que buscaba le asigno los datos al paquete que habia creado \n";
+    			
+    			//Nat i = (itcl.ClaveActual()).id;
+    			
+				//Nat prio = (itcl.ClaveActual()).prioridad;
+				
+				orip.hostname = ((itcl.ClaveActual()).origen).hostname ; 
+				orip.interfaces = ((itcl.ClaveActual()).origen).interfaces;
+
+				desp.hostname = ((itcl.ClaveActual()).destino).hostname ; 
+				desp.interfaces = ((itcl.ClaveActual()).destino).interfaces;
+
+				p( ((itcl.ClaveActual()).id) ,((itcl.ClaveActual()).prioridad) ,orip, desp );
+    			return p;
+				
+				
 				}
-    		it.Avanzar();
+
+    		itcl.Avanzar();
+    		std::cout << "No era el paquete que buscaba asi que paso al siguiente \n";
     	}
 		
-		i++;
+		it.Avanzar();
+		std::cout << "paso a buscar en la siguiente compu \n";
 	}
 }
 

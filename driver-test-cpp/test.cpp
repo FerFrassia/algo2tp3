@@ -138,12 +138,17 @@ void test_dcnet_ejemplo() {
 
 	std::cout << "Hace conectar entre c1 y c2 \n";
 
-	std::cout << "prioridad del paquete 0"<<dcnet.prioridad(0) <<"\n";
+
+	
 
 
 	dcnet.CrearPaquete(c1, c2, 3);
 
-	std::cout << "Crea un paquete \n";
+	std::cout << "prioridad del paquete 0"<<dcnet.prioridad(0) <<"\n";
+	std::cout << "destino del paquete 0"<<dcnet.destino(0) <<"\n";
+	std::cout << "origen del paquete 0"<<dcnet.origen(0) <<"\n";
+
+	/*std::cout << "Crea un paquete \n";
 	
 	dcnet.AvanzarSegundo();	
 
@@ -154,9 +159,11 @@ void test_dcnet_ejemplo() {
 
 	std::cout << "Avanza un segundo \n";
 
+	std::cout << "La que mas envio es"<<dcnet.laQueMasEnvio()<<"\n";
+
 	ASSERT_EQ(dcnet.laQueMasEnvio(), c1);
 
-	std::cout << "Hace la que mas envio \n";
+	std::cout << "Hace la que mas envio \n";*/
 		
 }
 void dicc_vacio() {

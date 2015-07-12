@@ -17,6 +17,9 @@ namespace aed2 {
         Hostname hostname;
         Conj<Interfaz> interfaces;
 
+        Compu() : hostname(), interfaces() {};
+        Compu(Hostname h , Conj<Interfaz> ci ) : hostname(h), interfaces(ci) {}
+
         const bool operator==(const Compu &otra) const {
             return (hostname == otra.hostname) && (interfaces == otra.interfaces);
         }
@@ -34,6 +37,10 @@ namespace aed2 {
         Nat prioridad;
         Compu origen;
         Compu destino;
+
+        _Paquete() : id(), prioridad(),origen(),destino() {};
+
+        _Paquete(Nat& i, Nat& p, Compu& o,Compu& d ) : id(i) , prioridad(p), origen(o), destino(d) {};
 
         const bool operator==(const _Paquete &otra) const {
             return (id == otra.id);

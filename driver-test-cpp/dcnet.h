@@ -37,7 +37,7 @@ public:
 
 	bool PaqueteEnTransito(_Paquete);
 
-	Compu LaQueMasEnvio();
+	Compu& LaQueMasEnvio();
 
 
 

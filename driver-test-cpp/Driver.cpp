@@ -190,6 +190,7 @@ namespace aed2 {
     }
 
     const Computadora& Driver::laQueMasEnvio() const {
+        assert(eldcnet != NULL);
         std::cout << "entro a la funcion la que mas envio \n";
         return (eldcnet->LaQueMasEnvio()).hostname;
         std::cout << "devuelvo el que mas envio \n";
@@ -197,15 +198,18 @@ namespace aed2 {
     }
 
     const Computadora& Driver::origen(const Paquete& p) const {
+        assert(eldcnet != NULL);
         return ((eldcnet->DamePaquete(p)).origen).hostname;
 
     }
 
     const Computadora& Driver::destino(const Paquete& p) const {
+        assert(eldcnet != NULL);
         return ((eldcnet->DamePaquete(p)).destino).hostname;
     }
 
     Nat Driver::prioridad(const Paquete& p) const {
+        assert(eldcnet != NULL);
         return (eldcnet->DamePaquete(p)).prioridad;
     }
 }
