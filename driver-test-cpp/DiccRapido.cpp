@@ -243,7 +243,7 @@ int main(){
 //TESTEO DE CREAR IT
 	std::cout << "Creo Iterador \n";
 	DiccRapido<int, int>::ITClave iterador = dicc.Claves();
-
+/*
 	std::cout << "Pido Clave: " << iterador.ClaveActual();
 	std::cout << "\n";
 
@@ -276,7 +276,7 @@ int main(){
 
 	std::cout << "Pido Clave: " << iterador.ClaveActual();
 	std::cout << "\n";
-
+*/
 
 /*
 	std::cout << "\n";

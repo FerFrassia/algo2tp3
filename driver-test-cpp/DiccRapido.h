@@ -71,6 +71,12 @@ class DiccRapido {
 					typename DiccRapido<Tc, Ts>::Nodo* nodoActual;
 					typename DiccRapido<Tc, Ts>::Nodo* raiz;
 					e_it(const DiccRapido<Tc, Ts>& dicc): nivelActual(1), nodosRecorridos(0), tam(0), nodoActual(NULL), raiz(NULL), diccIt(dicc) {}
+
+					~e_it() {
+						nodoActual = NULL;
+						raiz = NULL;
+					}
+				
 				};
 
 				const Lista<Tc> Siguientes() const;
@@ -118,6 +124,8 @@ class DiccRapido {
 			int tam;
 
 			e_dicc();
+
+			//~e_dicc();
 		};
 
 		Conj<Tc> DameNodos(Nodo* p, int actual, const int destino) const;
@@ -181,7 +189,12 @@ DiccRapido<Tc, Ts>::e_dicc::e_dicc() {
 	raiz = NULL;
 	tam = 0;
 }
-
+/*
+template<class Tc, class Ts>
+DiccRapido<Tc, Ts>::e_dicc::~e_dicc() {
+	delete raiz;
+}
+*/
 //metodos publicos DiccRapido
 template<class Tc, class Ts>
 DiccRapido<Tc, Ts>::DiccRapido() {
@@ -605,8 +618,8 @@ DiccRapido<Tc, Ts>::ITClave::ITClave(const DiccRapido<Tc, Ts>& dicc) : it(dicc) 
 
 template<class Tc, class Ts>
 DiccRapido<Tc, Ts>::ITClave::~ITClave() {
-	delete it.nodoActual;
-	delete it.raiz;
+	if (it.nodoActual != NULL) delete it.nodoActual;
+	if (it.raiz != NULL) delete it.raiz;
 }
 
 template<class Tc, class Ts>
@@ -620,7 +633,7 @@ DiccRapido<Tc, Ts>::ITClave::ITClave(const ITClave& otro) : it(otro.it.diccIt) {
 
 template<class Tc, class Ts>
 const bool DiccRapido<Tc, Ts>::ITClave::HayMas() const {
-	if (it.nodosRecorridos < it.tam - 1) {
+	if (it.nodosRecorridos < it.tam) {
 		return true;
 	} else {
 		return false;
@@ -653,8 +666,7 @@ void DiccRapido<Tc, Ts>::ITClave::Avanzar() {
 			} else {
 				pNodo = (*pNodo).izq;
 			}
-		}
-		Tc& c = (*pNodo).clave;		
+		}		
 		it.nodoActual = pNodo;
 	} else {
 		it.nivelActual = it.nivelActual + 1;
