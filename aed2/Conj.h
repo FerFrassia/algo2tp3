@@ -201,6 +201,7 @@ void Conj<T>::Union(const aed2::Conj<T> &otro) {
 
   while (itOtro.HaySiguiente()) {
     Agregar(itOtro.Siguiente());
+    itOtro.Avanzar();
   }
 }
 

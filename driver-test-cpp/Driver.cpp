@@ -5,7 +5,8 @@ namespace aed2 {
 
 Driver::Driver() {
     lared = new  Red();
-    eldcnet = new DCNet(lared);
+    eldcnet = NULL;
+    iddelproximopaquete = 0;
 }
 
 Driver::~Driver() {
@@ -15,7 +16,7 @@ Driver::~Driver() {
 
 // TAD RED
 Nat Driver::CantidadComputadoras() const {
-    Conj<Compu>::Iterador it = (lared->Computadoras()).CrearIt();
+    Conj<Compu>::Iterador it = lared->Computadoras();
     int res = 0;
         while(it.HaySiguiente()){
             res ++;
@@ -26,19 +27,21 @@ Nat Driver::CantidadComputadoras() const {
 }
 
 const Computadora& Driver::IesimaComputadora(const Nat i) const {
-    Conj<Compu>::Iterador it = (lared->Computadoras()).CrearIt();
+    Conj<Compu>::Iterador it = lared->Computadoras();
     int n = 0;
     Computadora res;
         while(it.HaySiguiente()){
             if(n == i){
-                return res = it.Siguiente();
+                return res = (it.Siguiente()).hostname;
             }
-            i ++;
+            n ++;
             it.Avanzar();
 }
+}
+ 
         
-Nat Driver::CantidadInterfacesDe(const Computadora& c) const {
-    Conj<Compu>::Iterador it = (lared->Computadoras()).CrearIt();
+Nat Driver::CantidadInterfacesDe(const Computadora& c) const{
+    Conj<Compu>::Iterador it = lared->Computadoras();
         while((it.Siguiente()).hostname != c){
               
             it.Avanzar();
@@ -47,22 +50,23 @@ Nat Driver::CantidadInterfacesDe(const Computadora& c) const {
 }
 
 const Interfaz& Driver::IesimaInterfazDe(const Computadora& c, const Nat i) const{
-    Conj<Compu>::Iterador it = (lared->Computadoras()).CrearIt();
+    Conj<Compu>::Iterador it = lared->Computadoras();
     Conj<Interfaz> cji;
+    
     
     while((it.Siguiente()).hostname != c){
         it.Avanzar();
     }
     cji = ((it.Siguiente()).interfaces);
     Conj<Interfaz>::Iterador itint = cji.CrearIt();
-    int n = 0
-    Interfaz res;
+    int n = 0;
+    
 
     while(itint.HaySiguiente()){
         if(n == i){
-            return res = itint.Siguiente();
+            return  itint.Siguiente();
         }
-        i++;
+        n++;
         it.Avanzar();
 
     }
@@ -71,43 +75,32 @@ const Interfaz& Driver::IesimaInterfazDe(const Computadora& c, const Nat i) cons
 
 const Interfaz& Driver::IntefazUsada(const Computadora& c1, const Computadora& c2) const {
     
-     return lared.InterfazUsada(c1, c2);
+
+     
+     return  lared->InterfazUsada(lared->DameCompu(c1), lared ->DameCompu(c2));
     
 }
 
 bool Driver::conectadas(const Computadora& c1, const Computadora& c2) const {
     
-    return lared.Conectadas(c1,c2);
+    return lared->Conectadas(lared->DameCompu(c1),lared->DameCompu(c2));
 }
 
 // TAD DCNET
 void Driver::AgregarComputadora(const Computadora& ip, const Conj<Interfaz>& ci) {
+    //ASSERT(eldcnet == NULL)
     Compu c;
     c.hostname = ip;
     c.interfaces = ci;
 
-    lared.AgregarComputadora(c);
+    lared->AgregarComputadora(c);
 }
         
 void Driver::Conectar(const Computadora& c1, const Interfaz& i1, const Computadora& c2, const Interfaz& i2) {
-        Conj<Compu>::Iterador it = (lared->Computadoras()).CrearIt();
-        Compu pc1;
-        Compu pc2;
-         while(it.HaySiguiente()){
-            if((it.Siguiente()).hostname == c1){
-                pc1.hostname = c1;
-                pc1.interfaces = (it.Siguiente()).interfaces;
-            }else{
-                if((it.Siguiente()).hostname == c2){
-                    pc2.hostname = c2;
-                    pc2.interfaces = (it.Siguiente()).interfaces;
-                }
-            }  
-              
-            it.Avanzar();
-            }
+        //ASSERT(eldcnet == NULL)
+        Conj<Compu>::Iterador it = lared->Computadoras();
         
-        lared->Conectar(pc1,i1,pc2,i2);
+        lared->Conectar(lared->DameCompu(c1),i1,lared->DameCompu(c2),i2);
 }
     
     
@@ -125,18 +118,18 @@ const Computadora& Driver::IesimoNodoRecorridoPor(const Paquete& p, const Nat i)
         if(n == i){
             return (it.Siguiente()).hostname;
         }
-        i++;
+        n++;
         it.Avanzar();
     }
 }
 
 Nat Driver::CantidadEnviadosPor(const Computadora& c) const {
-    return eldcnet->CantidadEnviados(eldcnet->DameCompu(c));
+    return eldcnet->CantidadEnviados(lared->DameCompu(c));
     
 }
     
 Nat Driver::CantidadEnEsperaEn(const Computadora& c) const {
-    DiccRapido<Paquete, Lista<Compu> >::ITClave it = eldcnet->EnEspera(eldcnet->DameCompu(c));
+    DiccRapido<_Paquete, Lista<Compu> >::ITClave it = eldcnet->EnEspera(lared->DameCompu(c));
     Nat n = 0;
     while(it.HayMas()){
         n++;
@@ -146,7 +139,7 @@ Nat Driver::CantidadEnEsperaEn(const Computadora& c) const {
 }
 
 const Paquete& Driver::IesimoEnEsperaEn(const Computadora& c, const Nat i) const {
-    DiccRapido<Paquete, Lista<Compu> >::ITClave it = eldcnet->EnEspera(eldcnet->DameCompu(c));
+    DiccRapido<_Paquete, Lista<Compu> >::ITClave it = eldcnet->EnEspera(lared->DameCompu(c));
     Nat n = 0;
     while(it.HayMas()){
         if(n==i){
@@ -159,33 +152,55 @@ const Paquete& Driver::IesimoEnEsperaEn(const Computadora& c, const Nat i) const
 
 
 void Driver::CrearPaquete(const Computadora& origen, const Computadora& destino, Nat prioridad) {
-    ::Paquete paq;
-    paq.id = 
+    if(eldcnet==NULL){
+        eldcnet = new DCNet(*lared);
+    }
+
+
+    ::_Paquete paq;
+    paq.id = iddelproximopaquete;///?;
+    iddelproximopaquete ++;
+    paq.prioridad = prioridad;
+
+    paq.destino = lared->DameCompu(destino);
+    paq.origen = lared->DameCompu(origen);
+
+    eldcnet -> CrearPaquete(paq);
+
 }
         
 void Driver::AvanzarSegundo() {
+    if(eldcnet==NULL){
+        eldcnet = new DCNet(*lared);
+    }
+
+
+
+
     eldcnet->AvanzarSegundo();
 }
         
 const Computadora& Driver::laQueMasEnvio() const {
-    return (eldcnet->laQueMasEnvio()).hostname;
+    return (eldcnet->LaQueMasEnvio()).hostname;
     
 }
 
 const Computadora& Driver::origen(const Paquete& p) const {
-    return (eldcnet->DamePaquete(p)).origen;
+    return ((eldcnet->DamePaquete(p)).origen).hostname;
 
 } 
 
 const Computadora& Driver::destino(const Paquete& p) const { 
-    return (eldcnet->DamePaquete(p)).destino;
+    return ((eldcnet->DamePaquete(p)).destino).hostname;
 }
 
 Nat Driver::prioridad(const Paquete& p) const { 
     return (eldcnet->DamePaquete(p)).prioridad;
+    }
 }
+
         
 
 
-} // namespace aed2
+ // namespace aed2
 

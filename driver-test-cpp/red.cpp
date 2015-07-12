@@ -73,7 +73,7 @@ bool Red::Conectadas(const Compu c1, const Compu c2) {
     return directasEInterfaces->obtener(c1.hostname)->Directas()->definido(c2.hostname);
 }
 
-Interfaz Red::InterfazUsada(const Compu c1, const Compu c2) {
+Interfaz& Red::InterfazUsada(const Compu c1, const Compu c2) {
     return *directasEInterfaces->obtener(c1.hostname)->Directas()->obtener(c2.hostname);
 }
 
@@ -206,7 +206,6 @@ Conj<Lista<Compu> > Red::CaminosImportantes(const Compu c1, const Compu c2, List
     Conj<Lista<Compu> > res;
 
     Conj<Compu> cVecinos = Vecinos(c1);
-
     if (cVecinos.Pertenece(c2)) {
         parcial.AgregarAtras(c2);
         res.Agregar(parcial);

@@ -25,34 +25,34 @@ public:
 
 	Red DameRed();
 
-	Lista<Compu> CaminoRecorrido(Paquete);
+	Lista<Compu> CaminoRecorrido(_Paquete);
 
 	Nat CantidadEnviados(Compu);
 
-	DiccRapido<Paquete, Lista<Compu> >::ITClave EnEspera(Compu);
+	DiccRapido<_Paquete, Lista<Compu> >::ITClave EnEspera(Compu);
 
-	void CrearPaquete(Paquete);
+	void CrearPaquete(_Paquete);
 
 	void AvanzarSegundo();
 
-	bool PaqueteEnTransito(Paquete);
+	bool PaqueteEnTransito(_Paquete);
 
 	Compu LaQueMasEnvio();
 
 
 
-	Paquete DamePaquete(Nat);
-	Compu DameCompu(Hostname);
+	_Paquete DamePaquete(Nat);
+	
 
 private:
 
 	struct e_InfoCompu {
-		DiccRapido<Nat, Conj<Paquete> >* masPriori;
-		DiccRapido<Paquete, Lista<Compu> >* paqYCam;
+		DiccRapido<Nat, Conj<_Paquete> >* masPriori;
+		DiccRapido<_Paquete, Lista<Compu> >* paqYCam;
 		Nat enviados;
 
-		e_InfoCompu() : masPriori(new DiccRapido<Nat, Conj<Paquete> >()),
-					  paqYCam(new DiccRapido<Paquete, Lista<Compu> >()), enviados(0) { };
+		e_InfoCompu() : masPriori(new DiccRapido<Nat, Conj<_Paquete> >()),
+					  paqYCam(new DiccRapido<_Paquete, Lista<Compu> >()), enviados(0) { };
 	};
 
 	struct e_masEnvio {

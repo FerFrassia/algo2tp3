@@ -17,11 +17,11 @@ using namespace aed2;
   	de los paquetes a mover.*/
 
 struct InfoPaquete {
-	Paquete paque;
+	_Paquete paque;
 	Compu compuAnt;
 	Lista<Compu> camReco;
 
-	InfoPaquete(Paquete p, Compu c, Lista<Compu> cr) : paque(p), compuAnt(c), camReco(cr) { };
+	InfoPaquete(_Paquete p, Compu c, Lista<Compu> cr) : paque(p), compuAnt(c), camReco(cr) { };
 };
 
 DCNet::DCNet(const Red &lared) {
@@ -52,7 +52,7 @@ Red DCNet::DameRed() {
 	return *red;
 }
 
-Lista<Compu> DCNet::CaminoRecorrido(const Paquete p) {
+Lista<Compu> DCNet::CaminoRecorrido(const _Paquete p) {
     vector<string> vr = (compYPaq->claves());
     int i=0;
 	bool esta = false;
@@ -72,24 +72,24 @@ Nat DCNet::CantidadEnviados(Compu c) {
     return compYPaq->obtener(c.hostname)->enviados;
 }
 
-DiccRapido<Paquete, Lista<Compu> >::ITClave DCNet::EnEspera(Compu c) {
-    DiccRapido<Paquete, Lista<Compu> >* dicc = compYPaq->obtener(c.hostname)->paqYCam;
-    DiccRapido<Paquete, Lista<Compu> >::ITClave It = dicc->Claves();
+DiccRapido<_Paquete, Lista<Compu> >::ITClave DCNet::EnEspera(Compu c) {
+    DiccRapido<_Paquete, Lista<Compu> >* dicc = compYPaq->obtener(c.hostname)->paqYCam;
+    DiccRapido<_Paquete, Lista<Compu> >::ITClave It = dicc->Claves();
     return It;
 }
 
-void DCNet::CrearPaquete(Paquete p) {
-	DiccRapido<Nat, Conj<Paquete> >* diccprio = compYPaq->obtener((p.origen).hostname)->masPriori;
-	DiccRapido<Paquete, Lista<Compu> >* dicccam = compYPaq->obtener((p.origen).hostname)->paqYCam;
+void DCNet::CrearPaquete(_Paquete p) {
+	DiccRapido<Nat, Conj<_Paquete> >* diccprio = compYPaq->obtener((p.origen).hostname)->masPriori;
+	DiccRapido<_Paquete, Lista<Compu> >* dicccam = compYPaq->obtener((p.origen).hostname)->paqYCam;
 
 	if (!diccprio->Def(p.prioridad)) {
-		Conj<Paquete> cj;
+		Conj<_Paquete> cj;
 		cj.AgregarRapido(p);
 		diccprio->Definir(p.prioridad, cj);
 	}
     else
     {
-		Conj<Paquete> cj(diccprio->Obtener(p.prioridad));
+		Conj<_Paquete> cj(diccprio->Obtener(p.prioridad));
 		cj.AgregarRapido(p);
 		diccprio->Definir(p.prioridad, cj);
 	}
@@ -105,12 +105,12 @@ void DCNet::AvanzarSegundo() {
 	Lista<InfoPaquete> l;
 
 	while (it.HaySiguiente()) {
-		DiccRapido<Nat, Conj<Paquete> >* diccprio = compYPaq->obtener((it.Siguiente()).hostname)->masPriori;
-		DiccRapido<Paquete, Lista<Compu> >* dicccam = compYPaq->obtener((it.Siguiente()).hostname)->paqYCam;
+		DiccRapido<Nat, Conj<_Paquete> >* diccprio = compYPaq->obtener((it.Siguiente()).hostname)->masPriori;
+		DiccRapido<_Paquete, Lista<Compu> >* dicccam = compYPaq->obtener((it.Siguiente()).hostname)->paqYCam;
 
 		if (!diccprio->Vacio()) {
 
-            Paquete paq = (diccprio->Obtener(diccprio->ClaveMax())).DameUno();
+            _Paquete paq = (diccprio->Obtener(diccprio->ClaveMax())).DameUno();
 
 
             l.AgregarAdelante(InfoPaquete(paq, it.Siguiente(), dicccam->Obtener(paq)));
@@ -132,16 +132,16 @@ void DCNet::AvanzarSegundo() {
 	while (itaux.HaySiguiente()) {
         Compu proxpc = red->CaminosMinimos(itaux.Siguiente().compuAnt, itaux.Siguiente().paque.destino).Siguiente().Primero();
 
-		DiccRapido<Nat, Conj<Paquete> >* diccprio = (compYPaq->obtener(proxpc.hostname))->masPriori;
-		DiccRapido<Paquete, Lista<Compu> >* dicccam = (compYPaq->obtener(proxpc.hostname))->paqYCam;
+		DiccRapido<Nat, Conj<_Paquete> >* diccprio = (compYPaq->obtener(proxpc.hostname))->masPriori;
+		DiccRapido<_Paquete, Lista<Compu> >* dicccam = (compYPaq->obtener(proxpc.hostname))->paqYCam;
 
 		if (proxpc != ((itaux.Siguiente()).paque).destino) {
 			if (diccprio->Def(((itaux.Siguiente()).paque).prioridad)) {
                 diccprio->Obtener(itaux.Siguiente().paque.prioridad).Agregar(itaux.Siguiente().paque);
-                Conj<Paquete> mismaPrio = diccprio->Obtener(itaux.Siguiente().paque.prioridad);
+                Conj<_Paquete> mismaPrio = diccprio->Obtener(itaux.Siguiente().paque.prioridad);
 				diccprio->Definir(((itaux.Siguiente()).paque).prioridad, mismaPrio);
 			} else {
-				Conj<Paquete> conjvacio;
+				Conj<_Paquete> conjvacio;
                 conjvacio.Agregar(itaux.Siguiente().paque);
                 diccprio->Definir(itaux.Siguiente().paque.prioridad, conjvacio);
 			}
@@ -153,7 +153,7 @@ void DCNet::AvanzarSegundo() {
 	}
 }
 
-bool DCNet::PaqueteEnTransito(Paquete p) {
+bool DCNet::PaqueteEnTransito(_Paquete p) {
 	Conj<Compu>::Iterador it = red->Computadoras();
 	bool esta = false;
 	while (it.HaySiguiente() && !esta) {
@@ -168,13 +168,13 @@ Compu DCNet::LaQueMasEnvio() {
 }
 
 
-Paquete DCNet::DamePaquete(Nat n){
+_Paquete DCNet::DamePaquete(Nat n){
 	vector<string> vr = (compYPaq->claves());
     int i=0;
 	bool esta = false;
-	Paquete p;
+	_Paquete p;
 	while (vr.size() < i && !esta) {
-    	DiccRapido<Paquete, Lista<Compu> >::ITClave it = (compYPaq->obtener(vr[i])->paqYCam)->Claves();
+    	DiccRapido<_Paquete, Lista<Compu> >::ITClave it = (compYPaq->obtener(vr[i])->paqYCam)->Claves();
     	while(it.HayMas()){
 
     		if((it.ClaveActual()).id == n){
@@ -189,23 +189,6 @@ Paquete DCNet::DamePaquete(Nat n){
     	}
 		
 		i++;
-	}
-}
-
-
-Compu DCNet::DameCompu(Hostname h){
-
-	Conj<Compu>::Iterador it = red->Computadoras();
-	int i=0;
-	Compu pc;
-
-	while (it.HaySiguiente()) {
-		if((it.Siguiente()).hostname == h){
-            pc.hostname = h;
-            pc.interfaces = (it.Siguiente()).interfaces;
-            return pc;
-        }
-		it.Avanzar();
 	}
 }
 

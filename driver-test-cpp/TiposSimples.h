@@ -31,7 +31,7 @@ namespace aed2 {
     };
 
 
-    struct Paquete {
+    struct _Paquete {
         Nat id;
         Nat prioridad;
         Compu origen;
@@ -42,19 +42,19 @@ namespace aed2 {
         //       const bool operator<(const Paquete& otra) const;
         //      const bool operator>(const Paquete& otra) const;
 
-        const bool operator==(const Paquete &otra) const {
+        const bool operator==(const _Paquete &otra) const {
             return (id == otra.id);
         }
 
-        const bool operator!=(const Paquete &otra) const {
+        const bool operator!=(const _Paquete &otra) const {
             return (id != otra.id);
         }
 
-        const bool operator<(const Paquete &otra) const {
+        const bool operator<(const _Paquete &otra) const {
             return (id < otra.id);
         }
 
-        const bool operator>(const Paquete &otra) const {
+        const bool operator>(const _Paquete &otra) const {
             return (id > otra.id);
         }
     };

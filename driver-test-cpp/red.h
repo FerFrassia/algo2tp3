@@ -54,7 +54,7 @@ public:
 
     bool Conectadas(const Compu c1, const Compu c2); // Chequeado
 
-    Interfaz InterfazUsada(const Compu c1, const Compu c2); // Chequeado
+    Interfaz& InterfazUsada(const Compu c1, const Compu c2); // Chequeado
 
     void AgregarComputadora(const Compu c); // Chequeado
 
