@@ -70,7 +70,6 @@ Lista<Compu> DCNet::CaminoRecorrido(const _Paquete p) {
 			esta = true;
 			res = ((compYPaq->obtener((it.Siguiente()).hostname))->paqYCam)->Obtener(p);
 		}
-
 		it.Avanzar();
 	}
 	return res;
@@ -118,7 +117,7 @@ void DCNet::AvanzarSegundo() {
 
 		if (!diccprio->Vacio()) {
 
-			_Paquete paq = (diccprio->Obtener(diccprio->ClaveMax())).DameUno();
+			_Paquete paq = (diccprio->Obtener(diccprio->ClaveMin())).DameUno();
 			//std::cout << "Agarre el paq de mayor prioridad \n";
 
 
@@ -130,13 +129,13 @@ void DCNet::AvanzarSegundo() {
 			(compYPaq->obtener((it.Siguiente()).hostname))->enviados++;
 			// std::cout << "Actualizo los enviados \n";
 
-			diccprio->Obtener(diccprio->ClaveMax()).Eliminar(paq);
+			diccprio->Obtener(diccprio->ClaveMin()).Eliminar(paq);
 
 			//  std::cout << "Elimino el paquete de la lista de paquetes con esa misma prioridad \n";
 
-			if ((diccprio->Obtener(diccprio->ClaveMax())).EsVacio()) {
+			if ((diccprio->Obtener(diccprio->ClaveMin())).EsVacio()) {
 
-				diccprio->Borrar(diccprio->ClaveMax());
+				diccprio->Borrar(diccprio->ClaveMin());
 				//        std::cout << "si no quedaban mas paquetes borro esa definicion de prioridad \n";
 			}
 
@@ -220,7 +219,6 @@ bool DCNet::PaqueteEnTransito(_Paquete p) {
 }
 
 Compu& DCNet::LaQueMasEnvio() {
-
 	//std::cout << "entro a la funcion la que mas envio \n";
 	return 	masEnviante->comp;
 	std::cout << "devuelvo la Compu mas enviante \n";
@@ -230,7 +228,7 @@ Compu& DCNet::LaQueMasEnvio() {
 _Paquete DCNet::DamePaquete(Nat n){
     _Paquete res;
 	Conj<Compu>::Iterador it = red->Computadoras();
-	std::cout << "Creo un iterador a las computadoras \n";
+	//std::cout << "Creo un iterador a las computadoras \n";
 
 	while (it.HaySiguiente()) {
 		//std::cout << "Checkeo si hay paquetes en esa compu \n";
@@ -238,13 +236,13 @@ _Paquete DCNet::DamePaquete(Nat n){
 			//std::cout << "Hay paquetes \n";
             DiccRapido<_Paquete, Lista<Compu> >* cl;
             cl = (compYPaq->obtener(it.Siguiente().hostname))->paqYCam;
-			std::cout << "es vacio el dicc?: " << cl->Vacio() << "\n";
+			//std::cout << "es vacio el dicc?: " << cl->Vacio() << "\n";
             DiccRapido<_Paquete, Lista<Compu> >::ITClave itcl = cl->Claves();
 
-			std::cout << "creo un iterador a los paquetes \n";
+			//std::cout << "creo un iterador a los paquetes \n";
 
 			while(itcl.HayMas()){
-				std::cout << "pregunto si todavia hay paquetes por revisar \n";
+				//std::cout << "pregunto si todavia hay paquetes por revisar \n";
 
 				if((itcl.ClaveActual()).id == n){
 					//std::cout << "si el paquete era el que buscaba le asigno los datos al paquete que habia creado \n";
@@ -261,6 +259,9 @@ _Paquete DCNet::DamePaquete(Nat n){
     return res;
 }
 
-
+DiccRapido<_Paquete, Lista<Compu> >* DCNet::EnEsperaAux(Compu c) {
+    DiccRapido<_Paquete, Lista<Compu> >* dicc = (compYPaq->obtener(c.hostname))->paqYCam;
+    return dicc;
+}
 
 

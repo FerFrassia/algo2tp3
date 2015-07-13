@@ -31,6 +31,8 @@ public:
 
 	DiccRapido<_Paquete, Lista<Compu> >::ITClave EnEspera(Compu);
 
+	DiccRapido<_Paquete, Lista<Compu> >* EnEsperaAux(Compu);
+
 	void CrearPaquete(_Paquete);
 
 	void AvanzarSegundo();

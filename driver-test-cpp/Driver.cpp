@@ -112,9 +112,7 @@ namespace aed2 {
 
 
     Nat Driver::CantidadNodosRecorridosPor(const Paquete& p) const {
-
         return (eldcnet->CaminoRecorrido(eldcnet->DamePaquete(p))).Longitud();
-
     }
 
     const Computadora& Driver::IesimoNodoRecorridoPor(const Paquete& p, const Nat i) const {
@@ -135,30 +133,38 @@ namespace aed2 {
     }
 
     Nat Driver::CantidadEnEsperaEn(const Computadora& c) const {
-        DiccRapido<_Paquete, Lista<Compu> >::ITClave it = eldcnet->EnEspera(lared->DameCompu(c));
-        Nat n = 0;
-        while(it.HayMas()){
-            n++;
-            it.Avanzar();
+//        DiccRapido<_Paquete, Lista<Compu> >::ITClave it = eldcnet->EnEspera(lared->DameCompu(c));
+        DiccRapido<_Paquete, Lista<Compu> >* dicc = eldcnet->EnEsperaAux(lared->DameCompu(c));
+
+        if (dicc->Vacio())
+            return 0;
+        else {
+            Nat n = 1;
+            DiccRapido<_Paquete, Lista<Compu> >::ITClave it = dicc->Claves();
+            while (it.HayMas()) {
+                n++;
+                it.Avanzar();
+            }
+            return n;
         }
-        return n;
     }
 
     const Paquete& Driver::IesimoEnEsperaEn(const Computadora& c, const Nat i) const {
         DiccRapido<_Paquete, Lista<Compu> >::ITClave it = eldcnet->EnEspera(lared->DameCompu(c));
+
         Nat n = 0;
-        while(it.HayMas()){
-            if(n==i){
-                return (it.ClaveActual()).id;
-            }
+        while(n != i && it.HayMas()){
             n++;
             it.Avanzar();
         }
+        return (it.ClaveActual()).id;
     }
 
 
     void Driver::CrearPaquete(const Computadora& origen, const Computadora& destino, Nat prioridad) {
-        assert(eldcnet != NULL);
+        if(eldcnet==NULL){
+            eldcnet = new DCNet(*lared);
+        }
 
         ::_Paquete paq;
         paq.id = iddelproximopaquete;///?
@@ -175,15 +181,12 @@ namespace aed2 {
         if(eldcnet==NULL){
             eldcnet = new DCNet(*lared);
         }
-        eldcnet -> AvanzarSegundo();
+        eldcnet->AvanzarSegundo();
     }
 
     const Computadora& Driver::laQueMasEnvio() const {
         assert(eldcnet != NULL);
-        std::cout << "entro a la funcion la que mas envio \n";
         return (eldcnet->LaQueMasEnvio()).hostname;
-        std::cout << "devuelvo el que mas envio \n";
-
     }
 
     const Computadora& Driver::origen(const Paquete& p) const {

@@ -210,7 +210,7 @@ void test_respeta_priodades() {
 	ASSERT_EQ(dcnet.CantidadEnviadosPor(c1), 1);
 
 	bool respetaPrioridad = true;
-	for (int i =0; i < dcnet.CantidadEnEsperaEn(c1) ; i++) { 
+	for (int i =0; i < dcnet.CantidadEnEsperaEn(c1) ; i++) {
 		Nat pr = dcnet.prioridad(dcnet.IesimoEnEsperaEn(c1, i));
 		if (pr == 1) {
 			respetaPrioridad = false;
