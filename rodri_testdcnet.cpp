@@ -340,6 +340,7 @@ std::cout << "Creo paquete 3 \n";
 	std::cout << "Avanzo segundo \n";
 
 
+
 		  /*
 					         
 			  paq2 C1/e2-----------C2/e2 
@@ -353,8 +354,10 @@ std::cout << "Creo paquete 3 \n";
                    \  /  		  |
                     \/            |
 		         C5/e1---------C4/e0 paq3 llego a su destino
-  */
 
+
+  */
+std::cout << "esta el paquete 3 en transito : " << (dcnet.PaqueteEnTransito(paq3)) << "\n";
 
 		    std::cout << "La que mas envio es  : " << (dcnet.LaQueMasEnvio()).hostname << "\n";
 	assert((dcnet.LaQueMasEnvio()).hostname == c1.hostname);
@@ -413,28 +416,149 @@ a destino		 \		/    	  |
   */
 
 	std::cout << "esta el paquete 5 en transito : " << (dcnet.PaqueteEnTransito(paq5)) << "\n";
-	assert(dcnet.PaqueteEnTransito(paq5) == false);
+	assert(dcnet.PaqueteEnTransito(paq5) == true);
 	std::cout << "esta el paquete 2 en transito : " << (dcnet.PaqueteEnTransito(paq2)) << "\n";
-	assert(dcnet.PaqueteEnTransito(paq2) == true);
+	assert(dcnet.PaqueteEnTransito(paq2) == false);
+
+}
 
 
 
+void test_copia(){
+	Red red;
+	Hostname c1 = "skynet";
+	Hostname c2 = "terminator";
+	Hostname c3 = "connor";
+	Hostname c4 = "sky";
+	Hostname c5 = "sarah";
+
+	Interfaz i1 = 1;
+	Interfaz i2 = 2;
+	Interfaz i3 = 3;
+	Interfaz i4 = 4;
+	Interfaz i5 = 5;
+	Interfaz i6 = 6;
+	Interfaz i7 = 7;
+	Interfaz i8 = 8;
+	Interfaz i9 = 9;
+	Interfaz i10 = 10;
+	Interfaz i11 = 11;
+	Interfaz i12 = 12;
+	
+	Conj<Interfaz> conjIc1;
+	Conj<Interfaz> conjIc2;
+	Conj<Interfaz> conjIc3;
+	Conj<Interfaz> conjIc4;
+	Conj<Interfaz> conjIc5;
+
+	conjIc1.Agregar(i1);
+	conjIc1.Agregar(i2);
+	
+	conjIc2.Agregar(i3);
+	conjIc2.Agregar(i4);
+	
+	conjIc3.Agregar(i5);
+	conjIc3.Agregar(i6);
+	conjIc3.Agregar(i7);
+
+	conjIc4.Agregar(i8);
+	conjIc4.Agregar(i9);
+	conjIc4.Agregar(i10);
+
+	conjIc5.Agregar(i11);
+	conjIc5.Agregar(i12);
+
+	Compu pc1;
+	pc1.hostname = c1;
+	pc1.interfaces = conjIc1;
+
+	Compu pc2;
+	pc2.hostname = c2;
+	pc2.interfaces = conjIc2;
+	Compu pc3;
+	pc3.hostname = c3;
+	pc3.interfaces = conjIc3;
+	Compu pc4;
+	pc4.hostname = c4;
+	pc4.interfaces = conjIc4;
+	Compu pc5;
+	pc5.hostname = c5;
+	pc5.interfaces = conjIc5;
 
 
 
+	
+	red.AgregarComputadora(pc1);
+	red.AgregarComputadora(pc2);
+	red.AgregarComputadora(pc3);
+	red.AgregarComputadora(pc4);
+	red.AgregarComputadora(pc5);
+	
+	red.Conectar(pc1, i1,pc2, i3);	
+	red.Conectar(pc1, i2,pc3, i5);
+
+	red.Conectar(pc2, i4,pc4, i8);
+
+	red.Conectar(pc3, i6,pc4, i9);
+	red.Conectar(pc3, i7,pc5, i11);
+
+	red.Conectar(pc4, i10,pc5, i12);
+
+	DCNet dcnet(red);
+
+	_Paquete paq0;
+	paq0.id = 0;
+	paq0.prioridad = 1;
+	paq0.origen = pc1 ;
+	paq0.destino = pc5 ;
 
 
 
+	dcnet.CrearPaquete(paq0);
+	
+	Lista<Compu> lc = dcnet.CaminoRecorrido(paq0);
+	Lista<Compu>::Iterador iterador = lc.CrearIt();
 
+	std::cout << "este es el iterador de lista"<< (iterador.Siguiente()).hostname << "\n";
+
+	ASSERT_EQ(((dcnet.CaminoRecorrido(paq0))).Longitud(),1);
+	
+	//while(n < ((dcnet.CaminoRecorrido(paq0))).Longitud()){
+	//	std::cout << "Esta la pc"<< (iterador.Siguiente()).hostname << "\n";
+	//	iterador.Avanzar();
+	//	n++;
+	//}
+	
+	
+	dcnet.AvanzarSegundo();
+
+	ASSERT_EQ(lc.Longitud(),2);
+
+
+
+	ASSERT(lc.Primero().hostname == c1);
+	ASSERT(lc.Ultimo().hostname == c2);
 
 
 
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
 int main(int argc, char **argv)
 {
     RUN_TEST(IniciarDCNET);
+    RUN_TEST(test_copia);
 	
 	
 
