@@ -25,7 +25,7 @@ public:
 
 	Red DameRed();
 
-	Lista<Compu> CaminoRecorrido(_Paquete);
+	Lista<Compu>& CaminoRecorrido(_Paquete);
 
 	Nat CantidadEnviados(Compu);
 
@@ -43,18 +43,23 @@ public:
 
 
 
-	_Paquete DamePaquete(Nat);
+	_Paquete& DamePaquete(Nat);
 	
 
 private:
 
 	struct e_InfoCompu {
-		DiccRapido<Nat, Conj<_Paquete> >* masPriori;
-		DiccRapido<_Paquete, Lista<Compu> >* paqYCam;
+		DiccRapido<Nat, Conj<_Paquete> > *masPriori;
+		DiccRapido<_Paquete, Lista<Compu> > *paqYCam;
 		Nat enviados;
 
 		e_InfoCompu() : masPriori(new DiccRapido<Nat, Conj<_Paquete> >()),
-					  paqYCam(new DiccRapido<_Paquete, Lista<Compu> >()), enviados(0) { };
+						paqYCam(new DiccRapido<_Paquete, Lista<Compu> >()), enviados(0) { };
+
+		~e_InfoCompu() {
+			delete masPriori;
+			delete paqYCam;
+		}
 	};
 
 	struct e_masEnvio {

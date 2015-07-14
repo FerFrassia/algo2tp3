@@ -364,7 +364,7 @@ void test_recorrido_complejo() {
 	Interfaz i10 = 10;
 	Interfaz i11 = 11;
 	Interfaz i12 = 12;
-	
+
 	Conj<Interfaz> conjIc1;
 	Conj<Interfaz> conjIc2;
 	Conj<Interfaz> conjIc3;
@@ -373,10 +373,10 @@ void test_recorrido_complejo() {
 
 	conjIc1.Agregar(i1);
 	conjIc1.Agregar(i2);
-	
+
 	conjIc2.Agregar(i3);
 	conjIc2.Agregar(i4);
-	
+
 	conjIc3.Agregar(i5);
 	conjIc3.Agregar(i6);
 	conjIc3.Agregar(i7);
@@ -388,14 +388,14 @@ void test_recorrido_complejo() {
 	conjIc5.Agregar(i11);
 	conjIc5.Agregar(i12);
 
-	
+
 	dcnet.AgregarComputadora(c1,conjIc1);
 	dcnet.AgregarComputadora(c2,conjIc2);
 	dcnet.AgregarComputadora(c3,conjIc3);
 	dcnet.AgregarComputadora(c4,conjIc4);
 	dcnet.AgregarComputadora(c5,conjIc5);
-	
-	dcnet.Conectar(c1, i1,c2, i3);	
+
+	dcnet.Conectar(c1, i1,c2, i3);
 	dcnet.Conectar(c1, i2,c3, i5);
 
 	dcnet.Conectar(c2, i4,c4, i8);
@@ -407,10 +407,13 @@ void test_recorrido_complejo() {
 
 	dcnet.CrearPaquete(c1,c5,1);
 	Nat paq = dcnet.IesimoEnEsperaEn(c1,0);
-	
+
 	dcnet.AvanzarSegundo();
 
 	ASSERT_EQ(dcnet.CantidadNodosRecorridosPor(paq),2);
+	std::cout << "test";
+	Computadora c = dcnet.IesimoNodoRecorridoPor(paq,0);
+	std::cout << c;
 	ASSERT(dcnet.IesimoNodoRecorridoPor(paq,0) == c1);
 	ASSERT(dcnet.IesimoNodoRecorridoPor(paq,1) == c3);
 }

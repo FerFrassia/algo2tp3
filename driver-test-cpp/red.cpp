@@ -190,8 +190,11 @@ Conj<Lista<Compu> > Red::CalcularCaminosMinimos(const Compu c1, const Compu c2) 
     while (itCaminosImportantes.HaySiguiente()) {
         if (res.EsVacio() || res.CrearIt().Siguiente().Longitud() == itCaminosImportantes.Siguiente().Longitud()) {
             res.Agregar(itCaminosImportantes.Siguiente());
-        }else if (res.CrearIt().Siguiente().Longitud() < itCaminosImportantes.Siguiente().Longitud()){
-            Conj<Lista<Compu> > res;
+        }else if (res.CrearIt().Siguiente().Longitud() > itCaminosImportantes.Siguiente().Longitud()){
+            Conj<Lista<Compu> >::Iterador resit = res.CrearIt();
+            while (resit.HaySiguiente())
+                resit.EliminarSiguiente();
+
             res.Agregar(itCaminosImportantes.Siguiente());
         }
         itCaminosImportantes.Avanzar();
@@ -238,6 +241,99 @@ Compu Red::DameCompu(Hostname h) {
         it.Avanzar();
     }
 }
+
+//int main() {
+//    DiccString<int> dicc;
+//    string str = "jose";
+//    int num1 = 3;
+//    int num2 = 4;
+//    int num3 = 5;
+//
+//    dicc.definir(str, num1);
+//    dicc.definir(str, num2);
+//    dicc.definir(str, num3);
+//
+//
+//}
+
+//int main(){
+//
+//    Red red;
+//
+//    Compu c1;
+//    Compu c2;
+//    Compu c3;
+//    Compu c4;
+//    Compu c5;
+//    Compu c6;
+//
+//    c1.hostname = "c1";
+//    c2.hostname = "c2";
+//    c3.hostname = "c3";
+//    c4.hostname = "c4";
+//    c5.hostname = "c5";
+//    c6.hostname = "c6";
+//
+//    red.AgregarComputadora(c1);
+//    red.AgregarComputadora(c2);
+//    red.AgregarComputadora(c5);
+//    red.AgregarComputadora(c3);
+//    red.AgregarComputadora(c4);
+//    red.AgregarComputadora(c6);
+//
+//    Interfaz i1 = 1;
+//    Interfaz i2 = 2;
+//    Interfaz i3 = 3;
+//    Interfaz i5 = 5;
+//
+//    red.Conectar(c1, i1, c2, i2);
+//    red.Conectar(c1, i3, c3, i1);
+//    red.Conectar(c3, i2, c5, i1);
+//    red.Conectar(c2, i1, c4, i1);
+//    red.Conectar(c4, i2, c5, i2);
+//    red.Conectar(c6, i1, c1, i2);
+//    red.Conectar(c6, i2, c2, i3);
+//    red.Conectar(c6, i3, c5, i3);
+//
+//
+//    //Conj<Lista<Compu> > camc3c4 = red.CaminosMinimos(c3, c4);
+//    Conj<Lista<Compu> >::Iterador camc3c4it = red.CaminosMinimos(c3, c4);
+//    while (camc3c4it.HaySiguiente()) {
+//        Lista<Compu> liscompu = camc3c4it.Siguiente();
+//        Lista<Compu>::Iterador liscompuit = liscompu.CrearIt();
+//
+//        while (liscompuit.HaySiguiente()) {
+//            std::cout << liscompuit.Siguiente().hostname << "-";
+//            liscompuit.Avanzar();
+//        }
+//
+//        camc3c4it.Avanzar();
+//        std::cout << "\n";
+//    }
+
+//
+//    Lista<Compu> li;
+//    li.AgregarAtras(c3);
+//    //Conj<Lista<Compu> >::Iterador camc3c4 = red.CaminosMinimos(c3, c4);
+//    Conj<Lista<Compu> > camimpc3c4 = red.CaminosImportantes(c3, c4, li);
+//    Conj<Lista<Compu> >::Iterador camimpc3c4it = camimpc3c4.CrearIt();
+//
+//    while (camimpc3c4it.HaySiguiente()) {
+//        Lista<Compu> liscompu = camimpc3c4it.Siguiente();
+//        Lista<Compu>::Iterador liscompuit = liscompu.CrearIt();
+//
+//        while (liscompuit.HaySiguiente()) {
+//            std::cout << liscompuit.Siguiente().hostname << "-";
+//            liscompuit.Avanzar();
+//        }
+//
+//        camimpc3c4it.Avanzar();
+//        std::cout << "\n";
+//    }
+
+
+//}
+
 /*
 int main(){
     Red red;

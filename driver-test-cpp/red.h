@@ -77,8 +77,8 @@ public:
 private:
     // Funciones Privadas
     Conj<Lista<Compu> > CalcularCaminosMinimos(const Compu c1, const Compu c2);
-
     Conj<Lista<Compu> > CaminosImportantes(const Compu c1, const Compu c2, Lista<Compu> parcial);
+
 
     DiccString<TuplaDirectas>* directasEInterfaces;
     DiccString<DiccString<Conj<Lista<Compu> > > >* deOrigenADestino;

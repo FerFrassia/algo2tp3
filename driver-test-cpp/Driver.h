@@ -58,8 +58,8 @@ class Driver
         const Computadora& laQueMasEnvio() const;
         
         // Auxiliares para ver los paquetes
-        const Computadora& origen(const Paquete& p) const; 
-        const Computadora& destino(const Paquete& p) const; 
+        const Computadora& origen(const Paquete& p) const;
+        const Computadora& destino(const Paquete& p) const;
         Nat prioridad(const Paquete& p) const; 
         
     private:
