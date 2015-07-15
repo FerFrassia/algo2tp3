@@ -39,16 +39,16 @@ DCNet::DCNet(const Red &lared) {
 	////std::cout << "creo un diccionario vacio \n";
 
 	while (it.HaySiguiente()) {
-//		DCNet::e_InfoCompu* nuevainfo = new e_InfoCompu();
-		DCNet::e_InfoCompu nuevainfo;
+		DCNet::e_InfoCompu* nuevainfo = new e_InfoCompu();
+		//DCNet::e_InfoCompu nuevainfo;
 
-		compYPaq->definir(((it.Siguiente()).hostname), nuevainfo);
+		compYPaq->definir(((it.Siguiente()).hostname), *nuevainfo);
 
 	//	//std::cout << "defino una computadora en el diccionario, con informacion vacia  \n";
-
+		//delete nuevainfo;
 		it.Avanzar();
 	//	//std::cout << "avanzo a la siguiente computadora \n";
-//		delete nuevainfo;
+		
 	}
 }
 

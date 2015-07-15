@@ -411,9 +411,9 @@ void test_recorrido_complejo() {
 	dcnet.AvanzarSegundo();
 
 	ASSERT_EQ(dcnet.CantidadNodosRecorridosPor(paq),2);
-	std::cout << "test";
-	Computadora c = dcnet.IesimoNodoRecorridoPor(paq,0);
-	std::cout << c;
+	//	std::cout << "test";
+	//Computadora c = dcnet.IesimoNodoRecorridoPor(paq,0);
+	//std::cout << c;
 	ASSERT(dcnet.IesimoNodoRecorridoPor(paq,0) == c1);
 	ASSERT(dcnet.IesimoNodoRecorridoPor(paq,1) == c3);
 }

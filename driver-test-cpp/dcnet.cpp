@@ -41,7 +41,7 @@ DCNet::DCNet(const Red &lared) {
 	while (it.HaySiguiente()) {
 		DCNet::e_InfoCompu* nuevainfo = new e_InfoCompu();
 
-		compYPaq->definir(((it.Siguiente()).hostname), *nuevainfo);
+		compYPaq->definir(((it.Siguiente()).hostname), nuevainfo);
 
 		//	std::cout << "defino una computadora en el diccionario, con informacion vacia  \n";
 
